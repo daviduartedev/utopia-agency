@@ -196,15 +196,27 @@ const FX_CSS = `
   }
   .fx-featured.active { opacity: 1; visibility: visible; }
   .fx-featured-title {
-    margin: 0;
+    margin: 0 auto;
+    max-width: min(28rem, 88vw);
     color: var(--fx-text);
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    font-size: clamp(2.5rem, 8vw, 7rem);
-    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+    line-height: 1.55;
+    text-align: center;
   }
-  .fx-word-mask { display: inline-block; overflow: hidden; vertical-align: middle; }
-  .fx-word      { display: inline-block; vertical-align: middle; }
+  /* Flex evita colapso de espaço entre palavras animadas */
+  .fx-word-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    column-gap: 0.35em;
+    row-gap: 0.4em;
+  }
+  .fx-word-mask { display: block; overflow: hidden; flex: 0 1 auto; }
+  .fx-word      { display: inline-block; vertical-align: baseline; }
 
   /* Footer / pagination line */
   .fx-footer {
@@ -266,7 +278,12 @@ const FX_CSS = `
     .fx-list { height: auto; }
     .fx-list .fx-track { display: flex; gap: 14px; }
     .fx-list .fx-item  { font-size: 0.65rem; margin: 0; }
-    .fx-center { height: 25vh; }
+    .fx-center { height: auto; min-height: 28vh; max-height: 42vh; padding: 0 0.5rem; }
+    .fx-featured-title {
+      font-size: clamp(0.8rem, 3.2vw, 1rem);
+      line-height: 1.4;
+      max-width: min(22rem, 92vw);
+    }
   }
 `;
 
@@ -357,19 +374,23 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     /** Refs must be per-section: a shared bucket breaks because refs attach after render, so only idx 0 received the array. */
     const splitWords = (text: string, sectionIdx: number) => {
       wordRefs.current[sectionIdx] = [];
-      return text.split(/\s+/).filter(Boolean).map((w, i, arr) => (
-        <span className="fx-word-mask" key={i}>
-          <span
-            className="fx-word"
-            ref={(el) => {
-              if (el) wordRefs.current[sectionIdx].push(el);
-            }}
-          >
-            {w}
-          </span>
-          {i < arr.length - 1 ? " " : null}
+      const words = text.split(/\s+/).filter(Boolean);
+      return (
+        <span className="fx-word-row">
+          {words.map((w, i) => (
+            <span className="fx-word-mask" key={i}>
+              <span
+                className="fx-word"
+                ref={(el) => {
+                  if (el) wordRefs.current[sectionIdx].push(el);
+                }}
+              >
+                {w}
+              </span>
+            </span>
+          ))}
         </span>
-      ));
+      );
     };
 
     // ── Center list tracks ────────────────────────────────────────────────────
