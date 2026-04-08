@@ -2,7 +2,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 w-full border-t border-white/5">
+    <footer id="contato" className="relative z-10 w-full scroll-mt-24 border-t border-white/5">
       <div className="max-w-[1300px] mx-auto px-8 md:px-12 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo */}
@@ -32,19 +32,18 @@ export function Footer() {
             </span>
           </div>
 
-          {/* Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6 text-[14px] text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">
-              Sobre
+          <nav className="flex flex-wrap items-center justify-center gap-6 text-[14px] text-gray-400" aria-label="Rodapé">
+            <a href="#inicio" className="hover:text-white transition-colors">
+              Início
             </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Portfólio
+            <a href="#portfolio" className="hover:text-white transition-colors">
+              Trabalhos
             </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Serviços
+            <a href="#stack" className="hover:text-white transition-colors">
+              Stack
             </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Contato
+            <a href="#depoimentos" className="hover:text-white transition-colors">
+              Depoimentos
             </a>
           </nav>
 

@@ -2,6 +2,7 @@ import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Portfolio } from "./components/Portfolio";
 import { LogoCloud } from "./components/LogoCloud";
+import { Testimonials } from "./components/Testimonials";
 import { Footer } from "./components/Footer";
 import DemoOne from "./components/DemoOne";
 import DarkVeil from "./components/DarkVeil";
@@ -41,6 +42,11 @@ export default function App() {
       {/* Logo Cloud — technologies & stack */}
       <div className="relative z-10 w-full">
         <LogoCloud />
+      </div>
+
+      {/* Depoimentos */}
+      <div className="relative z-10 w-full">
+        <Testimonials />
       </div>
 
       {/* Footer */}
