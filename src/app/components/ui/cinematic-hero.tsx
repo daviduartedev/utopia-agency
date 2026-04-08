@@ -240,8 +240,8 @@ export function CinematicHero({
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
-      {/* WebGL orb (react-bits / OGL) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* WebGL orb (react-bits / OGL) — ligeiramente acima do centro visual */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none -translate-y-[min(3.5vh,2rem)] sm:-translate-y-[4vh]">
         <div className="relative h-full w-full min-h-full pointer-events-auto">
           <Orb
             hoverIntensity={2}
@@ -255,36 +255,43 @@ export function CinematicHero({
       <div className="film-grain" aria-hidden="true" />
       <div className="bg-grid-theme absolute inset-0 z-[1] pointer-events-none opacity-50" aria-hidden="true" />
 
-      {/* PHASE 1 LAYER: ENTRANCE TEXTS */}
+      {/* PHASE 1 LAYER: ENTRANCE TEXTS — offset interno para não colidir com scale do GSAP no pai */}
       <div className="entrance-text-layer absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
-        <h1 className="text-track gsap-reveal text-3d-matte text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tight mb-2">
-          {tagline1}
-        </h1>
-        <h1 className="text-days gsap-reveal text-white text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-extrabold tracking-tighter drop-shadow-md">
-          {tagline2}
-        </h1>
+        <div className="flex flex-col items-center justify-center -translate-y-[min(3.5vh,2rem)] sm:-translate-y-[4vh]">
+          <h1 className="text-track gsap-reveal text-3d-matte text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tight mb-2">
+            {tagline1}
+          </h1>
+          <h1 className="text-days gsap-reveal text-white text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-extrabold tracking-tighter drop-shadow-md">
+            {tagline2}
+          </h1>
+        </div>
       </div>
 
       {/* PHASE 6 LAYER: FINAL CALL TO ACTION */}
       <div className="final-cta-layer absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto will-change-transform">
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-white drop-shadow-lg">
-          {ctaHeading}
-        </h2>
-        <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
-          {ctaDescription}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-6">
-          <a href="#" className="btn-modern-light flex items-center justify-center gap-3 px-10 py-5 rounded-full group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-            <div className="text-xl font-bold leading-none tracking-tight">Solicitar proposta</div>
-            <svg className="w-5 h-5 ml-2 text-purple-600 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+        <div className="flex flex-col items-center justify-center w-full max-w-4xl -translate-y-[min(3.5vh,2rem)] sm:-translate-y-[4vh]">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-white drop-shadow-lg">
+            {ctaHeading}
+          </h2>
+          <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
+            {ctaDescription}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <a href="#" className="btn-modern-light flex items-center justify-center gap-3 px-10 py-5 rounded-full group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+              <div className="text-xl font-bold leading-none tracking-tight">Solicitar proposta</div>
+              <svg className="w-5 h-5 ml-2 text-purple-600 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
       {/* PHASE 2-3-7 LAYER: THE ANIMATED CARD */}
-      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" style={{ perspective: "1500px" }}>
+      <div
+        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none -translate-y-[min(3.5vh,2rem)] sm:-translate-y-[4vh]"
+        style={{ perspective: "1500px" }}
+      >
         <div
           ref={mainCardRef}
           className="animated-card-container premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[92vw] md:w-[85vw] h-[92vh] md:h-[85vh] rounded-[32px] md:rounded-[40px]"
