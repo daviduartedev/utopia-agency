@@ -31,15 +31,19 @@ export function InfiniteSlider({
   useEffect(() => {
     let controls: ReturnType<typeof animate> | undefined;
     const size = direction === "horizontal" ? width : height;
-    const contentSize = size + gap;
-    const from = reverse ? -contentSize / 2 : 0;
-    const to = reverse ? 0 : -contentSize / 2;
+    /** Largura total já inclui o gap do flex entre todos os itens (duas cópias). Metade = um ciclo perfeito. */
+    const loopDistance = size > 0 ? size / 2 : 0;
+    const from = reverse ? -loopDistance : 0;
+    const to = reverse ? 0 : -loopDistance;
+
+    if (loopDistance < 1) return;
 
     if (isTransitioning) {
       controls = animate(translation, [translation.get(), to], {
         ease: "linear",
         duration:
-          currentDuration * Math.abs((translation.get() - to) / contentSize),
+          currentDuration *
+          Math.abs((translation.get() - to) / Math.max(loopDistance, 1)),
         onComplete: () => {
           setIsTransitioning(false);
           setKey((prevKey) => prevKey + 1);
@@ -52,9 +56,6 @@ export function InfiniteSlider({
         repeat: Infinity,
         repeatType: "loop",
         repeatDelay: 0,
-        onRepeat: () => {
-          translation.set(from);
-        },
       });
     }
 

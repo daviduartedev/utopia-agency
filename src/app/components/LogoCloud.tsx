@@ -5,56 +5,37 @@ import { ProgressiveBlur } from "./ui/progressive-blur";
 type Logo = {
   src: string;
   alt: string;
+  /** Se false, mantém cores originais (ex.: React Native em ciano). */
+  monochrome?: boolean;
 };
 
+/** Ícones (não wordmarks) — ordem do carrossel */
 const logos: Logo[] = [
   {
-    src: "https://svgl.app/library/nvidia-wordmark-light.svg",
-    alt: "Nvidia",
-  },
-  {
-    src: "https://svgl.app/library/supabase_wordmark_light.svg",
-    alt: "Supabase",
-  },
-  {
-    src: "https://svgl.app/library/openai_wordmark_light.svg",
-    alt: "OpenAI",
-  },
-  {
-    src: "https://svgl.app/library/vercel_wordmark.svg",
-    alt: "Vercel",
-  },
-  {
-    src: "https://svgl.app/library/github_wordmark_light.svg",
-    alt: "GitHub",
+    src: "https://svgl.app/library/cursor_light.svg",
+    alt: "Cursor",
   },
   {
     src: "https://svgl.app/library/claude-ai-wordmark-icon_light.svg",
-    alt: "Claude AI",
+    alt: "Claude",
   },
   {
-    src: "https://svgl.app/library/clerk-wordmark-light.svg",
-    alt: "Clerk",
+    src: "https://svgl.app/library/supabase.svg",
+    alt: "Supabase",
   },
   {
-    src: "https://svgl.app/library/turso-wordmark-light.svg",
-    alt: "Turso",
+    src: "https://svgl.app/library/strapi.svg",
+    alt: "Strapi",
   },
   {
-    src: "https://svgl.app/library/nextjs_wordmark_light.svg",
-    alt: "Next.js",
-  },
-  {
-    src: "https://svgl.app/library/tailwindcss_wordmark.svg",
-    alt: "Tailwind CSS",
-  },
-  {
-    src: "https://svgl.app/library/typescript_wordmark.svg",
-    alt: "TypeScript",
-  },
-  {
-    src: "https://svgl.app/library/react_wordmark.svg",
+    src: "https://cdn.simpleicons.org/react/61DAFB",
     alt: "React",
+    monochrome: false,
+  },
+  {
+    src: "https://cdn.simpleicons.org/reactnative/61DAFB",
+    alt: "React Native",
+    monochrome: false,
   },
 ];
 
@@ -120,11 +101,11 @@ export function LogoCloud() {
         {/* Bottom border line */}
         <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-        <div className="py-7 bg-white/[0.02]">
+        <div className="py-8 md:py-9 bg-zinc-950/40 min-h-[4.5rem] md:min-h-[5rem]">
           <InfiniteSlider
-            gap={72}
-            duration={120}
-            durationOnHover={200}
+            gap={56}
+            duration={90}
+            durationOnHover={160}
             reverse={false}
           >
             {logos.map((logo) => (
@@ -132,22 +113,28 @@ export function LogoCloud() {
                 key={logo.alt}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-5 md:h-6 w-auto select-none pointer-events-none brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className={
+                  logo.monochrome === false
+                    ? "h-8 md:h-9 w-9 md:w-10 shrink-0 object-contain select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    : "h-8 md:h-9 w-auto max-w-[7.5rem] shrink-0 object-contain object-left select-none pointer-events-none brightness-0 invert opacity-50 hover:opacity-85 transition-opacity duration-300"
+                }
                 loading="lazy"
               />
             ))}
           </InfiniteSlider>
         </div>
 
-        {/* Progressive blur masks on both sides */}
+        {/* Desfoque progressivo nas laterais + vinheta suave */}
         <ProgressiveBlur
-          blurIntensity={0.8}
-          className="pointer-events-none absolute top-0 left-0 h-full w-[140px]"
+          blurIntensity={1.35}
+          blurLayers={10}
+          className="pointer-events-none absolute top-0 left-0 z-[1] h-full w-[min(28vw,220px)]"
           direction="left"
         />
         <ProgressiveBlur
-          blurIntensity={0.8}
-          className="pointer-events-none absolute top-0 right-0 h-full w-[140px]"
+          blurIntensity={1.35}
+          blurLayers={10}
+          className="pointer-events-none absolute top-0 right-0 z-[1] h-full w-[min(28vw,220px)]"
           direction="right"
         />
       </motion.div>
