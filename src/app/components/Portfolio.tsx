@@ -86,32 +86,32 @@ export function Portfolio() {
         }
       `}</style>
 
-      {/* Section header */}
-      <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12 mb-16 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+      {/* Section header — mesma hierarquia visual da seção Stack */}
+      <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12 mb-12 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight"
-          style={{ fontFamily: "'Inter', sans-serif" }}
+          className="text-zinc-500 uppercase tracking-[0.25em] text-xs mb-3"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           Trabalhos recentes
-        </motion.h2>
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-bold leading-tight text-white mb-4"
+          className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Landings, SaaS e apps no mundo real
-        </motion.h3>
+        </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
