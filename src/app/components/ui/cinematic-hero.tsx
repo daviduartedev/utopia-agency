@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "./utils";
 import { FullScreenScrollFX, FullScreenFXAPI } from "./full-screen-scroll-fx";
-import Orb from "./Orb";
+import Iridescence from "./Iridescence";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,15 +20,6 @@ const INJECTED_STYLES = `
       position: absolute; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 50; opacity: 0.05; mix-blend-mode: overlay;
       background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
-  }
-
-  .bg-grid-theme {
-      background-size: 60px 60px;
-      background-image: 
-          linear-gradient(to right, rgba(168, 85, 247, 0.15) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(168, 85, 247, 0.15) 1px, transparent 1px);
-      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
   }
 
   /* -------------------------------------------------------------------
@@ -198,7 +189,7 @@ export function CinematicHero({
 
       scrollTl
         // ── PHASE 2: CARD_APPEARANCE ──
-        .to([".entrance-text-layer", ".bg-grid-theme"], { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
+        .to(".entrance-text-layer", { scale: 1.15, filter: "blur(20px)", opacity: 0.2, ease: "power2.inOut", duration: 2 }, 0)
         .to(".animated-card-container", { y: 0, ease: "power3.inOut", duration: 2 }, 0)
         
         // ── PHASE 3: FULL_SCREEN_EXPANSION ──
@@ -240,20 +231,18 @@ export function CinematicHero({
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
-      {/* WebGL orb (react-bits / OGL) — ligeiramente acima do centro visual */}
+      {/* WebGL iridescence (react-bits / OGL) — ligeiramente acima do centro visual */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none -translate-y-[min(3.5vh,2rem)] sm:-translate-y-[4vh]">
         <div className="relative h-full w-full min-h-full pointer-events-auto">
-          <Orb
-            hoverIntensity={2}
-            rotateOnHover
-            hue={0}
-            forceHoverState={false}
-            backgroundColor="#000000"
+          <Iridescence
+            color={[0.5, 0.6, 0.7]}
+            mouseReact
+            amplitude={0.1}
+            speed={0.3}
           />
         </div>
       </div>
       <div className="film-grain" aria-hidden="true" />
-      <div className="bg-grid-theme absolute inset-0 z-[1] pointer-events-none opacity-50" aria-hidden="true" />
 
       {/* PHASE 1 LAYER: ENTRANCE TEXTS — offset interno para não colidir com scale do GSAP no pai */}
       <div className="entrance-text-layer absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
