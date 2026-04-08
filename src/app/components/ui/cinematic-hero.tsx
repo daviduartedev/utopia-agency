@@ -90,10 +90,10 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export function CinematicHero({ 
-  tagline1 = "Criamos seu site ou sistema,",
-  tagline2 = "pronto para vender em dias.",
-  ctaHeading = "Eleve seu padrão agora.",
-  ctaDescription = "Design de elite, performance extrema e foco total em conversão. Sua visão, materializada em tempo recorde.",
+  tagline1 = "Seu produto digital,",
+  tagline2 = "do zero ao crescimento.",
+  ctaHeading = "Produto digital pronto para vender.",
+  ctaDescription = "Agência focada em landings, sistemas SaaS e aplicativos: briefing objetivo, prazos curtos e entrega eficiente — sem abrir mão de acabamento premium.",
   className, 
   ...props 
 }: CinematicHeroProps) {
@@ -109,9 +109,9 @@ export function CinematicHero({
 
   // ── FX sections defined once ────────────────────────────────────────────
   const FX_SECTIONS = [
-    { id: "landing",  leftLabel: "Landing Pages", title: "Converte", rightLabel: "Landing Pages",  background: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1600&auto=format&fit=crop" },
-    { id: "sistemas", leftLabel: "Sistemas (SaaS)", title: "Escala",   rightLabel: "Sistemas (SaaS)", background: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" },
-    { id: "aplicativos", leftLabel: "Aplicativos", title: "Retém",   rightLabel: "Aplicativos",     background: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1600&auto=format&fit=crop" },
+    { id: "landing",  leftLabel: "Landing pages", title: "RÁPIDO", rightLabel: "Landing pages",  background: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1600&auto=format&fit=crop" },
+    { id: "sistemas", leftLabel: "Sistemas SaaS", title: "PREMIUM", rightLabel: "Sistemas SaaS", background: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" },
+    { id: "aplicativos", leftLabel: "Aplicativos", title: "EFICIENTE", rightLabel: "Aplicativos",     background: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1600&auto=format&fit=crop" },
   ] satisfies { id: string; leftLabel: string; title: string; rightLabel: string; background: string }[];
   const FX_TOTAL = FX_SECTIONS.length; // 3
 
@@ -241,7 +241,7 @@ export function CinematicHero({
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
           <a href="#" className="btn-modern-light flex items-center justify-center gap-3 px-10 py-5 rounded-full group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-            <div className="text-xl font-bold leading-none tracking-tight">Começar jornada</div>
+            <div className="text-xl font-bold leading-none tracking-tight">Solicitar proposta</div>
             <svg className="w-5 h-5 ml-2 text-purple-600 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -271,8 +271,8 @@ export function CinematicHero({
               header={
                 <>
                   <span style={{ fontSize: "clamp(0.55rem, 1vw, 0.9rem)", letterSpacing: "0.4em", opacity: 0.5, marginBottom: "0.5rem" }}>UTOPIA STUDIO</span>
-                  <span>O PROCESSO</span>
-                  <span>CRIATIVO</span>
+                  <span>LANDINGS · SAAS · APPS</span>
+                  <span style={{ fontSize: "clamp(0.65rem, 1.6vw, 1rem)", letterSpacing: "0.2em", opacity: 0.65, marginTop: "0.35rem" }}>ENTREGA RÁPIDA · PADRÃO ALTO</span>
                 </>
               }
               sections={FX_SECTIONS}

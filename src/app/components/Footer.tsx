@@ -50,13 +50,12 @@ export function Footer() {
 
           {/* Copyright */}
           <div className="text-[14px] text-gray-500">
-            © {currentYear} utopia. Todos os direitos reservados.
+            © {currentYear} Utopia Studio. Todos os direitos reservados.
           </div>
         </div>
 
-        {/* Social Links ou informações adicionais (opcional) */}
         <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-gray-500">
-          <p>Criando experiências digitais únicas</p>
+          <p>Landings, SaaS e apps — entrega rápida, padrão premium.</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-gray-300 transition-colors">
               Termos

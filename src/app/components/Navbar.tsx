@@ -15,18 +15,13 @@ export function Navbar() {
 
         {/* Links */}
         <nav className="hidden lg:flex items-center gap-7 text-[14px] text-gray-300 font-medium tracking-wide mt-1">
+          <a href="#stack" className="hover:text-white transition-colors">Stack</a>
+          <a href="#portfolio" className="hover:text-white transition-colors">Trabalhos</a>
           <a href="#" className="flex items-center hover:text-white transition-colors">
-            Produto <ChevronDown size={14} className="ml-0.5 opacity-60"/>
+            Serviços <ChevronDown size={14} className="ml-0.5 opacity-60"/>
           </a>
-          <a href="#" className="hover:text-white transition-colors">Equipe</a>
-          <a href="#" className="hover:text-white transition-colors">Empresas</a>
-          <a href="#" className="flex items-center hover:text-white transition-colors">
-            Explorar <ChevronDown size={14} className="ml-0.5 opacity-60"/>
-          </a>
-          <a href="#" className="hover:text-white transition-colors">Marketplace</a>
-          <a href="#" className="flex items-center hover:text-white transition-colors">
-            Preços <ChevronDown size={14} className="ml-0.5 opacity-60"/>
-          </a>
+          <a href="#" className="hover:text-white transition-colors">Como funciona</a>
+          <a href="#" className="hover:text-white transition-colors">Contato</a>
         </nav>
       </div>
     </header>

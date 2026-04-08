@@ -82,7 +82,7 @@ export function LogoCloud() {
           className="text-zinc-500 uppercase tracking-[0.25em] text-xs mb-3"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Stack & Ferramentas
+          Stack produtiva
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -92,8 +92,7 @@ export function LogoCloud() {
           className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Tecnologias que{" "}
-          dominamos
+          Ferramentas para entregar rápido e com qualidade
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -103,8 +102,8 @@ export function LogoCloud() {
           className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Construímos com as melhores ferramentas do mercado para garantir
-          performance, escalabilidade e design de alto nível.
+          Usamos um stack moderno para landings, SaaS e apps que precisam performar,
+          escalar e passar confiança — sem reinventar a roda a cada projeto.
         </motion.p>
       </div>
 

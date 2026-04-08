@@ -1,9 +1,12 @@
 # utopia-agency
 
-This is a code bundle for LP agência. The original project is available at https://www.figma.com/design/PBKtJ4dYInzDCkVU7eP5PB/LP-ag%C3%AAncia.
+Site da **Utopia Studio**: agência focada em **landing pages**, **Sistemas SaaS** e **aplicativos** — entrega rápida, padrão premium e processo eficiente.
 
-## Running the code
+Design base: [Figma — LP agência](https://www.figma.com/design/PBKtJ4dYInzDCkVU7eP5PB/LP-ag%C3%AAncia).
 
-Run `npm i` to install the dependencies.
+## Rodar o projeto
 
-Run `npm run dev` to start the development server.
+```bash
+npm i
+npm run dev
+```

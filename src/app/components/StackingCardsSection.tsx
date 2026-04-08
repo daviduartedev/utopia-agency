@@ -4,38 +4,38 @@ import { Code, CheckCircle, Pencil, Users } from 'lucide-react';
 
 const projects: ProjectData[] = [
   {
-    tag: 'Build',
+    tag: 'Briefing',
     icon: <Code size={20} className="text-zinc-600" />,
-    title: 'Build your MVP in just 2 weeks',
+    title: 'Alinhamento rápido no que importa',
     description:
-      'We start by designing and developing the core functionality to validate your concept fast — so you can prove traction before investing big.',
+      'Escopo claro para landing, SaaS ou app: priorizamos o que vende e o que precisa estar no ar primeiro — sem semanas em reunião infinita.',
     url: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
   {
-    tag: 'Iterate',
+    tag: 'Build',
     icon: <CheckCircle size={20} className="text-zinc-600" />,
-    title: 'Set your roadmap and milestones',
+    title: 'Sprints curtos, entrega contínua',
     description:
-      'Continuous development with flexible roadmaps that let you shift priorities as you learn from users and adapt to the market.',
+      'Desenvolvimento em ciclos objetivos com demos frequentes. Você acompanha o produto tomando forma e ajusta antes do go-live.',
     url: 'https://images.unsplash.com/photo-1611606063065-ee7946f0787a?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
   {
-    tag: 'Grow',
+    tag: 'Qualidade',
     icon: <Pencil size={20} className="text-zinc-600" />,
-    title: 'Move faster with AI-powered tools',
+    title: 'Acabamento premium, performance real',
     description:
-      'Leverage modern AI workflows and automated testing to accelerate deployment and ensure software quality at every step.',
+      'UI polida, código enxuto e stack atual — para seu site ou sistema carregar rápido, converter melhor e aguentar escala.',
     url: 'https://images.unsplash.com/photo-1675271591211-126ad94e495d?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
   {
-    tag: 'Collaborate',
+    tag: 'Lançamento',
     icon: <Users size={20} className="text-zinc-600" />,
-    title: 'Stay flexible with async collaboration',
+    title: 'Do deploy ao time usando de verdade',
     description:
-      'Global-first async workflows that keep everyone aligned without unnecessary meetings, letting you scale with talent anywhere.',
+      'Publicação assistida, handoff com documentação e suporte pós-lançamento para landings, SaaS e apps entrarem no ar com confiança.',
     url: 'https://images.unsplash.com/photo-1542744173-8e7e5381bb52?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
@@ -53,8 +53,8 @@ export function StackingCardsSection() {
 
       <div className="max-w-2xl mx-auto px-8 md:px-12 mb-16 text-center relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-8">
-          How we work? We simplify complex builds into <br />
-          <span className="text-zinc-400">fast, focused sprints that ship real results every week.</span>
+          Como trabalhamos: landings, SaaS e apps <br />
+          <span className="text-zinc-400">com processo enxuto, prazos realistas e entrega que você acompanha em cada sprint.</span>
         </h2>
       </div>
 

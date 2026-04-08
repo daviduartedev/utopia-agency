@@ -354,25 +354,22 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     const motionOff = reduceMotion ?? prefersReduced;
 
     // ── Word splitting ────────────────────────────────────────────────────────
-    const bucket = useRef<HTMLSpanElement[]>([]);
-
-    const splitWords = (text: string) =>
-      text.split(/\s+/).filter(Boolean).map((w, i, arr) => (
+    /** Refs must be per-section: a shared bucket breaks because refs attach after render, so only idx 0 received the array. */
+    const splitWords = (text: string, sectionIdx: number) => {
+      wordRefs.current[sectionIdx] = [];
+      return text.split(/\s+/).filter(Boolean).map((w, i, arr) => (
         <span className="fx-word-mask" key={i}>
-          <span className="fx-word" ref={(el) => { if (el) bucket.current.push(el); }}>{w}</span>
+          <span
+            className="fx-word"
+            ref={(el) => {
+              if (el) wordRefs.current[sectionIdx].push(el);
+            }}
+          >
+            {w}
+          </span>
           {i < arr.length - 1 ? " " : null}
         </span>
       ));
-
-    // WordsCollector fires after each section mounts and captures word refs
-    const WordsCollector = ({ idx }: { idx: number }) => {
-      useEffect(() => {
-        if (bucket.current.length) {
-          wordRefs.current[idx] = [...bucket.current];
-          bucket.current = [];
-        }
-      }, []); // eslint-disable-line react-hooks/exhaustive-deps
-      return null;
     };
 
     // ── Center list tracks ────────────────────────────────────────────────────
@@ -607,7 +604,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             {/* Center */}
             <div className="fx-center">
               {sections.map((s, sIdx) => {
-                bucket.current = [];
                 const isStr = typeof s.title === "string";
                 return (
                   <div
@@ -615,9 +611,8 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                     className={`fx-featured${sIdx === activeIndex ? " active" : ""}`}
                   >
                     <h3 className="fx-featured-title">
-                      {isStr ? splitWords(s.title as string) : s.title}
+                      {isStr ? splitWords(s.title as string, sIdx) : s.title}
                     </h3>
-                    <WordsCollector idx={sIdx} />
                   </div>
                 );
               })}

@@ -5,57 +5,57 @@ import { motion } from "motion/react";
 const projects = [
   {
     id: 1,
-    title: "Financial Dashboard",
-    category: "Web Application",
+    title: "Dashboard financeiro",
+    category: "SaaS · Web",
     image:
       "https://images.unsplash.com/photo-1720962158883-b0f2021fb51e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2UlMjBkYXJrfGVufDF8fHx8MTc3NTI5NTA5M3ww&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 2,
-    title: "Analytics Platform",
-    category: "SaaS Dashboard",
+    title: "Plataforma de analytics",
+    category: "SaaS · Dashboard",
     image:
       "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbmFseXRpY3MlMjBkYXNoYm9hcmQlMjBVSXxlbnwxfHx8fDE3NzUzNTU3OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 3,
-    title: "Banking App",
-    category: "Mobile Interface",
+    title: "App bancário",
+    category: "App · Mobile",
     image:
       "https://images.unsplash.com/photo-1645226880663-81561dcab0ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzc1MzU1NzkyfDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 4,
-    title: "Project Manager",
-    category: "Web Application",
+    title: "Gestão de projetos",
+    category: "SaaS · Web",
     image:
       "https://images.unsplash.com/photo-1770368787779-8472da646193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMGRhc2hib2FyZHxlbnwxfHx8fDE3NzUzNTU3OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 5,
-    title: "E-Commerce Store",
-    category: "Landing Page",
+    title: "Loja e-commerce",
+    category: "Landing · Conversão",
     image:
       "https://images.unsplash.com/photo-1694599048261-a1de00f0117e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlJTIwZGVzaWdufGVufDF8fHx8MTc3NTMwNzUxMXww&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 6,
-    title: "SaaS Platform",
-    category: "Marketing Site",
+    title: "Site de produto SaaS",
+    category: "Landing · Marketing",
     image:
       "https://images.unsplash.com/photo-1648134859175-78b41b4db186?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWFzJTIwbGFuZGluZyUyMHBhZ2UlMjBkZXNpZ258ZW58MXx8fHwxNzc1MzU1NzkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
     id: 7,
-    title: "Design System",
-    category: "UI/UX",
+    title: "Design system",
+    category: "UI · Produto",
     image:
       "https://images.unsplash.com/photo-1618788372246-79faff0c3742?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
   },
   {
     id: 8,
-    title: "CRM Dashboard",
-    category: "Enterprise App",
+    title: "CRM interno",
+    category: "SaaS · Enterprise",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
   },
@@ -96,7 +96,7 @@ export function Portfolio() {
           className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Nosso Portfólio
+          Trabalhos recentes
         </motion.h2>
         <motion.h3
           initial={{ opacity: 0, y: 20 }}
@@ -106,7 +106,7 @@ export function Portfolio() {
           className="text-4xl md:text-5xl font-bold leading-tight text-white mb-4"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Experiências Visuais
+          Landings, SaaS e apps no mundo real
         </motion.h3>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -116,8 +116,8 @@ export function Portfolio() {
           className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Conheça nossos últimos protótipos de landing pages e sistemas modernos
-          desenvolvidos com foco em conversão e design premium.
+          Projetos que entregam rápido e mantêm padrão premium — do site de produto ao app
+          que o time usa todo dia.
         </motion.p>
       </div>
 
