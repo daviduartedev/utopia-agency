@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "./utils";
 import { FullScreenScrollFX, FullScreenFXAPI } from "./full-screen-scroll-fx";
+import Orb from "./Orb";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -109,9 +110,30 @@ export function CinematicHero({
 
   // ── FX sections defined once ────────────────────────────────────────────
   const FX_SECTIONS = [
-    { id: "landing",  leftLabel: "Landing pages", title: "RÁPIDO", rightLabel: "Landing pages",  background: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1600&auto=format&fit=crop" },
-    { id: "sistemas", leftLabel: "Sistemas SaaS", title: "PREMIUM", rightLabel: "Sistemas SaaS", background: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" },
-    { id: "aplicativos", leftLabel: "Aplicativos", title: "EFICIENTE", rightLabel: "Aplicativos",     background: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1600&auto=format&fit=crop" },
+    {
+      id: "landing",
+      leftLabel: "Landing pages",
+      title:
+        "Landing pages e sites de produto para converter visita em lead. Mensagem clara, layout objetivo e performance real.",
+      rightLabel: "Landing pages",
+      background: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1600&auto=format&fit=crop",
+    },
+    {
+      id: "sistemas",
+      leftLabel: "Sistemas SaaS",
+      title:
+        "Sistemas SaaS e painéis sob medida para o time operar e medir. Integrações sólidas e escala sem gargalo técnico.",
+      rightLabel: "Sistemas SaaS",
+      background: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    },
+    {
+      id: "aplicativos",
+      leftLabel: "Aplicativos",
+      title:
+        "Aplicativos mobile e PWA com fluxos simples e onboarding inteligente. Experiência pensada para o uso no dia a dia.",
+      rightLabel: "Aplicativos",
+      background: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1600&auto=format&fit=crop",
+    },
   ] satisfies { id: string; leftLabel: string; title: string; rightLabel: string; background: string }[];
   const FX_TOTAL = FX_SECTIONS.length; // 3
 
@@ -218,8 +240,20 @@ export function CinematicHero({
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
+      {/* WebGL orb (react-bits / OGL) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="relative h-full w-full min-h-full pointer-events-auto">
+          <Orb
+            hoverIntensity={2}
+            rotateOnHover
+            hue={0}
+            forceHoverState={false}
+            backgroundColor="#000000"
+          />
+        </div>
+      </div>
       <div className="film-grain" aria-hidden="true" />
-      <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
+      <div className="bg-grid-theme absolute inset-0 z-[1] pointer-events-none opacity-50" aria-hidden="true" />
 
       {/* PHASE 1 LAYER: ENTRANCE TEXTS */}
       <div className="entrance-text-layer absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
@@ -270,7 +304,7 @@ export function CinematicHero({
               durations={{ change: 0.6 }}
               header={
                 <>
-                  <span style={{ fontSize: "clamp(0.55rem, 1vw, 0.9rem)", letterSpacing: "0.4em", opacity: 0.5, marginBottom: "0.5rem" }}>UTOPIA STUDIO</span>
+                  <span style={{ fontSize: "clamp(0.55rem, 1vw, 0.9rem)", letterSpacing: "0.4em", opacity: 0.5, marginBottom: "0.5rem" }}>UTOPIA</span>
                   <span>LANDINGS · SAAS · APPS</span>
                   <span style={{ fontSize: "clamp(0.65rem, 1.6vw, 1rem)", letterSpacing: "0.2em", opacity: 0.65, marginTop: "0.35rem" }}>ENTREGA RÁPIDA · PADRÃO ALTO</span>
                 </>
