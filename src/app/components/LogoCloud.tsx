@@ -3,11 +3,32 @@ import { InfiniteSlider } from "./ui/infinite-slider";
 import { ProgressiveBlur } from "./ui/progressive-blur";
 
 type Logo = {
-  src: string;
+  src?: string;
   alt: string;
   /** Se false, mantém cores originais (ex.: React Native em ciano). */
   monochrome?: boolean;
+  /** Evita CDN quebrada — logo oficial embutido. */
+  inline?: "react";
 };
+
+/** Logo React (SVG local — mesmo símbolo da marca, cor #61DAFB) */
+function ReactLogoMark({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="-11.5 -10.23174 23 20.46348"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+      <g stroke="#61DAFB" fill="none" strokeWidth="1">
+        <ellipse cx="0" cy="0" rx="11" ry="4.2" />
+        <ellipse cx="0" cy="0" rx="11" ry="4.2" transform="rotate(60)" />
+        <ellipse cx="0" cy="0" rx="11" ry="4.2" transform="rotate(-60)" />
+      </g>
+    </svg>
+  );
+}
 
 /** Ícones (não wordmarks) — ordem do carrossel */
 const logos: Logo[] = [
@@ -28,9 +49,9 @@ const logos: Logo[] = [
     alt: "Strapi",
   },
   {
-    src: "https://cdn.simpleicons.org/react/61DAFB",
     alt: "React",
     monochrome: false,
+    inline: "react",
   },
   {
     src: "https://cdn.simpleicons.org/reactnative/61DAFB",
@@ -108,19 +129,29 @@ export function LogoCloud() {
             durationOnHover={160}
             reverse={false}
           >
-            {logos.map((logo) => (
-              <img
-                key={logo.alt}
-                src={logo.src}
-                alt={logo.alt}
-                className={
-                  logo.monochrome === false
-                    ? "h-8 md:h-9 w-9 md:w-10 shrink-0 object-contain select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
-                    : "h-8 md:h-9 w-auto max-w-[7.5rem] shrink-0 object-contain object-left select-none pointer-events-none brightness-0 invert opacity-50 hover:opacity-85 transition-opacity duration-300"
-                }
-                loading="lazy"
-              />
-            ))}
+            {logos.map((logo) =>
+              logo.inline === "react" ? (
+                <div
+                  key={logo.alt}
+                  className="h-8 md:h-9 w-9 md:w-10 shrink-0 flex items-center justify-center select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  aria-hidden
+                >
+                  <ReactLogoMark className="h-full w-full" />
+                </div>
+              ) : (
+                <img
+                  key={logo.alt}
+                  src={logo.src}
+                  alt={logo.alt}
+                  className={
+                    logo.monochrome === false
+                      ? "h-8 md:h-9 w-9 md:w-10 shrink-0 object-contain select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
+                      : "h-8 md:h-9 w-auto max-w-[7.5rem] shrink-0 object-contain object-left select-none pointer-events-none brightness-0 invert opacity-50 hover:opacity-85 transition-opacity duration-300"
+                  }
+                  loading="lazy"
+                />
+              )
+            )}
           </InfiniteSlider>
         </div>
 
