@@ -1,3 +1,5 @@
+import { openWhatsApp } from "../lib/whatsapp";
+import { WA_MSG_FLOATING } from "../lib/whatsapp-messages";
 import { FloatingConsultButton } from "./ui/floating-consult-button";
 
 export default function DemoOne() {
@@ -6,13 +8,13 @@ export default function DemoOne() {
       buttonSize={200}
       imageSize={120}
       imageSrc="/avatar.png"
-      revolvingText="FALE CONOSCO — ORÇAMENTO — LANDING · SAAS · APPS — "
+      revolvingText="QUERO MEU PROJETO AGORA — FALE CONOSCO — UTOPIA — "
       revolvingSpeed={8}
-      popupHeading="Vamos conversar"
-      popupDescription="Conte sua ideia: landing, SaaS ou app. Respondemos com prazo, escopo e próximos passos — sem enrolação."
-      ctaButtonText="Ir para o contato"
+      popupHeading="Bora começar?"
+      popupDescription="Um clique e você fala direto com a gente no WhatsApp — landing, SaaS ou app."
+      ctaButtonText="Quero falar agora"
       ctaButtonAction={() => {
-        document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+        openWhatsApp(WA_MSG_FLOATING);
       }}
     />
   );

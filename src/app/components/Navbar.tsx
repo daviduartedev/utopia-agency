@@ -1,11 +1,13 @@
 import { BrandLogo } from "./BrandLogo";
+import { whatsappHref } from "../lib/whatsapp";
+import { WA_MSG_NAV } from "../lib/whatsapp-messages";
 
 const links = [
   { href: "#ofertas", label: "Serviços" },
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#portfolio", label: "Trabalhos" },
   { href: "#depoimentos", label: "Depoimentos" },
-  { href: "#contato", label: "Contato" },
+  { href: whatsappHref(WA_MSG_NAV), label: "Falar agora" },
 ] as const;
 
 export function Navbar() {
@@ -18,15 +20,21 @@ export function Navbar() {
         style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         aria-label="Navegação principal"
       >
-        {links.map(({ href, label }) => (
-          <a
-            key={href}
-            href={href}
-            className="shrink-0 whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium tracking-normal text-zinc-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface sm:px-0 sm:py-0 sm:text-sm md:text-[15px]"
-          >
-            {label}
-          </a>
-        ))}
+        {links.map(({ href, label }) => {
+          const external = /^https?:\/\//i.test(href);
+          return (
+            <a
+              key={label}
+              href={href}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="shrink-0 whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium tracking-normal text-zinc-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface sm:px-0 sm:py-0 sm:text-sm md:text-[15px]"
+            >
+              {label}
+            </a>
+          );
+        })}
       </nav>
     </header>
   );

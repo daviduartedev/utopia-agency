@@ -2,6 +2,8 @@
 "use client";
 
 import React from "react";
+import { whatsappHref } from "../../lib/whatsapp";
+import { WA_MSG_HERO } from "../../lib/whatsapp-messages";
 import Plasma from "./plasma";
 import { cn } from "./utils";
 
@@ -64,11 +66,13 @@ export function CinematicHero({
         </p>
         <div className="flex w-full min-w-0 max-w-md flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center">
           <a
-            href="#contato"
+            href={whatsappHref(WA_MSG_HERO)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="pointer-events-auto inline-flex w-full min-w-0 items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-base font-semibold leading-none tracking-tight text-black transition-colors hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:w-auto sm:px-12 sm:py-5 sm:text-lg"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
-            Solicitar proposta
+            Quero meu projeto agora
             <svg
               className="h-5 w-5 text-zinc-500"
               fill="none"
