@@ -1,27 +1,53 @@
 import { motion } from "motion/react";
-import { Zap, Star, MessageSquare, PackageCheck } from "lucide-react";
+import {
+  MessageSquare,
+  PackageCheck,
+  Star,
+  Zap,
+} from "lucide-react";
+import { BentoGrid, type BentoItem } from "./ui/bento-grid";
 import { SectionHeader } from "./ui/section-header";
 
-const items = [
+const bentoItems: BentoItem[] = [
   {
-    icon: Zap,
     title: "Entrega ágil",
-    body: "Da proposta ao ar em semanas, não meses. Processo enxuto, sem reuniões desnecessárias e sem fase de aprovação que nunca termina.",
+    meta: "Semanas, não meses",
+    description:
+      "Da proposta ao ar com processo enxuto, sem reuniões desnecessárias e sem fases de aprovação intermináveis.",
+    icon: <Zap className="size-4 text-amber-400" strokeWidth={1.75} />,
+    status: "Ritmo",
+    tags: ["Prazo", "Lean", "Foco"],
+    colSpan: 2,
+    hasPersistentHover: true,
+    cta: "Ver processo →",
   },
   {
-    icon: Star,
     title: "Qualidade de produto",
-    body: "UI polida, código limpo e performance real. Não apenas bonito na apresentação — funciona de verdade em produção.",
+    meta: "Pronto para produção",
+    description:
+      "UI polida, código limpo e performance real — não só bonito na apresentação, funciona de verdade no ar.",
+    icon: <Star className="size-4 text-violet-400" strokeWidth={1.75} />,
+    status: "Padrão",
+    tags: ["UI", "Performance", "Código"],
   },
   {
-    icon: MessageSquare,
     title: "Comunicação direta",
-    body: "Você acompanha cada etapa. Sem intermediários, sem surpresas no escopo, sem \"vou verificar com o time\" que nunca volta.",
+    meta: "Sem intermediários",
+    description:
+      "Você acompanha cada etapa: sem surpresas de escopo e sem respostas que nunca chegam.",
+    icon: <MessageSquare className="size-4 text-sky-400" strokeWidth={1.75} />,
+    status: "Transparência",
+    tags: ["Alinhamento", "Status"],
+    colSpan: 2,
   },
   {
-    icon: PackageCheck,
     title: "Do zero ao deploy",
-    body: "Não entregamos só design ou só código. O produto vai ao ar com domínio, hospedagem e suporte nos primeiros dias online.",
+    meta: "Suporte inicial",
+    description:
+      "Não entregamos só telas ou só repositório: produto no ar com domínio, hospedagem e apoio nos primeiros dias.",
+    icon: <PackageCheck className="size-4 text-emerald-400" strokeWidth={1.75} />,
+    status: "Entrega",
+    tags: ["Deploy", "CI/CD", "Docs"],
   },
 ];
 
@@ -50,41 +76,12 @@ export function WhyUs() {
           eyebrow="Por que a Utopia"
           title="Feito para quem não quer perder tempo."
           description="Cada projeto é tratado como se fosse o produto principal do nosso portfólio. Porque é."
-          className="mb-14"
+          className="mb-10 md:mb-14"
         />
       </motion.div>
 
       <div className="mx-auto max-w-[1300px] px-4 sm:px-8 md:px-12">
-        <div className="grid grid-cols-1 gap-px border border-white/10 sm:grid-cols-2 rounded-2xl overflow-hidden">
-          {items.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="flex flex-col gap-4 border-white/10 bg-page-surface p-8 md:p-10 [&:nth-child(1)]:border-b [&:nth-child(2)]:border-b sm:[&:nth-child(1)]:border-r sm:[&:nth-child(3)]:border-r"
-            >
-              <div className="flex size-10 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                <item.icon className="size-5 text-zinc-300" strokeWidth={1.5} />
-              </div>
-              <div>
-                <p
-                  className="mb-2 text-base font-semibold text-white"
-                  style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-                >
-                  {item.title}
-                </p>
-                <p
-                  className="text-sm leading-relaxed text-zinc-400"
-                  style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-                >
-                  {item.body}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <BentoGrid items={bentoItems} />
       </div>
 
       <div
