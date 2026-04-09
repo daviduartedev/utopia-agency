@@ -7,7 +7,7 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { BookCallWidget } from "./BookCallWidget";
 
-/** Substitui pelo teu email de contacto. */
+/** Substitui pelo seu e-mail de contato. */
 const CONTACT_EMAIL = "contato@seudominio.com";
 
 const fieldClass =
@@ -58,9 +58,9 @@ export function ContactFormSection() {
       >
         <SectionHeader
           id="contact-heading"
-          eyebrow="Contacto"
-          title="Conta-nos sobre o teu projeto."
-          description="Resposta em até um dia útil. Sem spam — só o necessário para preparar uma proposta alinhada ao que precisas."
+          eyebrow="Contato"
+          title="Conte-nos sobre o seu projeto."
+          description="Resposta em até um dia útil. Sem spam — só o necessário para preparar uma proposta alinhada ao que você precisa."
           className="mb-12 md:mb-14"
         />
       </motion.div>
@@ -89,7 +89,7 @@ export function ContactFormSection() {
               type="text"
               required
               autoComplete="name"
-              placeholder="O teu nome"
+              placeholder="Seu nome"
               className={fieldClass}
             />
           </div>
@@ -118,7 +118,7 @@ export function ContactFormSection() {
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="+351 …"
+              placeholder="+55 (11) 99999-9999"
               className={fieldClass}
             />
           </div>
@@ -135,7 +135,7 @@ export function ContactFormSection() {
               defaultValue=""
             >
               <option value="" disabled className="bg-zinc-900 text-zinc-400">
-                Seleciona uma opção
+                Selecione uma opção
               </option>
               <option value="Landing page / site" className="bg-zinc-900">
                 Landing page / site
@@ -167,7 +167,7 @@ export function ContactFormSection() {
           </div>
 
           <Button type="submit" className="w-full sm:w-auto sm:self-start">
-            Enviar pedido
+            Enviar mensagem
           </Button>
 
           {sent ? (
@@ -176,8 +176,8 @@ export function ContactFormSection() {
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
               role="status"
             >
-              Se o cliente de email não abriu, confirma que tens uma app de correio
-              configurada ou envia manualmente para{" "}
+              Se o programa de e-mail não abriu, verifique se você tem um app de
+              e-mail configurado ou envie manualmente para{" "}
               <span className="text-zinc-300">{CONTACT_EMAIL}</span>.
             </p>
           ) : null}

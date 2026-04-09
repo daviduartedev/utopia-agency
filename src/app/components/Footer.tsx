@@ -36,7 +36,7 @@ export function Footer() {
               className="max-w-sm text-center text-sm leading-relaxed text-zinc-500 md:text-left"
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
             >
-              Landings, SaaS e apps — entrega rápida com padrão premium.
+              Landing pages, SaaS e apps — entrega rápida com padrão premium.
             </p>
 
             {/* Stack logos */}

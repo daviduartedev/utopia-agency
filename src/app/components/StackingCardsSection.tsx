@@ -35,7 +35,7 @@ const projects: ProjectData[] = [
     icon: <Users size={20} className="text-zinc-600" />,
     title: 'Do deploy ao time usando de verdade',
     description:
-      'Publicação assistida, handoff com documentação e suporte pós-lançamento para landings, SaaS e apps entrarem no ar com confiança.',
+      'Publicação assistida, repasse com documentação e suporte pós-lançamento para landing pages, SaaS e apps entrarem no ar com confiança.',
     url: 'https://images.unsplash.com/photo-1542744173-8e7e5381bb52?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },

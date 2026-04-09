@@ -49,7 +49,7 @@ export function BookCallWidget({
             className="mt-0.5 text-sm leading-snug text-zinc-500"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
-            15 minutos gratuitos com a nossa equipa para falares do teu projeto.
+            15 minutos gratuitos com a nossa equipe para falar sobre o seu projeto.
           </p>
         </div>
       </div>

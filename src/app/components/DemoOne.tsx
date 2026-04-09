@@ -10,8 +10,10 @@ export default function DemoOne() {
       revolvingSpeed={8}
       popupHeading="Vamos conversar"
       popupDescription="Conte sua ideia: landing, SaaS ou app. Respondemos com prazo, escopo e próximos passos — sem enrolação."
-      ctaButtonText="Agendar conversa"
-      ctaButtonAction={() => window.location.href = '/booking'}
+      ctaButtonText="Ir para o contato"
+      ctaButtonAction={() => {
+        document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+      }}
     />
   );
 }

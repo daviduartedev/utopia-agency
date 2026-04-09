@@ -13,7 +13,7 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
 export function CinematicHero({
   tagline1 = "Produto digital",
   tagline2 = "pronto para vender.",
-  ctaDescription = "Agência focada em landings, sistemas SaaS e aplicativos: briefing objetivo, prazos curtos e entrega eficiente — sem abrir mão de acabamento premium.",
+  ctaDescription = "Agência focada em landing pages, sistemas SaaS e aplicativos: briefing objetivo, prazos curtos e entrega eficiente — sem abrir mão do acabamento premium.",
   className,
   ...props
 }: CinematicHeroProps) {

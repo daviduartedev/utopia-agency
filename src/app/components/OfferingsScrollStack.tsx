@@ -16,7 +16,7 @@ const STACK_ITEMS = [
     kicker: "Operação e escala",
     title: "Sistemas SaaS",
     body:
-      "Sistemas SaaS e painéis sob medida para o time operar e medir. Integrações sólidas e escala sem gargalo técnico.",
+      "Sistemas SaaS e painéis sob medida para sua equipe operar e medir. Integrações sólidas e escala sem gargalo técnico.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
   },
@@ -42,7 +42,7 @@ export function OfferingsScrollStack() {
         id="ofertas-heading"
         className="pb-10 pt-20 md:pb-12 md:pt-28"
         title="Nossos serviços"
-        description="Landings, sistemas SaaS e aplicativos — o que fazemos, em cartões que acompanham o scroll."
+        description="Landing pages, sistemas SaaS e aplicativos — o que fazemos, em cartões que acompanham o scroll."
       />
 
       <div className="min-h-[130vh] w-full pb-28">
