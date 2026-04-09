@@ -11,43 +11,31 @@ import { SectionHeader } from "./ui/section-header";
 const bentoItems: BentoItem[] = [
   {
     title: "Entrega ágil",
-    meta: "Semanas, não meses",
     description:
       "Da proposta ao ar com processo enxuto, sem reuniões desnecessárias e sem fases de aprovação intermináveis.",
     icon: <Zap className="size-4 text-amber-400" strokeWidth={1.75} />,
     status: "Ritmo",
-    tags: ["Prazo", "Lean", "Foco"],
-    colSpan: 2,
-    hasPersistentHover: true,
-    cta: "Ver processo →",
   },
   {
     title: "Qualidade de produto",
-    meta: "Pronto para produção",
     description:
       "UI polida, código limpo e performance real — não só bonito na apresentação, funciona de verdade no ar.",
     icon: <Star className="size-4 text-violet-400" strokeWidth={1.75} />,
     status: "Padrão",
-    tags: ["UI", "Performance", "Código"],
   },
   {
     title: "Comunicação direta",
-    meta: "Sem intermediários",
     description:
       "Você acompanha cada etapa: sem surpresas de escopo e sem respostas que nunca chegam.",
     icon: <MessageSquare className="size-4 text-sky-400" strokeWidth={1.75} />,
     status: "Transparência",
-    tags: ["Alinhamento", "Status"],
-    colSpan: 2,
   },
   {
     title: "Do zero ao deploy",
-    meta: "Suporte inicial",
     description:
       "Não entregamos só telas ou só repositório: produto no ar com domínio, hospedagem e apoio nos primeiros dias.",
     icon: <PackageCheck className="size-4 text-emerald-400" strokeWidth={1.75} />,
     status: "Entrega",
-    tags: ["Deploy", "CI/CD", "Docs"],
   },
 ];
 

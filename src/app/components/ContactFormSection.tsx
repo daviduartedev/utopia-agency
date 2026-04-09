@@ -5,7 +5,6 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { BookCallWidget } from "./BookCallWidget";
 
 /** Substitui pelo seu e-mail de contato. */
 const CONTACT_EMAIL = "contato@seudominio.com";
@@ -72,8 +71,6 @@ export function ContactFormSection() {
         transition={{ duration: 0.45, delay: 0.08 }}
         className="mx-auto max-w-xl px-4 sm:px-8 md:px-12"
       >
-        <BookCallWidget className="mb-8" />
-
         <form
           id="contact-form"
           onSubmit={handleSubmit}

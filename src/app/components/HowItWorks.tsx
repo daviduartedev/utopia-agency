@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { BookCallWidget } from "./BookCallWidget";
 import { SectionHeader } from "./ui/section-header";
 import { SpotlightCard } from "./ui/spotlight-card";
 
@@ -103,6 +104,16 @@ export function HowItWorks() {
             </motion.li>
           ))}
         </ol>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, delay: 0.15 }}
+          className="mx-auto mt-10 max-w-xl md:mt-14"
+        >
+          <BookCallWidget />
+        </motion.div>
       </div>
 
       <div

@@ -1,8 +1,8 @@
 import { CalendarPlus } from "lucide-react";
 import { cn } from "./ui/utils";
 
-const AVATAR_SRC =
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=128&h=128&fit=crop&crop=faces&q=85&auto=format";
+/** Mesma foto do botão flutuante (`public/avatar.png`). */
+const AVATAR_SRC = "/avatar.png";
 
 type BookCallWidgetProps = {
   className?: string;
@@ -36,6 +36,7 @@ export function BookCallWidget({
           alt=""
           width={48}
           height={48}
+          decoding="async"
           className="size-12 shrink-0 rounded-full object-cover ring-1 ring-zinc-200"
         />
         <div className="min-w-0 pt-0.5 sm:pt-0">
