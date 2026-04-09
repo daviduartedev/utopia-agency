@@ -127,11 +127,12 @@ export function Plasma({
 
     const directionMultiplier = direction === "reverse" ? -1.0 : 1.0;
 
+    const narrowViewport = window.matchMedia("(max-width: 767px)").matches;
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      dpr: Math.min(window.devicePixelRatio || 1, narrowViewport ? 1 : 2),
     });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;

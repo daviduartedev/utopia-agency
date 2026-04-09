@@ -75,6 +75,21 @@ export function Portfolio() {
         .marquee-track.is-paused {
           animation-play-state: paused;
         }
+        @media (max-width: 767px) {
+          .marquee-track {
+            animation-duration: 52s;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .portfolio-marquee-outer {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
+          }
+          .marquee-track {
+            animation: none;
+          }
+        }
       `}</style>
 
       <motion.div
@@ -93,7 +108,7 @@ export function Portfolio() {
         />
       </motion.div>
 
-      <div className="w-full max-w-full overflow-hidden">
+      <div className="portfolio-marquee-outer w-full max-w-full overflow-hidden">
         <div
           className={`marquee-track flex gap-4 sm:gap-8${paused ? " is-paused" : ""}`}
           style={{ width: "max-content" }}
