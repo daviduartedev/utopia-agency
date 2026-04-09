@@ -93,9 +93,9 @@ export function Portfolio() {
         />
       </motion.div>
 
-      <div className="w-full overflow-hidden" style={{ width: "100vw" }}>
+      <div className="w-full max-w-full overflow-hidden">
         <div
-          className={`marquee-track flex gap-8${paused ? " is-paused" : ""}`}
+          className={`marquee-track flex gap-4 sm:gap-8${paused ? " is-paused" : ""}`}
           style={{ width: "max-content" }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
@@ -103,7 +103,7 @@ export function Portfolio() {
           {allItems.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
-              className="group w-[400px] flex-shrink-0 md:w-[480px]"
+              className="group w-[min(85vw,22rem)] shrink-0 sm:w-[min(90vw,25rem)] md:w-[480px]"
             >
               <div className="h-full rounded-2xl border border-white/10 bg-page-surface p-3">
                 <div className="mb-3 flex flex-col px-2">
@@ -121,7 +121,7 @@ export function Portfolio() {
                   </p>
                 </div>
 
-                <div className="relative h-[280px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface md:h-[340px]">
+                <div className="relative h-[220px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface sm:h-[280px] md:h-[340px]">
                   <ImageWithFallback
                     src={item.image}
                     alt={item.title}

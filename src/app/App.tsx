@@ -15,7 +15,7 @@ import "../styles/fonts.css";
 export default function App() {
   return (
     <div
-      className="min-h-screen bg-page-surface text-white antialiased selection:bg-white/15 overflow-x-hidden"
+      className="min-h-screen overflow-x-hidden bg-page-surface pb-28 text-white antialiased selection:bg-white/15 sm:pb-10 md:pb-12"
       style={{ fontFamily: "var(--font-sans)" }}
     >
       {/* 1. Hero */}
@@ -72,8 +72,8 @@ export default function App() {
       <DemoOne />
 
       {/* Navbar por último no DOM + z-index alto */}
-      <div className="pointer-events-auto fixed inset-x-0 top-0 z-[200]">
-        <div className="w-full px-8 pt-5 md:px-12 md:pt-6">
+      <div className="pointer-events-auto fixed inset-x-0 top-0 z-[200] pt-[env(safe-area-inset-top,0px)]">
+        <div className="w-full px-3 pt-3 sm:px-6 sm:pt-4 md:px-12 md:pt-6">
           <div className="mx-auto max-w-[1300px]">
             <Navbar />
           </div>

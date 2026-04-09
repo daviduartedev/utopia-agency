@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./button";
 
 interface FloatingConsultButtonProps {
   // Button appearance
-  buttonSize?: number; // Diameter in pixels (default: 160 for lg, 128 for mobile)
-  imageSize?: number; // Center image diameter in pixels (default: 96 for lg, 80 for mobile)
+  buttonSize?: number;
+  imageSize?: number;
   imageSrc?: string;
   imageAlt?: string;
-  
+  /** Quando fornecido, renderiza este nó no centro em vez da imagem. */
+  centerContent?: React.ReactNode;
+
   // Revolving text
   revolvingText?: string;
-  revolvingSpeed?: number; // Duration in seconds for one rotation (default: 10)
-  
+  revolvingSpeed?: number;
+
   // Popup content
   popupHeading?: string;
   popupDescription?: string;
   popupBadgeText?: string;
   ctaButtonText?: string;
   ctaButtonAction?: () => void;
-  
+
   // Positioning
   position?: {
     bottom?: string;
@@ -32,8 +34,9 @@ interface FloatingConsultButtonProps {
 export const FloatingConsultButton = ({
   buttonSize,
   imageSize,
-  imageSrc = "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&h=256&auto=format&fit=crop",
-  imageAlt = "Consultor",
+  imageSrc,
+  imageAlt = "Mascote",
+  centerContent,
   revolvingText = "CONSULTA GRÁTIS — FALE CONOSCO — ",
   revolvingSpeed = 10,
   popupHeading = "Chamada rápida",
@@ -42,10 +45,20 @@ export const FloatingConsultButton = ({
   popupBadgeText = "Grátis",
   ctaButtonText = "Agendar chamada",
   ctaButtonAction = () => console.log("CTA clicked"),
-  position = { bottom: "2rem", right: "2rem" },
+  position = {
+    bottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+    right: "max(0.75rem, env(safe-area-inset-right, 0px))",
+  },
 }: FloatingConsultButtonProps): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSrc]);
+
+  const hasMascot = !!centerContent;
+
   // Responsive sizes with defaults
   const lgButtonSize = buttonSize || 160;
   const smButtonSize = buttonSize ? buttonSize * 0.8 : 128;
@@ -74,45 +87,51 @@ export const FloatingConsultButton = ({
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed bottom-48 right-8 z-50 bg-white rounded-3xl shadow-2xl p-8 lg:p-10 max-w-md w-[calc(100vw-4rem)]"
+            className="fixed bottom-[max(6.25rem,calc(env(safe-area-inset-bottom,0px)+5rem))] left-1/2 z-50 max-h-[min(85dvh,calc(100vh-2rem))] w-[min(100%,calc(100vw-1.5rem))] max-w-md -translate-x-1/2 overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:bottom-[max(10rem,calc(env(safe-area-inset-bottom,0px)+2rem))] sm:left-auto sm:right-[max(1rem,env(safe-area-inset-right,0px))] sm:translate-x-0 sm:p-8 lg:p-10"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="floating-consult-heading"
           >
-            {/* Close Button */}
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
-              className="absolute -top-12 -right-2 text-white hover:text-gray-300 transition-colors"
+              className="absolute right-3 top-3 rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 sm:right-4 sm:top-4"
+              aria-label="Fechar"
             >
               <svg
-                width="40"
-                height="40"
+                width="24"
+                height="24"
                 viewBox="0 0 40 40"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                aria-hidden
               >
                 <line x1="10" y1="10" x2="30" y2="30" />
                 <line x1="30" y1="10" x2="10" y2="30" />
               </svg>
             </button>
 
-            <div className="space-y-6">
-              {/* Header */}
-              <div className="flex items-start justify-between">
-                <h3 className="text-4xl lg:text-5xl font-bold text-black leading-tight">
+            <div className="space-y-5 pt-2 sm:space-y-6 sm:pt-0">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <h3
+                  id="floating-consult-heading"
+                  className="pr-10 text-2xl font-bold leading-tight text-black sm:pr-0 sm:text-3xl lg:text-4xl xl:text-5xl"
+                >
                   {popupHeading}
                 </h3>
-                <span className="text-black px-4 py-2 border-2 border-black rounded-full text-sm font-medium">
+                <span className="inline-flex w-fit shrink-0 rounded-full border-2 border-black px-3 py-1.5 text-xs font-medium text-black sm:px-4 sm:py-2 sm:text-sm">
                   {popupBadgeText}
                 </span>
               </div>
 
               {/* Description */}
-              <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
+              <p className="text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
                 {popupDescription}
               </p>
 
-              {/* CTA Button */}
-              <Button 
-                className="w-full rounded-full bg-page-surface px-8 py-4 text-base font-medium text-white hover:bg-neutral-900"
+              <Button
+                className="w-full rounded-full bg-page-surface px-6 py-3 text-sm font-medium text-white hover:bg-neutral-900 sm:px-8 sm:py-4 sm:text-base"
                 onClick={ctaButtonAction}
               >
                 {ctaButtonText}
@@ -123,12 +142,9 @@ export const FloatingConsultButton = ({
       </AnimatePresence>
 
       {/* Floating Button */}
-      <div 
-        className="fixed z-50"
-        style={position}
-      >
+      <div className="fcc-float-wrap fixed z-50" style={position}>
         <motion.div
-          className="relative cursor-pointer group"
+          className="relative cursor-pointer group fcc-float-trigger"
           style={{
             width: `${smButtonSize}px`,
             height: `${smButtonSize}px`,
@@ -167,38 +183,73 @@ export const FloatingConsultButton = ({
 
           {/* Center Image/Circle */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div 
-              className="rounded-full overflow-hidden bg-gray-900 shadow-lg group-hover:shadow-xl transition-shadow"
+            <div
+              className="fcc-float-inner rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow flex items-center justify-center"
               style={{
                 width: `${smImageSize}px`,
                 height: `${smImageSize}px`,
+                background: hasMascot ? "transparent" : "#18181b",
               }}
             >
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback if image doesn't exist
-                  e.currentTarget.style.display = 'none';
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-red-500 to-orange-500"></div>';
-                  }
-                }}
-              />
+              {hasMascot ? (
+                <div className="flex h-full w-full items-center justify-center">
+                  {centerContent}
+                </div>
+              ) : imageFailed ? (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background: "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              ) : imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={256}
+                  height={256}
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageFailed(true)}
+                />
+              ) : (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
         
         {/* Responsive sizing for larger screens */}
         <style>{`
+          @media (max-width: 639px) {
+            .fcc-float-wrap .fcc-float-trigger {
+              width: min(${smButtonSize}px, 32vw) !important;
+              height: min(${smButtonSize}px, 32vw) !important;
+            }
+            .fcc-float-wrap .fcc-float-inner {
+              width: min(${smImageSize}px, 22vw) !important;
+              height: min(${smImageSize}px, 22vw) !important;
+            }
+          }
           @media (min-width: 1024px) {
-            .relative.cursor-pointer.group {
+            .fcc-float-wrap .fcc-float-trigger {
               width: ${lgButtonSize}px !important;
               height: ${lgButtonSize}px !important;
             }
-            .relative.cursor-pointer.group .rounded-full.overflow-hidden {
+            .fcc-float-wrap .fcc-float-inner {
               width: ${lgImageSize}px !important;
               height: ${lgImageSize}px !important;
             }

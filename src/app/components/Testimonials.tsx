@@ -16,7 +16,7 @@ const testimonials = [
       "O painel SaaS ficou sob medida para o nosso fluxo. Treinamento rápido e a equipe adotou sem atrito.",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Fernanda Costa",
+    name: "Fernando Costa",
     role: "COO",
   },
   {
@@ -87,7 +87,7 @@ export function Testimonials() {
       id="depoimentos"
       className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
     >
-      <div className="mx-auto w-full max-w-[1300px] px-8 md:px-12">
+      <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
