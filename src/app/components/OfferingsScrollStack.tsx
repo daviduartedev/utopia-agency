@@ -9,7 +9,7 @@ const STACK_ITEMS = [
     body:
       "Landing pages e sites de produto para converter visita em lead. Mensagem clara, layout objetivo e performance real.",
     image:
-      "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=85&w=1600&auto=format&fit=crop",
   },
   {
     id: "saas",
