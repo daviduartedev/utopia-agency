@@ -60,7 +60,7 @@ export default function App() {
         <CtaSection />
       </div>
 
-      {/* 9. Formulário de contacto (#contato) */}
+      {/* 9. Formulário de contato (#contato) */}
       <div className="relative z-10 w-full">
         <ContactFormSection />
       </div>

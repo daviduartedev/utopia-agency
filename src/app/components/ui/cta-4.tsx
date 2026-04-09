@@ -10,16 +10,16 @@ export interface Cta4Props {
   buttonUrl?: string;
   items?: string[];
   sectionClassName?: string;
-  /** Quando false, não mostra o ícone ArrowRight (ex.: texto já termina com →). */
+  /** Quando false, não exibe o ícone ArrowRight (ex.: texto já termina com →). */
   showArrowIcon?: boolean;
 }
 
 const defaultItems = [
-  "Easy Integration",
-  "24/7 Support",
-  "Customizable Design",
-  "Scalable Performance",
-  "Hundreds of Blocks",
+  "Integração simples",
+  "Suporte dedicado",
+  "Design personalizável",
+  "Performance escalável",
+  "Dezenas de blocos prontos",
 ];
 
 function isExternalUrl(url: string) {
@@ -27,11 +27,11 @@ function isExternalUrl(url: string) {
 }
 
 export function Cta4({
-  title = "Call to Action",
+  title = "Chamada para ação",
   description =
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto illo praesentium nisi, accusantium quae.",
-  buttonText = "Get Started",
-  buttonUrl = "https://shadcnblocks.com",
+    "Texto de apoio que reforça o benefício e convida o visitante ao próximo passo.",
+  buttonText = "Começar agora",
+  buttonUrl = "#contato",
   items = defaultItems,
   sectionClassName,
   showArrowIcon = true,

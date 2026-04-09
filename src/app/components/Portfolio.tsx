@@ -89,7 +89,7 @@ export function Portfolio() {
           className="pb-12 pt-16 md:pb-14 md:pt-20"
           eyebrow="Portfólio"
           title="Trabalhos selecionados"
-          description="Alguns tipos de entrega — do site de produto ao app que o time usa no dia a dia."
+          description="Alguns tipos de entrega — do site de produto ao app que a equipe usa no dia a dia."
         />
       </motion.div>
 

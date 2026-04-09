@@ -13,7 +13,7 @@ const testimonials = [
   },
   {
     text:
-      "O painel SaaS ficou sob medida para o nosso fluxo. Treinamento rápido e o time adotou sem atrito.",
+      "O painel SaaS ficou sob medida para o nosso fluxo. Treinamento rápido e a equipe adotou sem atrito.",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces&q=80",
     name: "Fernanda Costa",
@@ -21,7 +21,7 @@ const testimonials = [
   },
   {
     text:
-      "Equipe técnica atenciosa, do discovery ao deploy. Sentimos que entendiam de verdade o nosso negócio.",
+      "Equipe técnica atenciosa, da descoberta ao deploy. Sentimos que entendiam de verdade o nosso negócio.",
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces&q=80",
     name: "Juliana Martins",
@@ -29,7 +29,7 @@ const testimonials = [
   },
   {
     text:
-      "O app mobile saiu com UX polida e prazos cumpridos. O feedback dos usuários foi muito positivo.",
+      "O app mobile saiu com UX polida e prazos cumpridos. O retorno dos usuários foi muito positivo.",
     image:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=faces&q=80",
     name: "Pedro Henrique",
@@ -45,7 +45,7 @@ const testimonials = [
   },
   {
     text:
-      "Implementação sem drama: documentação, handoff e suporte pós-entrega impecáveis.",
+      "Implementação sem drama: documentação, repasse técnico e suporte pós-entrega impecáveis.",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80",
     name: "Lucas Ferreira",
@@ -61,7 +61,7 @@ const testimonials = [
   },
   {
     text:
-      "Comunicação objetiva e entregas semana a semana. O time comercial parou de depender de planilhas soltas.",
+      "Comunicação objetiva e entregas semana a semana. A equipe comercial parou de depender de planilhas soltas.",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
     name: "André Nascimento",
@@ -99,7 +99,7 @@ export function Testimonials() {
             className="mb-12 md:mb-14"
             eyebrow="Depoimentos"
             title="O que dizem nossos clientes"
-            description="Feedback de quem confiou na Utopia para landings, produtos SaaS e apps."
+            description="Feedback de quem confiou na Utopia para landing pages, produtos SaaS e apps."
           />
         </motion.div>
 

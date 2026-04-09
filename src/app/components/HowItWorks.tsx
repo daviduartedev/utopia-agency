@@ -20,12 +20,12 @@ const steps = [
   {
     number: "04",
     title: "Desenvolvimento",
-    body: "Código limpo, stack moderno e preview links para acompanhar ao vivo. Você vê o progresso a cada entrega.",
+    body: "Código limpo, stack moderno e links de pré-visualização para acompanhar ao vivo. Você vê o progresso a cada entrega.",
   },
   {
     number: "05",
     title: "Entrega e suporte",
-    body: "Produto no ar com domínio, CI/CD e documentação incluídos. Suporte nos primeiros dias para garantir uma estreia sem sustos.",
+    body: "Produto no ar com domínio, CI/CD e documentação incluídos. Suporte nos primeiros dias para garantir um lançamento sem sustos.",
   },
 ];
 

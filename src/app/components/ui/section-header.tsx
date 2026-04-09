@@ -1,7 +1,7 @@
 import { cn } from "./utils";
 
 export interface SectionHeaderProps {
-  /** Título principal da secção (único h2) */
+  /** Título principal da seção (único h2) */
   title: string;
   /** Linha pequena opcional acima do título */
   eyebrow?: string;
@@ -12,7 +12,7 @@ export interface SectionHeaderProps {
 }
 
 /**
- * Cabeçalho consistente para secções: título claro + texto de apoio suave.
+ * Cabeçalho consistente para seções: título claro + texto de apoio suave.
  */
 export function SectionHeader({
   title,

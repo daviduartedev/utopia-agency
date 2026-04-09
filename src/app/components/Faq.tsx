@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "Vocês fazem manutenção pós-entrega?",
-    a: "Oferecemos suporte nos primeiros dias após o lançamento sem custo adicional. Para manutenção contínua, atualizações e novas features, temos planos mensais que podemos combinar ao final do projeto.",
+    a: "Oferecemos suporte nos primeiros dias após o lançamento sem custo adicional. Para manutenção contínua, atualizações e novas funcionalidades, temos planos mensais que podemos combinar ao final do projeto.",
   },
   {
     q: "Vocês trabalham com clientes fora do Brasil?",
@@ -58,7 +58,7 @@ export function Faq() {
           id="faq-heading"
           eyebrow="Dúvidas frequentes"
           title="Perguntas que todo cliente faz."
-          description="Se a sua não estiver aqui, é só mandar uma mensagem — respondemos rápido."
+          description="Se a sua dúvida não estiver aqui, é só mandar uma mensagem — respondemos rápido."
           className="mb-14"
         />
       </motion.div>
