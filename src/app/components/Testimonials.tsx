@@ -87,7 +87,7 @@ export function Testimonials() {
       id="depoimentos"
       className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
     >
-      <div className="mx-auto w-full max-w-[1300px] px-8 md:px-12">
+      <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}

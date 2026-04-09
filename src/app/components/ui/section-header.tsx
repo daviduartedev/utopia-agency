@@ -22,7 +22,7 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   return (
-    <header className={cn("mx-auto max-w-[1300px] px-8 text-center md:px-12", className)}>
+    <header className={cn("mx-auto max-w-[1300px] px-4 text-center sm:px-8 md:px-12", className)}>
       {eyebrow ? (
         <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.12em] text-zinc-500">
           {eyebrow}

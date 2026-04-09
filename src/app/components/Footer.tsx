@@ -24,7 +24,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 w-full border-t border-white/10 bg-page-surface">
-      <div className="mx-auto max-w-[1300px] px-8 py-14 md:px-12">
+      <div className="mx-auto max-w-[1300px] px-4 py-12 sm:px-8 sm:py-14 md:px-12">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-3 md:items-start">
             <BrandLogo

@@ -42,10 +42,10 @@ export function CinematicHero({
         >
           {ctaDescription}
         </p>
-        <div className="flex flex-col gap-6 sm:flex-row">
+        <div className="flex w-full min-w-0 max-w-md flex-col gap-6 sm:max-w-none sm:flex-row sm:justify-center">
           <a
             href="#contato"
-            className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-10 py-5 text-lg font-semibold leading-none tracking-tight text-black transition-colors hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="inline-flex w-full min-w-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-4 text-base font-semibold leading-none tracking-tight text-black transition-colors hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:w-auto sm:px-10 sm:py-5 sm:text-lg"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
             Solicitar proposta
