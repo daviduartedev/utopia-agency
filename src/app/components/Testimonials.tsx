@@ -1,5 +1,6 @@
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { motion } from "motion/react";
+import { SectionHeader } from "./ui/section-header";
 
 const testimonials = [
   {
@@ -84,31 +85,25 @@ export function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="relative z-10 w-full bg-black py-20 md:py-28 scroll-mt-28 text-zinc-100"
+      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
     >
-      <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12">
+      <div className="mx-auto w-full max-w-[1300px] px-8 md:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center mb-10 md:mb-12"
+          transition={{ duration: 0.45 }}
         >
-          <div className="flex justify-center">
-            <div className="border border-white/15 py-1.5 px-4 rounded-lg text-sm text-zinc-400">
-              Depoimentos
-            </div>
-          </div>
-
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter mt-4 md:mt-5 text-white">
-            O que dizem nossos clientes
-          </h2>
-          <p className="text-center mt-4 md:mt-5 text-zinc-400 max-w-md text-base leading-relaxed">
-            Feedback de quem confiou em landings, produtos SaaS e apps com a Utopia.
-          </p>
+          <SectionHeader
+            id="depoimentos-heading"
+            className="mb-12 md:mb-14"
+            eyebrow="Depoimentos"
+            title="O que dizem nossos clientes"
+            description="Feedback de quem confiou na Utopia para landings, produtos SaaS e apps."
+          />
         </motion.div>
 
-        <div className="flex justify-center gap-5 sm:gap-6 md:gap-8 [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_78%,transparent)] max-h-[min(72vh,680px)] md:max-h-[740px] overflow-hidden">
+        <div className="flex max-h-[min(72vh,680px)] justify-center gap-5 overflow-hidden sm:gap-6 md:max-h-[740px] md:gap-8">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />

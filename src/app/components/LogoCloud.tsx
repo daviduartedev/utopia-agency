@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import LogoLoop, { type LogoLoopItem } from "./ui/LogoLoop";
+import { SectionHeader } from "./ui/section-header";
 import {
   SiReact,
   SiNextdotjs,
@@ -58,60 +59,42 @@ export function LogoCloud() {
   return (
     <section
       id="stack"
-      className="relative z-10 w-full py-20 overflow-hidden"
+      className="relative z-10 w-full overflow-hidden bg-page-surface py-20"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-center"
       >
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="h-px w-full bg-white/10" />
       </div>
 
-      <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12 mb-12 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="text-zinc-500 uppercase tracking-[0.25em] text-xs mb-3"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
-        >
-          Stack produtiva
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Ferramentas para entregar rápido e com qualidade
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
-        >
-          Usamos um stack moderno para landings, SaaS e apps que precisam performar,
-          escalar e passar confiança — sem reinventar a roda a cada projeto.
-        </motion.p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.45 }}
+        className="w-full"
+      >
+        <SectionHeader
+          id="stack-heading"
+          className="mb-12 pb-2"
+          eyebrow="Tecnologia"
+          title="Stack e ferramentas"
+          description="Um conjunto moderno para landings, SaaS e apps que precisam performar e escalar com confiança."
+        />
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-        className="relative w-full max-w-[1300px] mx-auto px-4 sm:px-8 md:px-12"
+        transition={{ duration: 0.55, delay: 0.05 }}
+        className="relative mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12"
       >
-        <div className="absolute top-0 inset-x-8 md:inset-x-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute bottom-0 inset-x-8 md:inset-x-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute inset-x-8 top-0 h-px bg-white/10 md:inset-x-12" />
+        <div className="absolute inset-x-8 bottom-0 h-px bg-white/10 md:inset-x-12" />
 
-        <div className="relative flex min-h-[200px] md:min-h-[220px] w-full items-center overflow-hidden rounded-2xl border border-white/[0.06] bg-zinc-950/80">
+        <div className="relative flex min-h-[200px] w-full items-center overflow-hidden rounded-2xl border border-white/10 bg-page-surface md:min-h-[220px]">
           <LogoLoop
             logos={stackLogos}
             speed={100}
@@ -121,7 +104,7 @@ export function LogoCloud() {
             hoverSpeed={0}
             scaleOnHover
             fadeOut
-            fadeOutColor="#000000"
+            fadeOutColor="#0a0a0a"
             ariaLabel="Ferramentas e tecnologias do stack"
             className="w-full"
           />
@@ -132,7 +115,7 @@ export function LogoCloud() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
       >
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="h-px w-full bg-white/10" />
       </div>
     </section>
   );

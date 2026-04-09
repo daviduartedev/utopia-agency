@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { motion } from "motion/react";
+import { SectionHeader } from "./ui/section-header";
 
 const projects = [
   {
@@ -61,7 +62,6 @@ const projects = [
   },
 ];
 
-// Duplicate for seamless infinite loop (2 copies → animate -50%)
 const allItems = [...projects, ...projects];
 
 export function Portfolio() {
@@ -70,9 +70,8 @@ export function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="relative z-10 w-full bg-transparent flex flex-col items-center pt-12 pb-32"
+      className="relative z-10 flex w-full flex-col items-center bg-page-surface pb-32 pt-8"
     >
-      {/* Keyframe styles injected directly */}
       <style>{`
         @keyframes marquee {
           0%   { transform: translateX(0); }
@@ -86,51 +85,23 @@ export function Portfolio() {
         }
       `}</style>
 
-      {/* Section header — mesma hierarquia visual da seção Stack */}
-      <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12 mb-12 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="text-zinc-500 uppercase tracking-[0.25em] text-xs mb-3"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
-        >
-          Trabalhos recentes
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Landings, SaaS e apps no mundo real
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
-        >
-          Projetos que entregam rápido e mantêm padrão premium — do site de produto ao app
-          que o time usa todo dia.
-        </motion.p>
-      </div>
-
-      {/*
-        Carousel container:
-        - overflow-hidden clips cards outside the viewport
-        - width 100vw ensures it's truly edge-to-edge
-        - No padding, no max-width, no margins
-      */}
-      <div
-        className="overflow-hidden w-full"
-        style={{ width: "100vw" }}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.45 }}
+        className="w-full"
       >
+        <SectionHeader
+          id="portfolio-heading"
+          className="pb-12 pt-16 md:pb-14 md:pt-20"
+          eyebrow="Portfólio"
+          title="Trabalhos selecionados"
+          description="Alguns tipos de entrega — do site de produto ao app que o time usa no dia a dia."
+        />
+      </motion.div>
+
+      <div className="w-full overflow-hidden" style={{ width: "100vw" }}>
         <div
           className={`marquee-track flex gap-8${paused ? " is-paused" : ""}`}
           style={{ width: "max-content" }}
@@ -140,28 +111,31 @@ export function Portfolio() {
           {allItems.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
-              className="flex-shrink-0 w-[400px] md:w-[480px] group"
+              className="group w-[400px] flex-shrink-0 md:w-[480px]"
             >
-              <div className="border border-white/10 p-3 bg-[#0a0a0a]/95 backdrop-blur-xl rounded-2xl shadow-2xl h-full transition-transform duration-300 group-hover:scale-[1.02]">
-                <div className="flex flex-col mb-3 px-2">
+              <div className="h-full rounded-2xl border border-white/10 bg-page-surface p-3">
+                <div className="mb-3 flex flex-col px-2">
                   <h3
-                    className="text-xl font-bold text-white tracking-wide"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-xl font-medium tracking-[-0.02em] text-white"
+                    style={{ fontFamily: "var(--font-display), Georgia, serif" }}
                   >
                     {item.title}
                   </h3>
-                  <p className="text-zinc-400 font-medium text-sm">
+                  <p
+                    className="text-sm font-normal text-zinc-500"
+                    style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+                  >
                     {item.category}
                   </p>
                 </div>
 
-                <div className="h-[280px] md:h-[340px] w-full bg-black rounded-xl overflow-hidden relative border border-white/5">
+                <div className="relative h-[280px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface md:h-[340px]">
                   <ImageWithFallback
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                    className="h-full w-full object-cover object-top"
                   />
-                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-page-surface/50" />
                 </div>
               </div>
             </div>

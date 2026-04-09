@@ -6,35 +6,19 @@ import { LogoCloud } from "./components/LogoCloud";
 import { Testimonials } from "./components/Testimonials";
 import { Footer } from "./components/Footer";
 import DemoOne from "./components/DemoOne";
-import DarkVeil from "./components/DarkVeil";
 import "../styles/fonts.css";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white antialiased selection:bg-[#d946ef]/30 overflow-x-hidden" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-      
-      {/* DarkVeil Background effect - fixed to viewport so it doesn't stretch and distort */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <DarkVeil 
-          hueShift={0}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.65}
-          scanlineFrequency={0}
-          warpAmount={0}
-        />
-      </div>
-
-      {/* Hero + header sobreposto (mesma linguagem visual do Iridescence) */}
+    <div
+      className="min-h-screen bg-page-surface text-white antialiased selection:bg-white/15 overflow-x-hidden"
+      style={{ fontFamily: "var(--font-sans)" }}
+    >
+      {/* Hero — header está no fim do App para ficar acima de todas as secções (mesmo z-index) */}
       <div className="relative z-10 w-full">
-        <main className="w-full relative">
+        <main className="relative w-full">
           <Hero />
         </main>
-        <div className="pointer-events-none fixed inset-x-0 top-0 z-40">
-          <div className="pointer-events-auto max-w-[1300px] mx-auto px-8 md:px-12 pt-5 md:pt-6">
-            <Navbar />
-          </div>
-        </div>
       </div>
 
       <div className="relative z-10 w-full">
@@ -61,6 +45,15 @@ export default function App() {
 
       {/* Floating UI Elements */}
       <DemoOne />
+
+      {/* Navbar por último no DOM + z-index alto: secções abaixo não cobrem os cliques */}
+      <div className="pointer-events-auto fixed inset-x-0 top-0 z-[200]">
+        <div className="w-full px-8 pt-5 md:px-12 md:pt-6">
+          <div className="mx-auto max-w-[1300px]">
+            <Navbar />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -43,7 +43,7 @@ const projects: ProjectData[] = [
 
 export function StackingCardsSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-black py-20">
+    <section className="relative w-full overflow-hidden bg-page-surface py-20">
       {/* Creme Digital Inspired Radial Gradient Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,120,244,0.4)_0%,rgba(240,113,165,0.3)_50%,rgba(125,194,251,0.2)_100%)] blur-[100px]" />

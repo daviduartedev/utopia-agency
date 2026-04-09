@@ -2,64 +2,62 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contato" className="relative z-10 w-full scroll-mt-24 border-t border-white/5">
-      <div className="max-w-[1300px] mx-auto px-8 md:px-12 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Logo */}
-          <div className="flex items-center cursor-pointer select-none group">
-            <svg 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="mr-2 group-hover:scale-105 transition-transform duration-300"
-            >
-              <path d="M12 2.5L4.5 7.5L12 12.5L19.5 7.5L12 2.5Z" fill="white"/>
-              <path 
-                d="M4.5 11.5L12 16.5L19.5 11.5M4.5 15.5L12 20.5L19.5 15.5" 
-                stroke="white" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span 
-              className="font-bold text-[22px] tracking-wide mt-0.5" 
+    <footer
+      id="contato"
+      className="relative z-10 w-full scroll-mt-24 border-t border-white/10 bg-page-surface"
+    >
+      <div className="mx-auto max-w-[1300px] px-8 py-14 md:px-12">
+        <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
+          <div className="flex flex-col items-center gap-3 md:items-start">
+            <span
+              className="text-[22px] font-semibold tracking-wide text-white"
               style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800 }}
             >
               utopia
             </span>
+            <p
+              className="max-w-sm text-center text-sm leading-relaxed text-zinc-500 md:text-left"
+              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+            >
+              Landings, SaaS e apps — entrega rápida com padrão premium.
+            </p>
           </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-6 text-[14px] text-gray-400" aria-label="Rodapé">
-            <a href="#inicio" className="hover:text-white transition-colors">
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[15px] font-medium text-zinc-300"
+            style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+            aria-label="Rodapé"
+          >
+            <a href="#inicio" className="transition-colors hover:text-white">
               Início
             </a>
-            <a href="#portfolio" className="hover:text-white transition-colors">
+            <a href="#ofertas" className="transition-colors hover:text-white">
+              Serviços
+            </a>
+            <a href="#portfolio" className="transition-colors hover:text-white">
               Trabalhos
             </a>
-            <a href="#stack" className="hover:text-white transition-colors">
+            <a href="#stack" className="transition-colors hover:text-white">
               Stack
             </a>
-            <a href="#depoimentos" className="hover:text-white transition-colors">
+            <a href="#depoimentos" className="transition-colors hover:text-white">
               Depoimentos
             </a>
           </nav>
-
-          {/* Copyright */}
-          <div className="text-[14px] text-gray-500">
-            © {currentYear} Utopia Studio. Todos os direitos reservados.
-          </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-gray-500">
-          <p>Landings, SaaS e apps — entrega rápida, padrão premium.</p>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-gray-300 transition-colors">
+        <div
+          className="mt-12 flex flex-col gap-6 border-t border-white/10 pt-10 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between"
+          style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+        >
+          <p className="text-center md:text-left">
+            © {currentYear} Utopia Studio. Todos os direitos reservados.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end">
+            <a href="#" className="transition-colors hover:text-zinc-300">
               Termos
             </a>
-            <a href="#" className="hover:text-gray-300 transition-colors">
+            <a href="#" className="transition-colors hover:text-zinc-300">
               Privacidade
             </a>
           </div>
