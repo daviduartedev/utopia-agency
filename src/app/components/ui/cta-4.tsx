@@ -1,5 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 
+import { whatsappHref } from "../../lib/whatsapp";
+import { WA_MSG_DEFAULT_IMPACT } from "../../lib/whatsapp-messages";
 import { Button } from "./button";
 import { cn } from "./utils";
 
@@ -30,8 +32,8 @@ export function Cta4({
   title = "Chamada para ação",
   description =
     "Texto de apoio que reforça o benefício e convida o visitante ao próximo passo.",
-  buttonText = "Começar agora",
-  buttonUrl = "#contato",
+  buttonText = "Quero começar agora",
+  buttonUrl = whatsappHref(WA_MSG_DEFAULT_IMPACT),
   items = defaultItems,
   sectionClassName,
   showArrowIcon = true,

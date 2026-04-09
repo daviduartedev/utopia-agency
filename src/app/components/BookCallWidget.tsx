@@ -1,27 +1,22 @@
 import { CalendarPlus } from "lucide-react";
+import { whatsappHref } from "../lib/whatsapp";
+import { WA_MSG_BOOK_CALL } from "../lib/whatsapp-messages";
 import { cn } from "./ui/utils";
 
-const AVATAR_SRC =
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=128&h=128&fit=crop&crop=faces&q=85&auto=format";
+/** Mesma foto do botão flutuante (`public/avatar.png`). */
+const AVATAR_SRC = "/avatar.png";
 
 type BookCallWidgetProps = {
   className?: string;
-  formId?: string;
-  firstFieldId?: string;
+  /** Texto pré-preenchido no WhatsApp */
+  whatsappMessage?: string;
 };
 
 export function BookCallWidget({
   className,
-  formId = "contact-form",
-  firstFieldId = "contact-name",
+  whatsappMessage = WA_MSG_BOOK_CALL,
 }: BookCallWidgetProps) {
-  function handleClick() {
-    const el = document.getElementById(formId);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.setTimeout(() => {
-      document.getElementById(firstFieldId)?.focus();
-    }, 450);
-  }
+  const href = whatsappHref(whatsappMessage);
 
   return (
     <div
@@ -36,6 +31,7 @@ export function BookCallWidget({
           alt=""
           width={48}
           height={48}
+          decoding="async"
           className="size-12 shrink-0 rounded-full object-cover ring-1 ring-zinc-200"
         />
         <div className="min-w-0 pt-0.5 sm:pt-0">
@@ -54,15 +50,16 @@ export function BookCallWidget({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={handleClick}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto"
         style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
       >
         <CalendarPlus className="size-5 shrink-0 text-white" strokeWidth={2} aria-hidden />
-        Marcar conversa
-      </button>
+        Quero agendar agora
+      </a>
     </div>
   );
 }

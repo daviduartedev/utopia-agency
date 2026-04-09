@@ -38,12 +38,18 @@ export function BrandLogo({
       />
       <span
         className={cn(
-          "text-[20px] font-bold tracking-wide text-white md:text-[22px]",
+          "inline-flex items-baseline gap-0.5 text-[20px] font-bold tracking-wide text-white md:text-[22px]",
           wordmarkClassName,
         )}
         style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800 }}
       >
-        utopia
+        <span className="leading-none">utopia</span>
+        <sup
+          className="ml-px translate-y-[-0.06em] text-[0.42em] font-semibold leading-none tracking-tight text-zinc-400"
+          aria-hidden
+        >
+          SM
+        </sup>
       </span>
     </a>
   );

@@ -13,6 +13,10 @@ out
 .env.*
 !.env.example
 !.env.sample
+# direnv / cópias locais
+.envrc
+*.env.bak
+.env.backup
 *.pem
 *.key
 *.p12

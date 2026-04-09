@@ -1,4 +1,6 @@
 import { motion } from "motion/react";
+import { whatsappHref } from "../lib/whatsapp";
+import { WA_MSG_CTA_SECTION } from "../lib/whatsapp-messages";
 import { Cta4 } from "./ui/cta-4";
 
 const ctaItems = [
@@ -29,8 +31,8 @@ export function CtaSection() {
         <Cta4
           title="Seu site pronto, rápido e do jeito certo."
           description="Criamos sites profissionais que não só impressionam, mas convertem."
-          buttonText="Quero meu projeto →"
-          buttonUrl="#ofertas"
+          buttonText="Quero meu projeto agora →"
+          buttonUrl={whatsappHref(WA_MSG_CTA_SECTION)}
           showArrowIcon={false}
           items={ctaItems}
         />

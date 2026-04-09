@@ -1,4 +1,6 @@
 import { BrandLogo } from "./BrandLogo";
+import { whatsappHref } from "../lib/whatsapp";
+import { WA_MSG_FOOTER } from "../lib/whatsapp-messages";
 import {
   SiReact,
   SiNextdotjs,
@@ -79,8 +81,13 @@ export function Footer() {
             <a href="#faq" className="transition-colors hover:text-white">
               FAQ
             </a>
-            <a href="#contato" className="transition-colors hover:text-white">
-              Contato
+            <a
+              href={whatsappHref(WA_MSG_FOOTER)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-white"
+            >
+              Quero meu projeto
             </a>
           </nav>
         </div>
