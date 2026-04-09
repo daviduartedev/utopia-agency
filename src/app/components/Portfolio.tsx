@@ -8,57 +8,49 @@ const projects = [
     id: 1,
     title: "Dashboard financeiro",
     category: "SaaS · Web",
-    image:
-      "https://images.unsplash.com/photo-1720962158883-b0f2021fb51e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2UlMjBkYXJrfGVufDF8fHx8MTc3NTI5NTA5M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 2,
     title: "Plataforma de analytics",
     category: "SaaS · Dashboard",
-    image:
-      "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbmFseXRpY3MlMjBkYXNoYm9hcmQlMjBVSXxlbnwxfHx8fDE3NzUzNTU3OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 3,
     title: "App bancário",
     category: "App · Mobile",
-    image:
-      "https://images.unsplash.com/photo-1645226880663-81561dcab0ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzc1MzU1NzkyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 4,
     title: "Gestão de projetos",
     category: "SaaS · Web",
-    image:
-      "https://images.unsplash.com/photo-1770368787779-8472da646193?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMGRhc2hib2FyZHxlbnwxfHx8fDE3NzUzNTU3OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 5,
     title: "Loja e-commerce",
     category: "Landing · Conversão",
-    image:
-      "https://images.unsplash.com/photo-1694599048261-a1de00f0117e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlJTIwZGVzaWdufGVufDF8fHx8MTc3NTMwNzUxMXww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 6,
     title: "Site de produto SaaS",
     category: "Landing · Marketing",
-    image:
-      "https://images.unsplash.com/photo-1648134859175-78b41b4db186?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWFzJTIwbGFuZGluZyUyMHBhZ2UlMjBkZXNpZ258ZW58MXx8fHwxNzc1MzU1NzkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 7,
     title: "Design system",
     category: "UI · Produto",
-    image:
-      "https://images.unsplash.com/photo-1618788372246-79faff0c3742?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=1080&q=85&fit=crop&auto=format",
   },
   {
     id: 8,
     title: "CRM interno",
     category: "SaaS · Enterprise",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1080&q=85&fit=crop&auto=format",
   },
 ];
 
@@ -135,7 +127,6 @@ export function Portfolio() {
                     alt={item.title}
                     className="h-full w-full object-cover object-top"
                   />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-page-surface/50" />
                 </div>
               </div>
             </div>
