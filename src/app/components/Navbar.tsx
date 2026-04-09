@@ -1,3 +1,5 @@
+import { BrandLogo } from "./BrandLogo";
+
 const links = [
   { href: "#ofertas", label: "Serviços" },
   { href: "#como-funciona", label: "Como funciona" },
@@ -9,18 +11,7 @@ const links = [
 export function Navbar() {
   return (
     <header className="flex w-full flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/10 bg-page-surface px-4 py-3 md:px-6 md:py-3.5">
-      <a
-        href="#inicio"
-        className="flex shrink-0 select-none items-center"
-        aria-label="Utopia — início"
-      >
-        <span
-          className="text-[20px] font-bold tracking-wide text-white md:text-[22px]"
-          style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800 }}
-        >
-          utopia
-        </span>
-      </a>
+      <BrandLogo />
 
       <nav
         className="flex items-center gap-5 text-sm font-medium tracking-normal text-zinc-300 md:gap-8 md:text-[15px]"

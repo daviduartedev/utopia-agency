@@ -30,7 +30,7 @@ export function ContactFormSection() {
 
     const subject = encodeURIComponent(`Proposta — ${name}`);
     const body = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone || "—"}\nTipo de projeto: ${service || "—"}\n\nMensagem:\n${message}`,
+      `Nome: ${name}\nE-mail: ${email}\nTelefone: ${phone || "—"}\nTipo de projeto: ${service || "—"}\n\nMensagem:\n${message}`,
     );
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
     setSent(true);
@@ -41,7 +41,7 @@ export function ContactFormSection() {
     <section
       id="contato"
       className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
-      aria-labelledby="contact-heading"
+      aria-labelledby="contato-heading"
     >
       <div
         aria-hidden="true"
@@ -57,10 +57,10 @@ export function ContactFormSection() {
         transition={{ duration: 0.45 }}
       >
         <SectionHeader
-          id="contact-heading"
+          id="contato-heading"
           eyebrow="Contato"
-          title="Conte-nos sobre o seu projeto."
-          description="Resposta em até um dia útil. Sem spam — só o necessário para preparar uma proposta alinhada ao que você precisa."
+          title="Fale com a gente sobre o seu projeto."
+          description="Respondemos em até um dia útil. Sem spam — só o que precisamos para montar uma proposta alinhada ao que você busca."
           className="mb-12 md:mb-14"
         />
       </motion.div>
@@ -96,7 +96,7 @@ export function ContactFormSection() {
 
           <div className="space-y-2">
             <Label htmlFor="contact-email" className="text-zinc-300">
-              Email
+              E-mail
             </Label>
             <Input
               id="contact-email"
@@ -104,7 +104,7 @@ export function ContactFormSection() {
               type="email"
               required
               autoComplete="email"
-              placeholder="email@empresa.com"
+              placeholder="nome@empresa.com.br"
               className={fieldClass}
             />
           </div>
@@ -137,17 +137,17 @@ export function ContactFormSection() {
               <option value="" disabled className="bg-zinc-900 text-zinc-400">
                 Selecione uma opção
               </option>
-              <option value="Landing page / site" className="bg-zinc-900">
-                Landing page / site
+              <option value="Landing page ou site" className="bg-zinc-900">
+                Landing page ou site
               </option>
-              <option value="SaaS / painel" className="bg-zinc-900">
-                SaaS / painel
+              <option value="SaaS ou painel administrativo" className="bg-zinc-900">
+                SaaS ou painel administrativo
               </option>
-              <option value="App mobile / PWA" className="bg-zinc-900">
-                App mobile / PWA
+              <option value="App mobile ou PWA" className="bg-zinc-900">
+                App mobile ou PWA
               </option>
-              <option value="Outro / ainda não sei" className="bg-zinc-900">
-                Outro / ainda não sei
+              <option value="Outro ou ainda não sei" className="bg-zinc-900">
+                Outro ou ainda não sei
               </option>
             </select>
           </div>
@@ -161,7 +161,7 @@ export function ContactFormSection() {
               name="message"
               required
               rows={5}
-              placeholder="Objetivo, prazo desejado, links de referência…"
+              placeholder="Conte o objetivo, prazo desejado, links de referência..."
               className={`min-h-[120px] resize-y ${fieldClass}`}
             />
           </div>
@@ -176,8 +176,8 @@ export function ContactFormSection() {
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
               role="status"
             >
-              Se o programa de e-mail não abriu, verifique se você tem um app de
-              e-mail configurado ou envie manualmente para{" "}
+              Se o programa de e-mail não abriu, confira se há um cliente de
+              e-mail configurado neste aparelho ou envie manualmente para{" "}
               <span className="text-zinc-300">{CONTACT_EMAIL}</span>.
             </p>
           ) : null}

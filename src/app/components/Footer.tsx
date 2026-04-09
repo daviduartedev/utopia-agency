@@ -1,3 +1,4 @@
+import { BrandLogo } from "./BrandLogo";
 import {
   SiReact,
   SiNextdotjs,
@@ -26,12 +27,11 @@ export function Footer() {
       <div className="mx-auto max-w-[1300px] px-8 py-14 md:px-12">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-3 md:items-start">
-            <span
-              className="text-[22px] font-semibold tracking-wide text-white"
-              style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800 }}
-            >
-              utopia
-            </span>
+            <BrandLogo
+              className="justify-center md:justify-start"
+              imgClassName="size-10 md:size-11"
+              wordmarkClassName="text-[22px] font-semibold md:text-[23px]"
+            />
             <p
               className="max-w-sm text-center text-sm leading-relaxed text-zinc-500 md:text-left"
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
