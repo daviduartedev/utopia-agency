@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { SectionHeader } from "./ui/section-header";
+import { SpotlightCard } from "./ui/spotlight-card";
 
 const steps = [
   {
@@ -54,50 +55,51 @@ export function HowItWorks() {
           eyebrow="Como funciona"
           title="Do briefing ao lançamento."
           description="Um processo claro em cinco etapas — para você saber o que esperar em cada fase."
-          className="mb-16"
+          className="mb-12 md:mb-16"
         />
       </motion.div>
 
       <div className="mx-auto max-w-[1300px] px-4 sm:px-8 md:px-12">
-        <ol className="grid grid-cols-1 gap-px border border-white/10 rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-5 xl:gap-4">
           {steps.map((step, i) => (
             <motion.li
               key={step.number}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="relative flex flex-col justify-between gap-10 border-white/10 bg-page-surface p-7 md:p-8
-                [&:nth-child(1)]:border-b [&:nth-child(2)]:border-b [&:nth-child(3)]:border-b [&:nth-child(4)]:border-b
-                sm:[&:nth-child(1)]:border-r sm:[&:nth-child(3)]:border-r
-                lg:[&:nth-child(1)]:border-r lg:[&:nth-child(2)]:border-r lg:[&:nth-child(3)]:border-r lg:[&:nth-child(4)]:border-r
-                lg:[&:nth-child(1)]:border-b-0 lg:[&:nth-child(2)]:border-b-0 lg:[&:nth-child(3)]:border-b-0 lg:[&:nth-child(4)]:border-b-0"
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              className="min-h-[200px] list-none sm:min-h-[220px] xl:min-h-[280px]"
             >
-              {/* large faded number */}
-              <span
-                aria-hidden
-                className="absolute right-5 top-4 select-none text-[4rem] font-bold leading-none tabular-nums text-white/[0.04]"
-              >
-                {step.number}
-              </span>
-
-              <div>
-                <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-zinc-600">
+              <SpotlightCard className="flex h-full min-h-0 flex-col justify-between p-6 sm:p-7 md:p-8">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute right-4 top-3 select-none text-[3.25rem] font-bold leading-none tabular-nums text-white/[0.05] sm:right-5 sm:text-[3.75rem] md:text-[4rem]"
+                >
                   {step.number}
-                </p>
-                <p
-                  className="mb-2 text-base font-semibold text-white"
-                  style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-                >
-                  {step.title}
-                </p>
-                <p
-                  className="text-sm leading-relaxed text-zinc-400"
-                  style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-                >
-                  {step.body}
-                </p>
-              </div>
+                </span>
+
+                <div className="relative">
+                  <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+                    {step.number}
+                  </p>
+                  <p
+                    className="mb-2 text-base font-semibold text-white"
+                    style={{
+                      fontFamily: "var(--font-sans), system-ui, sans-serif",
+                    }}
+                  >
+                    {step.title}
+                  </p>
+                  <p
+                    className="text-sm leading-relaxed text-zinc-400"
+                    style={{
+                      fontFamily: "var(--font-sans), system-ui, sans-serif",
+                    }}
+                  >
+                    {step.body}
+                  </p>
+                </div>
+              </SpotlightCard>
             </motion.li>
           ))}
         </ol>
