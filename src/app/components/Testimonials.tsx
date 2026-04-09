@@ -16,7 +16,7 @@ const testimonials = [
       "O painel SaaS ficou sob medida para o nosso fluxo. Treinamento rápido e a equipe adotou sem atrito.",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Fernanda Costa",
+    name: "Fernando Costa",
     role: "COO",
   },
   {

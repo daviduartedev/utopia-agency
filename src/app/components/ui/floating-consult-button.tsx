@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./button";
 
 interface FloatingConsultButtonProps {
   // Button appearance
-  buttonSize?: number; // Diameter in pixels (default: 160 for lg, 128 for mobile)
-  imageSize?: number; // Center image diameter in pixels (default: 96 for lg, 80 for mobile)
+  buttonSize?: number;
+  imageSize?: number;
   imageSrc?: string;
   imageAlt?: string;
-  
+  /** Quando fornecido, renderiza este nó no centro em vez da imagem. */
+  centerContent?: React.ReactNode;
+
   // Revolving text
   revolvingText?: string;
-  revolvingSpeed?: number; // Duration in seconds for one rotation (default: 10)
-  
+  revolvingSpeed?: number;
+
   // Popup content
   popupHeading?: string;
   popupDescription?: string;
   popupBadgeText?: string;
   ctaButtonText?: string;
   ctaButtonAction?: () => void;
-  
+
   // Positioning
   position?: {
     bottom?: string;
@@ -32,8 +34,9 @@ interface FloatingConsultButtonProps {
 export const FloatingConsultButton = ({
   buttonSize,
   imageSize,
-  imageSrc = "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&h=256&auto=format&fit=crop",
-  imageAlt = "Consultor",
+  imageSrc,
+  imageAlt = "Mascote",
+  centerContent,
   revolvingText = "CONSULTA GRÁTIS — FALE CONOSCO — ",
   revolvingSpeed = 10,
   popupHeading = "Chamada rápida",
@@ -45,7 +48,14 @@ export const FloatingConsultButton = ({
   position = { bottom: "2rem", right: "2rem" },
 }: FloatingConsultButtonProps): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSrc]);
+
+  const hasMascot = !!centerContent;
+
   // Responsive sizes with defaults
   const lgButtonSize = buttonSize || 160;
   const smButtonSize = buttonSize ? buttonSize * 0.8 : 128;
@@ -167,26 +177,40 @@ export const FloatingConsultButton = ({
 
           {/* Center Image/Circle */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div 
-              className="rounded-full overflow-hidden bg-gray-900 shadow-lg group-hover:shadow-xl transition-shadow"
+            <div
+              className="rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow flex items-center justify-center"
               style={{
                 width: `${smImageSize}px`,
                 height: `${smImageSize}px`,
+                background: hasMascot ? "transparent" : "#18181b",
               }}
             >
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback if image doesn't exist
-                  e.currentTarget.style.display = 'none';
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-red-500 to-orange-500"></div>';
-                  }
-                }}
-              />
+              {hasMascot ? (
+                <div className="flex h-full w-full items-center justify-center">
+                  {centerContent}
+                </div>
+              ) : imageFailed ? (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background: "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              ) : (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={256}
+                  height={256}
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageFailed(true)}
+                />
+              )}
             </div>
           </div>
         </motion.div>
