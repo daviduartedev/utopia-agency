@@ -60,7 +60,7 @@ export const FloatingConsultButton = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            className="fixed inset-0 z-40 bg-page-surface/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -111,7 +111,7 @@ export const FloatingConsultButton = ({
 
               {/* CTA Button */}
               <Button 
-                className="w-full bg-black hover:bg-gray-900 text-white px-8 py-4 rounded-full font-medium text-base"
+                className="w-full rounded-full bg-page-surface px-8 py-4 text-base font-medium text-white hover:bg-neutral-900"
                 onClick={ctaButtonAction}
               >
                 {ctaButtonText}
