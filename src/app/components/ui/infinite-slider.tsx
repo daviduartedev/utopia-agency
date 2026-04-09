@@ -31,8 +31,12 @@ export function InfiniteSlider({
   useEffect(() => {
     let controls: ReturnType<typeof animate> | undefined;
     const size = direction === "horizontal" ? width : height;
-    /** Largura total já inclui o gap do flex entre todos os itens (duas cópias). Metade = um ciclo perfeito. */
-    const loopDistance = size > 0 ? size / 2 : 0;
+    /**
+     * Duas cópias idênticas em linha com `gap` entre todos os pares.
+     * Largura total T = 2·W₁ + gap (W₁ = um bloco de logos + gaps internos).
+     * Deslocamento contínuo = W₁ + gap = T/2 + gap/2 (não T/2).
+     */
+    const loopDistance = size > 0 ? size / 2 + gap / 2 : 0;
     const from = reverse ? -loopDistance : 0;
     const to = reverse ? 0 : -loopDistance;
 
