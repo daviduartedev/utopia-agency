@@ -5,9 +5,10 @@ const links = [
   { href: "#contato", label: "Contato" },
 ] as const;
 
+/** Tipografia e vidro alinhados ao hero (Iridescence + acentos roxos / zinc). */
 export function Navbar() {
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 py-5 md:py-6 w-full relative z-10">
+    <header className="flex flex-wrap items-center justify-between gap-4 w-full rounded-2xl border border-white/15 bg-zinc-950/85 px-4 py-3 md:px-6 md:py-3.5 shadow-[0_12px_48px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-inset ring-white/10 supports-[backdrop-filter]:bg-zinc-950/75">
       <a
         href="#inicio"
         className="flex items-center select-none group shrink-0"
@@ -32,7 +33,7 @@ export function Navbar() {
           />
         </svg>
         <span
-          className="font-bold text-[20px] md:text-[22px] tracking-wide mt-0.5"
+          className="font-bold text-[20px] md:text-[22px] tracking-wide text-white mt-0.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
           style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800 }}
         >
           utopia
@@ -40,14 +41,15 @@ export function Navbar() {
       </a>
 
       <nav
-        className="flex items-center gap-5 md:gap-8 text-[13px] md:text-sm text-zinc-400 font-medium tracking-wide"
+        className="flex items-center gap-5 md:gap-8 text-sm md:text-[15px] font-medium tracking-tight text-zinc-200"
+        style={{ fontFamily: "'Inter', sans-serif" }}
         aria-label="Navegação principal"
       >
         {links.map(({ href, label }) => (
           <a
             key={href}
             href={href}
-            className="hover:text-white transition-colors whitespace-nowrap"
+            className="hover:text-white transition-colors duration-200 whitespace-nowrap [text-shadow:0_1px_3px_rgba(0,0,0,0.9)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950/90 rounded-sm"
           >
             {label}
           </a>

@@ -1,5 +1,6 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
+import { OfferingsScrollStack } from "./components/OfferingsScrollStack";
 import { Portfolio } from "./components/Portfolio";
 import { LogoCloud } from "./components/LogoCloud";
 import { Testimonials } from "./components/Testimonials";
@@ -24,15 +25,21 @@ export default function App() {
         />
       </div>
 
-      {/* Navbar constrained */}
-      <div className="max-w-[1300px] mx-auto px-8 md:px-12 w-full relative z-20">
-        <Navbar />
+      {/* Hero + header sobreposto (mesma linguagem visual do Iridescence) */}
+      <div className="relative z-10 w-full">
+        <main className="w-full relative">
+          <Hero />
+        </main>
+        <div className="pointer-events-none fixed inset-x-0 top-0 z-40">
+          <div className="pointer-events-auto max-w-[1300px] mx-auto px-8 md:px-12 pt-5 md:pt-6">
+            <Navbar />
+          </div>
+        </div>
       </div>
 
-      {/* Cinematic Hero full width */}
-      <main className="w-full relative z-10">
-        <Hero />
-      </main>
+      <div className="relative z-10 w-full">
+        <OfferingsScrollStack />
+      </div>
 
       {/* Portfolio lives OUTSIDE the max-width container so it can be truly full-width */}
       <div className="relative z-10 w-full">

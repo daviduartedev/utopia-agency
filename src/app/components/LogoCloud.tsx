@@ -1,62 +1,56 @@
 import { motion } from "motion/react";
-import { InfiniteSlider } from "./ui/infinite-slider";
-import { ProgressiveBlur } from "./ui/progressive-blur";
+import LogoLoop, { type LogoLoopItem } from "./ui/LogoLoop";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiSupabase,
+  SiStrapi,
+  SiClaude,
+} from "react-icons/si";
 
-type Logo = {
-  src?: string;
-  alt: string;
-  /** Se false, mantém cores originais (ex.: React Native em ciano). */
-  monochrome?: boolean;
-  /** Evita CDN quebrada — logo oficial embutido. */
-  inline?: "react";
-};
-
-/** Logo React (SVG local — mesmo símbolo da marca, cor #61DAFB) */
-function ReactLogoMark({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="-11.5 -10.23174 23 20.46348"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
-      <g stroke="#61DAFB" fill="none" strokeWidth="1">
-        <ellipse cx="0" cy="0" rx="11" ry="4.2" />
-        <ellipse cx="0" cy="0" rx="11" ry="4.2" transform="rotate(60)" />
-        <ellipse cx="0" cy="0" rx="11" ry="4.2" transform="rotate(-60)" />
-      </g>
-    </svg>
-  );
-}
-
-/** Ícones (não wordmarks) — ordem do carrossel */
-const logos: Logo[] = [
+const stackLogos: LogoLoopItem[] = [
+  {
+    node: <SiReact className="text-[#61DAFB]" aria-hidden />,
+    title: "React",
+    href: "https://react.dev",
+  },
+  {
+    node: <SiNextdotjs className="text-white" aria-hidden />,
+    title: "Next.js",
+    href: "https://nextjs.org",
+  },
+  {
+    node: <SiTypescript className="text-[#3178C6]" aria-hidden />,
+    title: "TypeScript",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    node: <SiTailwindcss className="text-[#06B6D4]" aria-hidden />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
+  },
+  {
+    node: <SiSupabase className="text-[#3FCF8E]" aria-hidden />,
+    title: "Supabase",
+    href: "https://supabase.com",
+  },
+  {
+    node: <SiStrapi className="text-[#8E75FF]" aria-hidden />,
+    title: "Strapi",
+    href: "https://strapi.io",
+  },
   {
     src: "https://svgl.app/library/cursor_light.svg",
     alt: "Cursor",
+    title: "Cursor",
+    href: "https://cursor.com",
   },
   {
-    src: "https://svgl.app/library/claude-ai-wordmark-icon_light.svg",
-    alt: "Claude",
-  },
-  {
-    src: "https://svgl.app/library/supabase.svg",
-    alt: "Supabase",
-  },
-  {
-    src: "https://svgl.app/library/strapi.svg",
-    alt: "Strapi",
-  },
-  {
-    alt: "React",
-    monochrome: false,
-    inline: "react",
-  },
-  {
-    src: "https://cdn.simpleicons.org/reactnative/61DAFB",
-    alt: "React Native",
-    monochrome: false,
+    node: <SiClaude className="text-[#CC785C]" aria-hidden />,
+    title: "Claude",
+    href: "https://claude.ai",
   },
 ];
 
@@ -66,7 +60,6 @@ export function LogoCloud() {
       id="stack"
       className="relative z-10 w-full py-20 overflow-hidden"
     >
-      {/* Subtle radial glow behind the section */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 flex justify-center"
@@ -74,7 +67,6 @@ export function LogoCloud() {
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
-      {/* Header */}
       <div className="w-full max-w-[1300px] mx-auto px-8 md:px-12 mb-12 text-center">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -109,68 +101,33 @@ export function LogoCloud() {
         </motion.p>
       </div>
 
-      {/* Logo strip */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        className="relative w-full"
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="relative w-full max-w-[1300px] mx-auto px-4 sm:px-8 md:px-12"
       >
-        {/* Top border line */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        {/* Bottom border line */}
-        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute top-0 inset-x-8 md:inset-x-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute bottom-0 inset-x-8 md:inset-x-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-        <div className="py-8 md:py-9 bg-zinc-950/40 min-h-[4.5rem] md:min-h-[5rem]">
-          <InfiniteSlider
+        <div className="relative flex min-h-[200px] md:min-h-[220px] w-full items-center overflow-hidden rounded-2xl border border-white/[0.06] bg-zinc-950/80">
+          <LogoLoop
+            logos={stackLogos}
+            speed={100}
+            direction="left"
+            logoHeight={56}
             gap={56}
-            duration={90}
-            durationOnHover={160}
-            reverse={false}
-          >
-            {logos.map((logo) =>
-              logo.inline === "react" ? (
-                <div
-                  key={logo.alt}
-                  className="h-8 md:h-9 w-9 md:w-10 shrink-0 flex items-center justify-center select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
-                  aria-hidden
-                >
-                  <ReactLogoMark className="h-full w-full" />
-                </div>
-              ) : (
-                <img
-                  key={logo.alt}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className={
-                    logo.monochrome === false
-                      ? "h-8 md:h-9 w-9 md:w-10 shrink-0 object-contain select-none pointer-events-none opacity-80 hover:opacity-100 transition-opacity duration-300"
-                      : "h-8 md:h-9 w-auto max-w-[7.5rem] shrink-0 object-contain object-left select-none pointer-events-none brightness-0 invert opacity-50 hover:opacity-85 transition-opacity duration-300"
-                  }
-                  loading="lazy"
-                />
-              )
-            )}
-          </InfiniteSlider>
+            hoverSpeed={0}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="#000000"
+            ariaLabel="Ferramentas e tecnologias do stack"
+            className="w-full"
+          />
         </div>
-
-        {/* Desfoque progressivo nas laterais + vinheta suave */}
-        <ProgressiveBlur
-          blurIntensity={1.35}
-          blurLayers={10}
-          className="pointer-events-none absolute top-0 left-0 z-[1] h-full w-[min(28vw,220px)]"
-          direction="left"
-        />
-        <ProgressiveBlur
-          blurIntensity={1.35}
-          blurLayers={10}
-          className="pointer-events-none absolute top-0 right-0 z-[1] h-full w-[min(28vw,220px)]"
-          direction="right"
-        />
       </motion.div>
 
-      {/* Bottom separator */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"

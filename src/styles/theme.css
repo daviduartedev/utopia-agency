@@ -120,6 +120,16 @@
 }
 
 @layer base {
+  :root {
+    --gradient-color: #8350e8;
+    --sparkles-color: #ffffff;
+  }
+
+  .dark {
+    --gradient-color: #8350e8;
+    --sparkles-color: #ffffff;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
