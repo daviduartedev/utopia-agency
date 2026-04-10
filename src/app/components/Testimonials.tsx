@@ -1,6 +1,10 @@
+"use client";
+
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { motion } from "motion/react";
 import { SectionHeader } from "./ui/section-header";
+import { useSectionAnimationActive } from "../hooks/use-section-animation-active";
+import { cn } from "./ui/utils";
 
 const testimonials = [
   {
@@ -53,15 +57,21 @@ const testimonials = [
   },
 ];
 
-const firstColumn = testimonials.slice(0, 2);
-const secondColumn = testimonials.slice(2, 4);
-const thirdColumn = testimonials.slice(4, 6);
+/** Duas colunas (3+3): menos animações simultâneas que três colunas. */
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
 
 export function Testimonials() {
+  const { ref, active } = useSectionAnimationActive();
+
   return (
     <section
+      ref={ref}
       id="depoimentos"
-      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
+      className={cn(
+        "relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28",
+        !active && "section-anim-paused",
+      )}
     >
       <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
         <motion.div
@@ -79,17 +89,12 @@ export function Testimonials() {
           />
         </motion.div>
 
-        <div className="flex max-h-[min(64vh,620px)] justify-center gap-4 overflow-hidden sm:gap-5 md:max-h-[min(68vh,680px)] md:gap-7">
-          <TestimonialsColumn testimonials={firstColumn} duration={16} />
+        <div className="flex max-h-[min(64vh,620px)] justify-center gap-4 overflow-hidden sm:gap-5 md:max-h-[min(68vh,680px)] md:gap-8">
+          <TestimonialsColumn testimonials={firstColumn} duration={18} />
           <TestimonialsColumn
             testimonials={secondColumn}
             className="hidden md:block"
-            duration={20}
-          />
-          <TestimonialsColumn
-            testimonials={thirdColumn}
-            className="hidden lg:block"
-            duration={18}
+            duration={22}
           />
         </div>
       </div>
