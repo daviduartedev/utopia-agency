@@ -1,16 +1,29 @@
-import { Navbar } from "./components/Navbar";
+import { Suspense } from "react";
 import { Hero } from "./components/Hero";
-import { WhyUs } from "./components/WhyUs";
-import { OfferingsScrollStack } from "./components/OfferingsScrollStack";
-import { HowItWorks } from "./components/HowItWorks";
-import { Portfolio } from "./components/Portfolio";
-import { Testimonials } from "./components/Testimonials";
-import { Faq } from "./components/Faq";
-import { CtaSection } from "./components/CtaSection";
-import { ContactFormSection } from "./components/ContactFormSection";
-import { Footer } from "./components/Footer";
+import { Navbar } from "./components/Navbar";
+import { LazySection } from "./components/LazySection";
 import { DeferredDemoOne } from "./components/DeferredDemoOne";
+import {
+  WhyUs,
+  OfferingsScrollStack,
+  HowItWorks,
+  Portfolio,
+  Testimonials,
+  Faq,
+  CtaSection,
+  ContactFormSection,
+  Footer,
+} from "./lazy-pages";
 import "../styles/fonts.css";
+
+function SectionFallback() {
+  return (
+    <div
+      className="w-full min-h-[28vh] bg-page-surface"
+      aria-hidden
+    />
+  );
+}
 
 export default function App() {
   return (
@@ -18,60 +31,88 @@ export default function App() {
       className="min-h-screen overflow-x-hidden bg-page-surface pb-28 text-white antialiased selection:bg-white/15 sm:pb-10 md:pb-12"
       style={{ fontFamily: "var(--font-sans)" }}
     >
-      {/* 1. Hero */}
+      {/* 1. Hero — chunk inicial; Plasma carrega async no próprio hero */}
       <div className="relative z-10 w-full">
         <main className="relative w-full">
           <Hero />
         </main>
       </div>
 
-      {/* 2. Por que a Utopia */}
+      {/* 2–10: JS pesado só quando perto do viewport */}
       <div className="relative z-10 w-full">
-        <WhyUs />
+        <LazySection minHeight="48vh">
+          <Suspense fallback={<SectionFallback />}>
+            <WhyUs />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 3. Serviços */}
       <div className="relative z-10 w-full">
-        <OfferingsScrollStack />
+        <LazySection minHeight="120vh">
+          <Suspense fallback={<SectionFallback />}>
+            <OfferingsScrollStack />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 4. Como funciona */}
       <div className="relative z-10 w-full">
-        <HowItWorks />
+        <LazySection minHeight="56vh">
+          <Suspense fallback={<SectionFallback />}>
+            <HowItWorks />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 5. Portfólio */}
       <div className="relative z-10 w-full">
-        <Portfolio />
+        <LazySection minHeight="52vh">
+          <Suspense fallback={<SectionFallback />}>
+            <Portfolio />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 6. Depoimentos */}
       <div className="relative z-10 w-full">
-        <Testimonials />
+        <LazySection minHeight="48vh">
+          <Suspense fallback={<SectionFallback />}>
+            <Testimonials />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 7. FAQ */}
       <div className="relative z-10 w-full">
-        <Faq />
+        <LazySection minHeight="40vh">
+          <Suspense fallback={<SectionFallback />}>
+            <Faq />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 8. CTA — após prova social máxima */}
       <div className="relative z-10 w-full">
-        <CtaSection />
+        <LazySection minHeight="44vh">
+          <Suspense fallback={<SectionFallback />}>
+            <CtaSection />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 9. Formulário de contato (#contato) */}
       <div className="relative z-10 w-full">
-        <ContactFormSection />
+        <LazySection minHeight="56vh">
+          <Suspense fallback={<SectionFallback />}>
+            <ContactFormSection />
+          </Suspense>
+        </LazySection>
       </div>
 
-      {/* 10. Footer */}
-      <Footer />
+      <div className="relative z-10 w-full">
+        <LazySection minHeight="32vh">
+          <Suspense fallback={<SectionFallback />}>
+            <Footer />
+          </Suspense>
+        </LazySection>
+      </div>
 
-      {/* Floating UI Elements */}
       <DeferredDemoOne />
 
-      {/* Navbar por último no DOM + z-index alto */}
       <div className="pointer-events-auto fixed inset-x-0 top-0 z-[200] pt-[env(safe-area-inset-top,0px)]">
         <div className="w-full px-3 pt-3 sm:px-6 sm:pt-4 md:px-12 md:pt-6">
           <div className="mx-auto max-w-[1300px]">

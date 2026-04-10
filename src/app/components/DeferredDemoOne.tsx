@@ -3,30 +3,22 @@
 import { useEffect, useState } from "react";
 import DemoOne from "./DemoOne";
 
-function isDesktopViewport(): boolean {
-  return typeof window !== "undefined"
-    ? !window.matchMedia("(max-width: 767px)").matches
-    : true;
-}
-
 /**
- * Desktop: balão imediato. Celular: adia até idle para não competir com o primeiro paint.
+ * Monta o balão após idle — reduz concorrência com hero, lazy sections e Plasma no desktop.
  */
 export function DeferredDemoOne() {
-  const [show, setShow] = useState(isDesktopViewport);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (isDesktopViewport()) {
-      setShow(true);
-      return;
-    }
-
     const reveal = () => setShow(true);
+    const narrow = window.matchMedia("(max-width: 767px)").matches;
+    const timeout = narrow ? 2800 : 1400;
+
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(reveal, { timeout: 2800 });
+      const id = window.requestIdleCallback(reveal, { timeout });
       return () => window.cancelIdleCallback(id);
     }
-    const t = window.setTimeout(reveal, 1600);
+    const t = window.setTimeout(reveal, narrow ? 1600 : 500);
     return () => window.clearTimeout(t);
   }, []);
 
