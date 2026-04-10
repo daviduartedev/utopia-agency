@@ -1,8 +1,5 @@
-"use client";
-
 import ScrollStack, { ScrollStackItem } from "./ui/ScrollStack";
 import { SectionHeader } from "./ui/section-header";
-import { useIsNarrowMobile } from "../lib/use-media-query";
 
 const STACK_ITEMS = [
   {
@@ -35,8 +32,6 @@ const STACK_ITEMS = [
 ] as const;
 
 export function OfferingsScrollStack() {
-  const narrow = useIsNarrowMobile();
-
   return (
     <section
       id="ofertas"
@@ -55,8 +50,8 @@ export function OfferingsScrollStack() {
           useWindowScroll
           className="!h-auto block min-h-[150vh] w-full"
           innerClassName="flex flex-col items-center !px-4 sm:!px-6 md:!px-10"
-          itemDistance={narrow ? 72 : 128}
-          itemStackDistance={narrow ? 16 : 24}
+          itemDistance={128}
+          itemStackDistance={24}
           baseScale={0.88}
           itemScale={0.038}
           blurAmount={0}
