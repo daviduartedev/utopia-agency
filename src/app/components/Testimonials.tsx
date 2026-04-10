@@ -51,35 +51,11 @@ const testimonials = [
     name: "Lucas Ferreira",
     role: "CTO",
   },
-  {
-    text:
-      "Entregaram um produto que reflete nossa marca e converteu melhor que a versão anterior.",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Mariana Duarte",
-    role: "CMO",
-  },
-  {
-    text:
-      "Comunicação objetiva e entregas semana a semana. A equipe comercial parou de depender de planilhas soltas.",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "André Nascimento",
-    role: "Diretor Comercial",
-  },
-  {
-    text:
-      "Site institucional e página de vendas no ar com performance excelente. Recomendo para quem precisa de resultado.",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Beatriz Lima",
-    role: "Growth Manager",
-  },
 ];
 
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 9);
+const firstColumn = testimonials.slice(0, 2);
+const secondColumn = testimonials.slice(2, 4);
+const thirdColumn = testimonials.slice(4, 6);
 
 export function Testimonials() {
   return (
@@ -103,10 +79,18 @@ export function Testimonials() {
           />
         </motion.div>
 
-        <div className="flex max-h-[min(72vh,680px)] justify-center gap-5 overflow-hidden sm:gap-6 md:max-h-[740px] md:gap-8">
-          <TestimonialsColumn testimonials={firstColumn} duration={15} />
-          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+        <div className="flex max-h-[min(64vh,620px)] justify-center gap-4 overflow-hidden sm:gap-5 md:max-h-[min(68vh,680px)] md:gap-7">
+          <TestimonialsColumn testimonials={firstColumn} duration={16} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={20}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={18}
+          />
         </div>
       </div>
     </section>
