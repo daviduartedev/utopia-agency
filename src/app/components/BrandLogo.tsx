@@ -1,4 +1,3 @@
-import type { MouseEventHandler } from "react";
 import { cn } from "./ui/utils";
 
 /** Marca visual: mesmo ativo do favicon (PNG com transparência em /public). */
@@ -10,19 +9,16 @@ type BrandLogoProps = {
   imgClassName?: string;
   /** Classes extras no texto “utopia”. */
   wordmarkClassName?: string;
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 export function BrandLogo({
   className,
   imgClassName,
   wordmarkClassName,
-  onClick,
 }: BrandLogoProps) {
   return (
     <a
       href="#inicio"
-      onClick={onClick}
       className={cn(
         "group flex shrink-0 items-center gap-2.5 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface",
         className,
