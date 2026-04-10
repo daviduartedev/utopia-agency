@@ -75,6 +75,11 @@ export function Portfolio() {
         .marquee-track.is-paused {
           animation-play-state: paused;
         }
+        @media (max-width: 767px) {
+          .marquee-track {
+            animation-duration: 52s;
+          }
+        }
       `}</style>
 
       <motion.div

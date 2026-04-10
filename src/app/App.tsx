@@ -9,7 +9,7 @@ import { Faq } from "./components/Faq";
 import { CtaSection } from "./components/CtaSection";
 import { ContactFormSection } from "./components/ContactFormSection";
 import { Footer } from "./components/Footer";
-import DemoOne from "./components/DemoOne";
+import { DeferredDemoOne } from "./components/DeferredDemoOne";
 import "../styles/fonts.css";
 
 export default function App() {
@@ -69,7 +69,7 @@ export default function App() {
       <Footer />
 
       {/* Floating UI Elements */}
-      <DemoOne />
+      <DeferredDemoOne />
 
       {/* Navbar por último no DOM + z-index alto */}
       <div className="pointer-events-auto fixed inset-x-0 top-0 z-[200] pt-[env(safe-area-inset-top,0px)]">

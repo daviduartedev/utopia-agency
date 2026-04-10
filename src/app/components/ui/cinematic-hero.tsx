@@ -4,6 +4,7 @@
 import React from "react";
 import { whatsappHref } from "../../lib/whatsapp";
 import { WA_MSG_HERO } from "../../lib/whatsapp-messages";
+import { useIsNarrowMobile } from "../../lib/use-media-query";
 import Plasma from "./plasma";
 import { cn } from "./utils";
 
@@ -20,6 +21,8 @@ export function CinematicHero({
   className,
   ...props
 }: CinematicHeroProps) {
+  const narrowMobile = useIsNarrowMobile();
+
   return (
     <div
       className={cn(
@@ -29,14 +32,21 @@ export function CinematicHero({
       {...props}
     >
       <div className="absolute inset-0 z-0">
-        <Plasma
-          color="#52525b"
-          speed={0.55}
-          direction="forward"
-          scale={1.05}
-          opacity={0.72}
-          mouseInteractive
-        />
+        {narrowMobile ? (
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[radial-gradient(ellipse_120%_85%_at_50%_38%,#3f3f46_0%,#18181b_45%,#09090b_78%,#000_100%)]"
+          />
+        ) : (
+          <Plasma
+            color="#52525b"
+            speed={0.55}
+            direction="forward"
+            scale={1.05}
+            opacity={0.72}
+            mouseInteractive
+          />
+        )}
       </div>
       {/* vignette vertical + lateral para legibilidade */}
       <div
