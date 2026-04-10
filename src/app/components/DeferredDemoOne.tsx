@@ -15,10 +15,10 @@ export function DeferredDemoOne() {
 
     if (narrow) {
       if (typeof window.requestIdleCallback === "function") {
-        const id = window.requestIdleCallback(reveal, { timeout: 4500 });
+        const id = window.requestIdleCallback(reveal, { timeout: 2800 });
         return () => window.cancelIdleCallback(id);
       }
-      const t = window.setTimeout(reveal, 2800);
+      const t = window.setTimeout(reveal, 1600);
       return () => window.clearTimeout(t);
     }
 
