@@ -194,6 +194,10 @@ export function Plasma({
     let raf = 0;
     const t0 = performance.now();
     const loop = (t: number) => {
+      if (typeof document !== "undefined" && document.hidden) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
       const timeValue = (t - t0) * 0.001;
       if (direction === "pingpong") {
         const pingpongDuration = 10;

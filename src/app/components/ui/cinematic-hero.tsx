@@ -1,12 +1,16 @@
 // src/app/components/ui/cinematic-hero.tsx
 "use client";
 
-import React from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { whatsappHref } from "../../lib/whatsapp";
 import { WA_MSG_HERO } from "../../lib/whatsapp-messages";
 import { useIsNarrowMobile } from "../../lib/use-media-query";
-import Plasma from "./plasma";
 import { cn } from "./utils";
+
+const PlasmaLazy = lazy(() => import("./plasma"));
+
+const DESKTOP_HERO_FALLBACK =
+  "absolute inset-0 bg-[radial-gradient(ellipse_120%_85%_at_50%_38%,#3f3f46_0%,#18181b_45%,#09090b_78%,#000_100%)]";
 
 export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   tagline1?: string;
@@ -22,33 +26,50 @@ export function CinematicHero({
   ...props
 }: CinematicHeroProps) {
   const narrowMobile = useIsNarrowMobile();
+  const [desktopPlasmaReady, setDesktopPlasmaReady] = useState(false);
+
+  useEffect(() => {
+    if (narrowMobile) return;
+    const run = () => setDesktopPlasmaReady(true);
+    if (typeof requestIdleCallback === "function") {
+      const id = requestIdleCallback(run, { timeout: 900 });
+      return () => cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(run, 120);
+    return () => window.clearTimeout(t);
+  }, [narrowMobile]);
 
   return (
     <div
       className={cn(
         "relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black text-white antialiased",
-        className
+        className,
       )}
       {...props}
     >
       <div className="absolute inset-0 z-0">
         {narrowMobile ? (
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(ellipse_120%_85%_at_50%_38%,#3f3f46_0%,#18181b_45%,#09090b_78%,#000_100%)]"
-          />
+          <div aria-hidden className={cn("absolute inset-0", DESKTOP_HERO_FALLBACK)} />
         ) : (
-          <Plasma
-            color="#52525b"
-            speed={0.55}
-            direction="forward"
-            scale={1.05}
-            opacity={0.72}
-            mouseInteractive
-          />
+          <>
+            <div aria-hidden className={cn("absolute inset-0", DESKTOP_HERO_FALLBACK)} />
+            {desktopPlasmaReady && (
+              <Suspense fallback={null}>
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <PlasmaLazy
+                    color="#52525b"
+                    speed={0.55}
+                    direction="forward"
+                    scale={1.05}
+                    opacity={0.72}
+                    mouseInteractive
+                  />
+                </div>
+              </Suspense>
+            )}
+          </>
         )}
       </div>
-      {/* vignette vertical + lateral para legibilidade */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/30 to-black/85"
