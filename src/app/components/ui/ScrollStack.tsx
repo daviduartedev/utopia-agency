@@ -5,7 +5,6 @@ import {
   type ReactNode,
 } from "react";
 import Lenis from "lenis";
-import { useNativeWindowScrollInsteadOfLenis } from "../../lib/use-media-query";
 import "./ScrollStack.css";
 
 /** Layout Y in document space (ignores transforms — avoids scroll jitter). */
@@ -64,7 +63,6 @@ function ScrollStack({
   useWindowScroll = false,
   onStackComplete,
 }: ScrollStackProps) {
-  const preferNativeScroll = useNativeWindowScrollInsteadOfLenis();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const stackCompletedRef = useRef(false);
   const animationFrameRef = useRef<number>(0);
@@ -338,7 +336,7 @@ function ScrollStack({
         card.style.marginBottom = `${itemDistance}px`;
       }
       card.style.willChange =
-        preferNativeScroll ? "auto" : blurAmount > 0 ? "transform, filter" : "transform";
+        blurAmount > 0 ? "transform, filter" : "transform";
       card.style.transformOrigin = "top center";
       card.style.backfaceVisibility = "hidden";
       card.style.transform = "translateZ(0)";
@@ -359,35 +357,6 @@ function ScrollStack({
     const onWinResize = () => syncAfterLayout();
     window.addEventListener("resize", onWinResize, { passive: true });
 
-    const resetStackState = () => {
-      stackCompletedRef.current = false;
-      cardsRef.current = [];
-      cardLayoutTopsRef.current = [];
-      endLayoutTopRef.current = 0;
-      transformsCache.clear();
-      isUpdatingRef.current = false;
-    };
-
-    if (preferNativeScroll) {
-      if (useWindowScroll) {
-        window.addEventListener("scroll", handleScroll, { passive: true });
-      } else {
-        scroller.addEventListener("scroll", handleScroll, { passive: true });
-      }
-      updateCardTransforms();
-
-      return () => {
-        ro.disconnect();
-        window.removeEventListener("resize", onWinResize);
-        if (useWindowScroll) {
-          window.removeEventListener("scroll", handleScroll);
-        } else {
-          scroller.removeEventListener("scroll", handleScroll);
-        }
-        resetStackState();
-      };
-    }
-
     setupLenis();
     updateCardTransforms();
 
@@ -401,7 +370,12 @@ function ScrollStack({
         lenisRef.current.destroy();
         lenisRef.current = null;
       }
-      resetStackState();
+      stackCompletedRef.current = false;
+      cardsRef.current = [];
+      cardLayoutTopsRef.current = [];
+      endLayoutTopRef.current = 0;
+      transformsCache.clear();
+      isUpdatingRef.current = false;
     };
   }, [
     itemDistance,
@@ -414,11 +388,9 @@ function ScrollStack({
     blurAmount,
     useWindowScroll,
     onStackComplete,
-    preferNativeScroll,
     setupLenis,
     updateCardTransforms,
     refreshLayoutMetrics,
-    handleScroll,
   ]);
 
   return (

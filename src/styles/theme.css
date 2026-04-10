@@ -151,12 +151,6 @@
     position: relative;
   }
 
-  @media (max-width: 767px) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-
   h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);

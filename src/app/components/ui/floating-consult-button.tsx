@@ -1,11 +1,5 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  useIsNarrowMobile,
-  usePrefersReducedMotion,
-} from "../../lib/use-media-query";
 import { Button } from "./button";
 
 interface FloatingConsultButtonProps {
@@ -56,9 +50,6 @@ export const FloatingConsultButton = ({
     right: "max(0.75rem, env(safe-area-inset-right, 0px))",
   },
 }: FloatingConsultButtonProps): React.ReactElement => {
-  const narrow = useIsNarrowMobile();
-  const reduceMotion = usePrefersReducedMotion();
-  const liteFloat = narrow || reduceMotion;
   const [isOpen, setIsOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
@@ -83,11 +74,7 @@ export const FloatingConsultButton = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={
-              liteFloat
-                ? "fixed inset-0 z-40 bg-black/65"
-                : "fixed inset-0 z-40 bg-page-surface/20 backdrop-blur-sm"
-            }
+            className="fixed inset-0 z-40 bg-page-surface/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -154,169 +141,96 @@ export const FloatingConsultButton = ({
         )}
       </AnimatePresence>
 
-      {/* Floating Button — mobile: sem SVG/texto a girar (RAF pesado no touch). */}
+      {/* Floating Button */}
       <div className="fcc-float-wrap fixed z-50" style={position}>
-        {liteFloat ? (
-          <button
-            type="button"
-            className="fcc-float-trigger relative cursor-pointer touch-manipulation rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
-            style={{
-              width: `${smButtonSize}px`,
-              height: `${smButtonSize}px`,
-            }}
-            aria-haspopup="dialog"
-            aria-expanded={isOpen}
-            aria-label="Abrir convite para falar no WhatsApp"
-            onClick={() => setIsOpen((o) => !o)}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-zinc-900 shadow-lg"
-                style={{
-                  width: `${smImageSize}px`,
-                  height: `${smImageSize}px`,
-                  background: hasMascot ? "transparent" : "#18181b",
-                }}
-              >
-                {hasMascot ? (
-                  <div className="flex h-full w-full items-center justify-center">
-                    {centerContent}
-                  </div>
-                ) : imageFailed ? (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                ) : imageSrc ? (
-                  <img
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={160}
-                    height={160}
-                    decoding="async"
-                    loading="lazy"
-                    fetchPriority="low"
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover"
-                    onError={() => setImageFailed(true)}
-                  />
-                ) : (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                )}
-              </div>
-            </div>
-          </button>
-        ) : (
+        <motion.div
+          className="relative cursor-pointer group fcc-float-trigger"
+          style={{
+            width: `${smButtonSize}px`,
+            height: `${smButtonSize}px`,
+          }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {/* Rotating Text */}
           <motion.div
-            className="fcc-float-trigger group relative cursor-pointer"
-            style={{
-              width: `${smButtonSize}px`,
-              height: `${smButtonSize}px`,
-            }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            role="button"
-            tabIndex={0}
-            aria-haspopup="dialog"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen(!isOpen)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setIsOpen(!isOpen);
-              }
+            className="absolute inset-0"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: revolvingSpeed,
+              repeat: Infinity,
+              ease: "linear",
             }}
           >
-            <motion.div
-              className="absolute inset-0"
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: revolvingSpeed,
-                repeat: Infinity,
-                ease: "linear",
+            <svg
+              viewBox="0 0 200 200"
+              className="w-full h-full"
+            >
+              <defs>
+                <path
+                  id="circlePath"
+                  d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                />
+              </defs>
+              <text className="text-[20.4px] fill-gray-600 font-medium uppercase tracking-wider">
+                <textPath href="#circlePath" startOffset="0%">
+                  {revolvingText}
+                </textPath>
+              </text>
+            </svg>
+          </motion.div>
+
+          {/* Center Image/Circle */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="fcc-float-inner rounded-full overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow flex items-center justify-center"
+              style={{
+                width: `${smImageSize}px`,
+                height: `${smImageSize}px`,
+                background: hasMascot ? "transparent" : "#18181b",
               }}
             >
-              <svg viewBox="0 0 200 200" className="h-full w-full">
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
-                  />
-                </defs>
-                <text className="text-[20.4px] font-medium uppercase tracking-wider fill-gray-600">
-                  <textPath href="#circlePath" startOffset="0%">
-                    {revolvingText}
-                  </textPath>
-                </text>
-              </svg>
-            </motion.div>
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-shadow group-hover:shadow-xl"
-                style={{
-                  width: `${smImageSize}px`,
-                  height: `${smImageSize}px`,
-                  background: hasMascot ? "transparent" : "#18181b",
-                }}
-              >
-                {hasMascot ? (
-                  <div className="flex h-full w-full items-center justify-center">
-                    {centerContent}
-                  </div>
-                ) : imageFailed ? (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                ) : imageSrc ? (
-                  <img
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={256}
-                    height={256}
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover"
-                    onError={() => setImageFailed(true)}
-                  />
-                ) : (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                )}
-              </div>
+              {hasMascot ? (
+                <div className="flex h-full w-full items-center justify-center">
+                  {centerContent}
+                </div>
+              ) : imageFailed ? (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background: "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              ) : imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={256}
+                  height={256}
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageFailed(true)}
+                />
+              ) : (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              )}
             </div>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
         
         {/* Responsive sizing for larger screens */}
         <style>{`
