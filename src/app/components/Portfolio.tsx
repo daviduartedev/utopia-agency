@@ -1,13 +1,17 @@
+"use client";
+
 import React, { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { motion } from "motion/react";
 import { SectionHeader } from "./ui/section-header";
+import { useSectionAnimationActive } from "../hooks/use-section-animation-active";
+import { cn } from "./ui/utils";
 
 function portfolioImageUrl(src: string): string {
   try {
     const u = new URL(src);
-    u.searchParams.set("w", "720");
-    u.searchParams.set("q", "72");
+    u.searchParams.set("w", "640");
+    u.searchParams.set("q", "70");
     u.searchParams.set("auto", "format");
     u.searchParams.set("fit", "crop");
     return u.toString();
@@ -58,27 +62,33 @@ const projects = [
 const allItems = [...projects, ...projects];
 
 export function Portfolio() {
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const { ref, active } = useSectionAnimationActive();
+  const marqueePaused = hoverPaused || !active;
 
   return (
     <section
+      ref={ref}
       id="portfolio"
-      className="relative z-10 flex w-full flex-col items-center bg-page-surface pb-32 pt-8"
+      className={cn(
+        "relative z-10 flex w-full flex-col items-center bg-page-surface pb-32 pt-8",
+        !active && "section-anim-paused",
+      )}
     >
       <style>{`
         @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0%   { transform: translate3d(0,0,0); }
+          100% { transform: translate3d(-50%,0,0); }
         }
         .marquee-track {
-          animation: marquee 42s linear infinite;
+          animation: marquee 48s linear infinite;
         }
         .marquee-track.is-paused {
           animation-play-state: paused;
         }
         @media (max-width: 767px) {
           .marquee-track {
-            animation-duration: 56s;
+            animation-duration: 64s;
           }
         }
       `}</style>
@@ -99,12 +109,15 @@ export function Portfolio() {
         />
       </motion.div>
 
-      <div className="w-full max-w-full overflow-hidden">
+      <div
+        className="w-full max-w-full overflow-hidden"
+        style={{ contain: "layout paint" }}
+      >
         <div
-          className={`marquee-track flex gap-3 sm:gap-6 md:gap-8${paused ? " is-paused" : ""}`}
+          className={`marquee-track flex gap-3 sm:gap-6 md:gap-8${marqueePaused ? " is-paused" : ""}`}
           style={{ width: "max-content" }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          onMouseEnter={() => setHoverPaused(true)}
+          onMouseLeave={() => setHoverPaused(false)}
         >
           {allItems.map((item, index) => (
             <div
@@ -133,6 +146,7 @@ export function Portfolio() {
                     alt={item.title}
                     loading="lazy"
                     decoding="async"
+                    sizes="(max-width: 768px) 82vw, 400px"
                     className="h-full w-full object-cover object-top"
                   />
                 </div>
