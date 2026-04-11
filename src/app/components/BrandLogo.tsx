@@ -1,8 +1,8 @@
 import type { MouseEventHandler } from "react";
 import { cn } from "./ui/utils";
 
-/** Marca circular UTOPIA no header/footer. O favicon do separador usa /favicon.png em index.html. */
-const LOGO_SRC = "/logo-mark.png";
+/** Marca no header/footer — `public/logo.png`. Favicon: `public/favicon.png` (index.html). */
+const LOGO_SRC = "/logo.png";
 
 type BrandLogoProps = {
   className?: string;
@@ -36,7 +36,7 @@ export function BrandLogo({
         height={40}
         decoding="async"
         className={cn(
-          "size-8 rounded-full object-cover transition-transform duration-200 group-hover:scale-[1.04] md:size-9",
+          "size-8 object-contain transition-transform duration-200 group-hover:scale-[1.04] md:size-9",
           imgClassName,
         )}
       />
