@@ -1,7 +1,7 @@
 import type { MouseEventHandler } from "react";
 import { cn } from "./ui/utils";
 
-/** Marca no header/footer — `public/logo.png`. Favicon: `public/favicon.png` (index.html). */
+/** Marca no header/footer — `public/logo.png`. Favicons: `public/favicon.ico`, PNGs e `site.webmanifest` (index.html). */
 const LOGO_SRC = "/logo.png";
 
 type BrandLogoProps = {
