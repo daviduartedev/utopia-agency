@@ -11,7 +11,7 @@ export default function DemoOne() {
   return (
     <FloatingConsultButton
       buttonSize={narrowMobile ? 136 : 200}
-      imageSize={narrowMobile ? 80 : 120}
+      imageSize={narrowMobile ? 95 : 120}
       imageSrc="/avatar.png"
       revolvingText="QUERO MEU PROJETO AGORA — FALE CONOSCO — UTOPIA — "
       revolvingSpeed={8}
