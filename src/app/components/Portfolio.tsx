@@ -23,39 +23,21 @@ function portfolioImageUrl(src: string): string {
 const projects = [
   {
     id: 1,
-    title: "Dashboard financeiro",
-    category: "SaaS · Web",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1080&q=85&fit=crop&auto=format",
+    title: "ERP para Lojistas",
+    category: "ERP · Web",
+    image: "/portfolio-movix-erp.png",
   },
   {
     id: 2,
-    title: "Plataforma de analytics",
-    category: "SaaS · Dashboard",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1080&q=85&fit=crop&auto=format",
+    title: "LP - Loja de Painel Solar",
+    category: "Landing · Conversão",
+    image: "/portfolio-emera-solar.png",
   },
   {
     id: 3,
-    title: "App bancário",
-    category: "App · Mobile",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1080&q=85&fit=crop&auto=format",
-  },
-  {
-    id: 4,
-    title: "Gestão de projetos",
-    category: "SaaS · Web",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&q=85&fit=crop&auto=format",
-  },
-  {
-    id: 5,
-    title: "Loja e-commerce",
-    category: "Landing · Conversão",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=85&fit=crop&auto=format",
-  },
-  {
-    id: 6,
-    title: "Site de produto SaaS",
-    category: "Landing · Marketing",
-    image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1080&q=85&fit=crop&auto=format",
+    title: "AppWeb para Barbearia",
+    category: "App · Web",
+    image: "/portfolio-appweb-barbearia.png",
   },
 ];
 
@@ -140,14 +122,14 @@ export function Portfolio() {
                   </p>
                 </div>
 
-                <div className="relative h-[180px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface sm:h-[240px] md:h-[280px]">
+                <div className="relative flex h-[180px] w-full items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-zinc-950 sm:h-[240px] md:h-[280px]">
                   <ImageWithFallback
                     src={portfolioImageUrl(item.image)}
                     alt={item.title}
                     loading="lazy"
                     decoding="async"
                     sizes="(max-width: 768px) 82vw, 400px"
-                    className="h-full w-full object-cover object-top"
+                    className="max-h-full max-w-full object-contain object-center"
                   />
                 </div>
               </div>
