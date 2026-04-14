@@ -20,7 +20,17 @@ function portfolioImageUrl(src: string): string {
   }
 }
 
-const projects = [
+type PortfolioLayout = "default" | "phone";
+
+type PortfolioProject = {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+  layout?: PortfolioLayout;
+};
+
+const projects: PortfolioProject[] = [
   {
     id: 1,
     title: "Dashboard financeiro",
@@ -41,21 +51,22 @@ const projects = [
   },
   {
     id: 4,
-    title: "Gestão de projetos",
-    category: "SaaS · Web",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&q=85&fit=crop&auto=format",
+    title: "ERP para Lojistas",
+    category: "ERP · Web",
+    image: "/portfolio-erp-lojistas.png",
   },
   {
     id: 5,
-    title: "Loja e-commerce",
+    title: "LP - Loja de Painel Solar",
     category: "Landing · Conversão",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1080&q=85&fit=crop&auto=format",
+    image: "/portfolio-lp-painel-solar.png",
   },
   {
     id: 6,
-    title: "Site de produto SaaS",
-    category: "Landing · Marketing",
-    image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1080&q=85&fit=crop&auto=format",
+    title: "APPWEB - Barbearia",
+    category: "App · Web mobile",
+    image: "/portfolio-appweb-barbearia.png",
+    layout: "phone",
   },
 ];
 
@@ -119,10 +130,17 @@ export function Portfolio() {
           onMouseEnter={() => setHoverPaused(true)}
           onMouseLeave={() => setHoverPaused(false)}
         >
-          {allItems.map((item, index) => (
+          {allItems.map((item, index) => {
+            const isPhone = item.layout === "phone";
+            return (
             <div
               key={`${item.id}-${index}`}
-              className="group w-[min(82vw,20rem)] shrink-0 sm:w-[min(88vw,22rem)] md:w-[400px]"
+              className={cn(
+                "group shrink-0",
+                isPhone
+                  ? "w-[min(46vw,12.5rem)] sm:w-[min(42vw,14rem)] md:w-[248px]"
+                  : "w-[min(82vw,20rem)] sm:w-[min(88vw,22rem)] md:w-[400px]",
+              )}
             >
               <div className="h-full rounded-2xl border border-white/10 bg-page-surface p-2.5 sm:p-3">
                 <div className="mb-2 flex flex-col px-1.5 sm:mb-3 sm:px-2">
@@ -140,19 +158,38 @@ export function Portfolio() {
                   </p>
                 </div>
 
-                <div className="relative h-[180px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface sm:h-[240px] md:h-[280px]">
-                  <ImageWithFallback
-                    src={portfolioImageUrl(item.image)}
-                    alt={item.title}
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 768px) 82vw, 400px"
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
+                {isPhone ? (
+                  <div className="flex justify-center">
+                    <div
+                      className="relative w-[min(100%,220px)] shrink-0 overflow-hidden rounded-[1.75rem] border border-white/15 bg-zinc-950 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/5"
+                      style={{ aspectRatio: "9 / 19" }}
+                    >
+                      <ImageWithFallback
+                        src={portfolioImageUrl(item.image)}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        sizes="220px"
+                        className="h-full w-full object-cover object-top"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative h-[180px] w-full overflow-hidden rounded-xl border border-white/5 bg-page-surface sm:h-[240px] md:h-[280px]">
+                    <ImageWithFallback
+                      src={portfolioImageUrl(item.image)}
+                      alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 768px) 82vw, 400px"
+                      className="h-full w-full object-cover object-top"
+                    />
+                  </div>
+                )}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
