@@ -1,6 +1,14 @@
 import { lazy } from "react";
 
 /** Secções pesadas (motion, Lenis, etc.) — carregadas sob demanda. */
+export const Problem = lazy(() =>
+  import("./components/Problem").then((m) => ({ default: m.Problem })),
+);
+
+export const ClientLogos = lazy(() =>
+  import("./components/ClientLogos").then((m) => ({ default: m.ClientLogos })),
+);
+
 export const WhyUs = lazy(() =>
   import("./components/WhyUs").then((m) => ({ default: m.WhyUs })),
 );
@@ -25,6 +33,10 @@ export const Testimonials = lazy(() =>
 
 export const Faq = lazy(() =>
   import("./components/Faq").then((m) => ({ default: m.Faq })),
+);
+
+export const Offer = lazy(() =>
+  import("./components/Offer").then((m) => ({ default: m.Offer })),
 );
 
 export const CtaSection = lazy(() =>

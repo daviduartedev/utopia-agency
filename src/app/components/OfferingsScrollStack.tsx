@@ -10,7 +10,7 @@ const STACK_ITEMS = [
     kicker: "Conversão e clareza",
     title: "Landing pages",
     body:
-      "Landing pages e sites de produto para converter visita em lead. Mensagem clara, layout objetivo e performance real.",
+      "Landing pages e sites de produto para converter visita em contato. Mensagem clara, layout objetivo e performance real.",
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=85&w=1600&auto=format&fit=crop",
   },
@@ -19,7 +19,7 @@ const STACK_ITEMS = [
     kicker: "Operação e escala",
     title: "Sistemas SaaS",
     body:
-      "Sistemas SaaS e painéis sob medida para sua equipe operar e medir. Integrações sólidas e escala sem gargalo técnico.",
+      "Sistemas SaaS e painéis customizados para sua equipe operar e medir. Integrações sólidas e escala sem gargalo técnico.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
   },
@@ -96,7 +96,7 @@ export function OfferingsScrollStack() {
         id="ofertas-heading"
         className="pb-10 pt-20 md:pb-12 md:pt-28"
         title="Nossos serviços"
-        description="Landing pages, sistemas SaaS e aplicativos — o que fazemos, em cartões que acompanham o scroll."
+        description="Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega."
       />
 
       {narrowMobile ? (
