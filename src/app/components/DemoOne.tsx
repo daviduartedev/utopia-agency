@@ -23,7 +23,7 @@ export default function DemoOne() {
           />
         </div>
       }
-      revolvingText="Falar no WhatsApp - Utopia digital - Falar no WhatsApp - Utopia digital - "
+      revolvingText="Falar no WhatsApp - Utopia Digital Lab."
       revolvingSpeed={8}
       ctaButtonAction={() => {
         openWhatsApp(WA_MSG_FLOATING);

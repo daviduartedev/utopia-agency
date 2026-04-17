@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { motion } from "motion/react";
 import { useIsNarrowMobile } from "../../lib/use-media-query";
+
+/** Anel de texto no viewBox 200×200 (maior que o disco central). */
+const REVOLVE_RADIUS = 87;
+const REVOLVE_PATH_LEN = 2 * Math.PI * REVOLVE_RADIUS;
 
 interface FloatingConsultButtonProps {
   buttonSize?: number;
@@ -28,7 +32,7 @@ export const FloatingConsultButton = ({
   imageSrc,
   imageAlt = "Mascote",
   centerContent,
-  revolvingText = "CONSULTA GRÁTIS — FALE CONOSCO — ",
+  revolvingText = "Falar no WhatsApp - Utopia Digital Lab.",
   revolvingSpeed = 10,
   ctaButtonAction = () => {},
   position = {
@@ -36,6 +40,7 @@ export const FloatingConsultButton = ({
     right: "max(0.75rem, env(safe-area-inset-right, 0px))",
   },
 }: FloatingConsultButtonProps): React.ReactElement => {
+  const revolvingPathId = useId().replace(/:/g, "");
   const narrowMobile = useIsNarrowMobile();
   const [imageFailed, setImageFailed] = useState(false);
 
@@ -64,22 +69,24 @@ export const FloatingConsultButton = ({
         >
           <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
             <defs>
-              {/* Raio maior = mais perímetro para o texto não se comprimir */}
               <path
-                id="fcc-revolving-path"
-                d="M 100, 100 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"
+                id={revolvingPathId}
+                d={`M 100, 100 m -${REVOLVE_RADIUS}, 0 a ${REVOLVE_RADIUS},${REVOLVE_RADIUS} 0 1,1 ${REVOLVE_RADIUS * 2},0 a ${REVOLVE_RADIUS},${REVOLVE_RADIUS} 0 1,1 -${REVOLVE_RADIUS * 2},0`}
               />
             </defs>
+            {/* Uma só frase; textLength + spacing distribui ao longo do arco sem repetir copy. */}
             <text
               className="fill-zinc-500"
+              textLength={REVOLVE_PATH_LEN * 0.94}
+              lengthAdjust="spacing"
               style={{
-                fontSize: 13,
-                letterSpacing: "0.11em",
+                fontSize: 16.5,
+                letterSpacing: "0.04em",
                 fontWeight: 450,
                 fontFamily: "var(--font-sans), system-ui, sans-serif",
               }}
             >
-              <textPath href="#fcc-revolving-path" startOffset="0%" method="align" spacing="auto">
+              <textPath href={`#${revolvingPathId}`} startOffset="0%">
                 {revolvingText}
               </textPath>
             </text>
