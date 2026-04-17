@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
@@ -100,6 +101,7 @@ const offers: OfferRow[] = [
 export function Offer() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const [openOffer, setOpenOffer] = useState<OfferRow["id"]>("landing");
 
   return (
     <section
@@ -128,8 +130,13 @@ export function Offer() {
         <motion.div {...scrollRevealMotion(prefersReducedMotion)}>
           <Accordion
             type="single"
-            collapsible
-            defaultValue="landing"
+            collapsible={false}
+            value={openOffer}
+            onValueChange={(v: string) => {
+              if (v === "landing" || v === "saas" || v === "app") {
+                setOpenOffer(v);
+              }
+            }}
             className="w-full space-y-3"
           >
             {offers.map((offer) => {
