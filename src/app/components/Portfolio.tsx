@@ -82,7 +82,7 @@ function Slide({ project, index, total }: { project: PortfolioProject; index: nu
             alt={project.title}
             loading="lazy"
             decoding="async"
-            sizes={isPhone ? "250px" : "880px"}
+            sizes={isPhone ? "250px" : "820px"}
             className="block h-full max-h-full min-h-0 w-full object-contain object-center"
           />
         ) : (
@@ -186,7 +186,7 @@ export function Portfolio() {
           gap: 2rem;
           padding-inline: max(1rem, calc((100vw - 1300px) / 2));
           touch-action: pan-y pinch-zoom;
-          --web-w: min(880px, calc(100vw - 2rem));
+          --web-w: min(820px, calc(100vw - 2rem));
           --slide-h: calc(var(--web-w) * 550 / 880);
         }
         @media (min-width: 768px) {

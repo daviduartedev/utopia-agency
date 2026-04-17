@@ -40,7 +40,7 @@ Legendas abaixo do slide: **título + 1 frase de escopo** (ex.: `ERP para lojist
 
 ## 5. Visual
 
-- Altura de slide derivada da proporção 880×550 (web) e 250×550 (phone), como no layout atual.
+- Largura máxima do slide web ~`820px` (viewport menos margens); altura pela proporção **880×550** (mesma escala que antes, só um pouco menor em telas largas). Phone: 250×550.
 - Fades laterais (mask) mantidos para lembrar ao usuário que há mais cases fora do viewport.
 - Radius `rounded-[15px]`, border `border-[0.5px] border-transparent` (mantida para evitar serrilhado).
 
