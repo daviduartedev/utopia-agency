@@ -4,11 +4,14 @@ import { Navbar } from "./components/Navbar";
 import { LazySection } from "./components/LazySection";
 import { DeferredDemoOne } from "./components/DeferredDemoOne";
 import {
+  Problem,
+  ClientLogos,
   WhyUs,
   OfferingsScrollStack,
   HowItWorks,
   Portfolio,
   Testimonials,
+  Offer,
   Faq,
   CtaSection,
   ContactFormSection,
@@ -38,15 +41,25 @@ export default function App() {
         </main>
       </div>
 
-      {/* 2–10: JS pesado só quando perto do viewport */}
+      {/* 2. Problema — reconhecimento de dor logo após o hero */}
       <div className="relative z-10 w-full">
-        <LazySection minHeight="48vh">
+        <LazySection minHeight="44vh">
           <Suspense fallback={<SectionFallback />}>
-            <WhyUs />
+            <Problem />
           </Suspense>
         </LazySection>
       </div>
 
+      {/* 3. Prova social rápida — logos de clientes */}
+      <div className="relative z-10 w-full">
+        <LazySection minHeight="32vh">
+          <Suspense fallback={<SectionFallback />}>
+            <ClientLogos />
+          </Suspense>
+        </LazySection>
+      </div>
+
+      {/* 4. Serviços (solução) */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="120vh">
           <Suspense fallback={<SectionFallback />}>
@@ -55,6 +68,16 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 5. Diferenciais */}
+      <div className="relative z-10 w-full">
+        <LazySection minHeight="48vh">
+          <Suspense fallback={<SectionFallback />}>
+            <WhyUs />
+          </Suspense>
+        </LazySection>
+      </div>
+
+      {/* 6. Como funciona */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="56vh">
           <Suspense fallback={<SectionFallback />}>
@@ -63,6 +86,7 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 7. Portfólio */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="52vh">
           <Suspense fallback={<SectionFallback />}>
@@ -71,6 +95,7 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 8. Depoimentos */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="48vh">
           <Suspense fallback={<SectionFallback />}>
@@ -79,6 +104,16 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 9. Oferta — o que está sendo vendido, preço e condições */}
+      <div className="relative z-10 w-full">
+        <LazySection minHeight="60vh">
+          <Suspense fallback={<SectionFallback />}>
+            <Offer />
+          </Suspense>
+        </LazySection>
+      </div>
+
+      {/* 10. FAQ */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="40vh">
           <Suspense fallback={<SectionFallback />}>
@@ -87,6 +122,7 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 11. CTA final */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="44vh">
           <Suspense fallback={<SectionFallback />}>
@@ -95,6 +131,7 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 12. Formulário de contato */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="56vh">
           <Suspense fallback={<SectionFallback />}>
@@ -103,6 +140,7 @@ export default function App() {
         </LazySection>
       </div>
 
+      {/* 13. Rodapé */}
       <div className="relative z-10 w-full">
         <LazySection minHeight="32vh">
           <Suspense fallback={<SectionFallback />}>

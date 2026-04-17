@@ -1,5 +1,6 @@
 "use client";
 
+import { SiWhatsapp } from "react-icons/si";
 import { openWhatsApp } from "../lib/whatsapp";
 import { WA_MSG_FLOATING } from "../lib/whatsapp-messages";
 import { useIsNarrowMobile } from "../lib/use-media-query";
@@ -11,13 +12,22 @@ export default function DemoOne() {
   return (
     <FloatingConsultButton
       buttonSize={narrowMobile ? 136 : 200}
-      imageSize={narrowMobile ? 80 : 120}
-      imageSrc="/avatar.png"
-      revolvingText="QUERO MEU PROJETO AGORA — FALE CONOSCO — UTOPIA — "
+      imageSize={narrowMobile ? 95 : 120}
+      imageAlt="WhatsApp"
+      centerContent={
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-[#25D366]">
+          <SiWhatsapp
+            aria-hidden
+            className="text-white"
+            style={{ width: "58%", height: "58%" }}
+          />
+        </div>
+      }
+      revolvingText="FALAR NO WHATSAPP — UTOPIA — "
       revolvingSpeed={8}
       popupHeading="Bora começar?"
       popupDescription="Um clique e você fala direto com a gente no WhatsApp — landing, SaaS ou app."
-      ctaButtonText="Quero falar agora"
+      ctaButtonText="Falar no WhatsApp agora"
       ctaButtonAction={() => {
         openWhatsApp(WA_MSG_FLOATING);
       }}

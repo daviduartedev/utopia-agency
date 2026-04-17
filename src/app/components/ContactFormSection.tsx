@@ -119,7 +119,7 @@ export function ContactFormSection() {
           id="contato-heading"
           eyebrow="Contato"
           title="Fale com a gente sobre o seu projeto."
-          description="Respondemos em até um dia útil. Sem spam — só o que precisamos para montar uma proposta alinhada ao que você busca."
+          description="Prefere escrever? Envie pelo formulário — respondemos em até um dia útil e continuamos a conversa no WhatsApp."
           className="mb-12 md:mb-14"
         />
       </motion.div>

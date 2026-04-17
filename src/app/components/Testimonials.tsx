@@ -1,101 +1,157 @@
 "use client";
 
-import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { motion } from "motion/react";
+import { Quote } from "lucide-react";
 import { SectionHeader } from "./ui/section-header";
-import { useSectionAnimationActive } from "../hooks/use-section-animation-active";
-import { cn } from "./ui/utils";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
-const testimonials = [
+type Testimonial = {
+  id: string;
+  text: string;
+  name: string;
+  role: string;
+  gradient: string;
+};
+
+const testimonials: Testimonial[] = [
   {
-    text:
-      "A landing page entregou conversão acima do que esperávamos. Processo rápido e comunicação clara em todas as etapas.",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Ricardo Almeida",
-    role: "Head de Marketing",
+    id: "rafaela",
+    text: "A landing saiu em menos de duas semanas e, pela primeira vez, o site conversa com o cliente que a gente quer atrair.",
+    name: "Rafaela",
+    role: "Fundadora • estúdio de design",
+    gradient: "from-rose-500/60 to-amber-500/60",
   },
   {
-    text:
-      "O painel SaaS ficou sob medida para o nosso fluxo. Treinamento rápido e a equipe adotou sem atrito.",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Fernando Costa",
-    role: "COO",
+    id: "diego",
+    text: "A Utopia me entregou um painel SaaS direto, sem tela inútil. Entramos no ritmo em poucos dias — o time adotou sem atrito.",
+    name: "Diego",
+    role: "Fundador • SaaS de RH",
+    gradient: "from-indigo-500/60 to-sky-500/60",
   },
   {
-    text:
-      "Equipe técnica atenciosa, da descoberta ao deploy. Sentimos que entendiam de verdade o nosso negócio.",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Juliana Martins",
-    role: "Fundadora",
+    id: "tatiana",
+    text: "Pedi site em até 7 dias e foi o que aconteceu. Proposta curta, sinal e entrega em cima do cronograma.",
+    name: "Tatiana",
+    role: "Consultora solo",
+    gradient: "from-emerald-500/60 to-teal-500/60",
   },
   {
-    text:
-      "O app mobile saiu com UX polida e prazos cumpridos. O retorno dos usuários foi muito positivo.",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Pedro Henrique",
-    role: "Product Lead",
+    id: "bruno",
+    text: "O que mudou foi a clareza: a gente consegue explicar o produto em uma frase e a página mostra exatamente isso.",
+    name: "Bruno",
+    role: "Co-founder • fintech early-stage",
+    gradient: "from-violet-500/60 to-fuchsia-500/60",
   },
   {
-    text:
-      "Integrações com sistemas legados foram bem resolvidas. Hoje operamos com muito mais previsibilidade.",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Camila Rocha",
-    role: "Diretora de Operações",
+    id: "isadora",
+    text: "Depois do lançamento, eles continuaram disponíveis pelo WhatsApp. Dúvida rápida vira conversa, não chamado novo.",
+    name: "Isadora",
+    role: "E-commerce de nicho",
+    gradient: "from-amber-500/60 to-orange-500/60",
   },
   {
-    text:
-      "Implementação sem drama: documentação, repasse técnico e suporte pós-entrega impecáveis.",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80",
-    name: "Lucas Ferreira",
-    role: "CTO",
+    id: "pedro",
+    text: "Orçamento claro, escopo enxuto e entrega rápida. Serviu exatamente para eu validar a ideia antes de escalar.",
+    name: "Pedro",
+    role: "Fundador solo • SaaS B2B",
+    gradient: "from-sky-500/60 to-cyan-500/60",
   },
 ];
 
-/** Duas colunas (3+3): menos animações simultâneas que três colunas. */
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
+function Initials({ name }: { name: string }) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
 
 export function Testimonials() {
-  const { ref, active } = useSectionAnimationActive();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const [featured, ...rest] = testimonials;
 
   return (
     <section
-      ref={ref}
       id="depoimentos"
-      className={cn(
-        "relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28",
-        !active && "section-anim-paused",
-      )}
+      aria-labelledby="depoimentos-heading"
+      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
     >
       <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
-        >
+        <motion.div {...headerMotion}>
           <SectionHeader
             id="depoimentos-heading"
-            className="mb-12 md:mb-14"
+            className="mb-12 md:mb-16"
             eyebrow="Depoimentos"
             title="O que dizem nossos clientes"
             description="Feedback de quem confiou na Utopia para landing pages, produtos SaaS e apps."
           />
         </motion.div>
 
-        <div className="flex max-h-[min(64vh,620px)] justify-center gap-4 overflow-hidden sm:gap-5 md:max-h-[min(68vh,680px)] md:gap-8">
-          <TestimonialsColumn testimonials={firstColumn} duration={18} />
-          <TestimonialsColumn
-            testimonials={secondColumn}
-            className="hidden md:block"
-            duration={22}
+        <motion.div
+          {...scrollRevealMotion(prefersReducedMotion)}
+          className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 via-page-surface to-page-surface p-8 md:p-12"
+        >
+          <Quote
+            className="absolute right-6 top-6 size-16 text-emerald-400/10 md:size-24"
+            strokeWidth={1.25}
+            aria-hidden
           />
+          <figure className="relative max-w-3xl">
+            <blockquote
+              className="m-0 border-none p-0 text-[clamp(1.125rem,2.4vw,1.5rem)] font-medium leading-snug tracking-[-0.02em] text-white"
+              style={{
+                fontFamily: "var(--font-display), Georgia, serif",
+              }}
+            >
+              <p className="m-0">{featured.text}</p>
+            </blockquote>
+            <figcaption className="mt-8 flex items-center gap-4">
+              <span
+                aria-hidden
+                className={`inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-sm font-semibold text-white/95 ${featured.gradient}`}
+              >
+                <Initials name={featured.name} />
+              </span>
+              <cite className="not-italic">
+                <p className="text-base font-semibold text-white">{featured.name}</p>
+                <p className="text-sm text-zinc-500">{featured.role}</p>
+              </cite>
+            </figcaption>
+          </figure>
+        </motion.div>
+
+        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:gap-7">
+          {rest.map((t, i) => (
+            <motion.figure
+              key={t.id}
+              {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+              className="group relative m-0 border-l-2 border-white/15 pl-6 transition-colors hover:border-emerald-400/40"
+            >
+              <blockquote
+                className="m-0 border-none p-0 text-[15px] leading-relaxed text-zinc-300"
+                style={{
+                  fontFamily: "var(--font-sans), system-ui, sans-serif",
+                }}
+              >
+                <p className="m-0">{t.text}</p>
+              </blockquote>
+              <figcaption className="mt-5 flex items-center gap-3">
+                <span
+                  aria-hidden
+                  className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xs font-semibold text-white/90 ${t.gradient}`}
+                >
+                  <Initials name={t.name} />
+                </span>
+                <cite className="not-italic">
+                  <p className="text-sm font-semibold text-white">{t.name}</p>
+                  <p className="text-[12px] text-zinc-500">{t.role}</p>
+                </cite>
+              </figcaption>
+            </motion.figure>
+          ))}
         </div>
       </div>
     </section>

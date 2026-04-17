@@ -75,8 +75,8 @@ export function Footer() {
             <a href="#portfolio" className="transition-colors hover:text-white">
               Trabalhos
             </a>
-            <a href="#depoimentos" className="transition-colors hover:text-white">
-              Depoimentos
+            <a href="#oferta" className="transition-colors hover:text-white">
+              Oferta
             </a>
             <a href="#faq" className="transition-colors hover:text-white">
               FAQ
