@@ -73,7 +73,7 @@ export const FloatingConsultButton = ({
             <text
               className="fill-zinc-500"
               style={{
-                fontSize: 11.25,
+                fontSize: 13,
                 letterSpacing: "0.11em",
                 fontWeight: 450,
                 fontFamily: "var(--font-sans), system-ui, sans-serif",
