@@ -64,13 +64,22 @@ export const FloatingConsultButton = ({
         >
           <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
             <defs>
+              {/* Raio maior = mais perímetro para o texto não se comprimir */}
               <path
-                id="circlePath"
-                d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                id="fcc-revolving-path"
+                d="M 100, 100 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"
               />
             </defs>
-            <text className="fill-gray-600 text-[20.4px] font-medium uppercase tracking-wider">
-              <textPath href="#circlePath" startOffset="0%">
+            <text
+              className="fill-zinc-500"
+              style={{
+                fontSize: 10.5,
+                letterSpacing: "0.11em",
+                fontWeight: 450,
+                fontFamily: "var(--font-sans), system-ui, sans-serif",
+              }}
+            >
+              <textPath href="#fcc-revolving-path" startOffset="0%" method="align" spacing="auto">
                 {revolvingText}
               </textPath>
             </text>
