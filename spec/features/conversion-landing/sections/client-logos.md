@@ -20,7 +20,7 @@ Prova social leve imediatamente após reconhecer a dor em "Problema". Mostra que
 
 ## 4. Dataset (placeholders)
 
-SVGs em `public/logos/`, todos mono-cor via `currentColor` (herdado de `text-zinc-400`):
+SVGs em `public/logos/` usam `currentColor` no ficheiro; como são renderizados via `<img>`, no DOM **não** herdam cor — no `ClientLogos` aplica-se **filtro** (`brightness(0) invert`) para marcas claras sobre `#0a0a0a`.
 
 | # | Nome | Arquivo |
 |---|---|---|
@@ -38,7 +38,8 @@ Nomes e wordmarks são **genéricos realistas** — nenhum remete a marcas exist
 ## 5. Visual
 
 - `bg-page-surface py-14 md:py-16`.
-- Logos mono-cor em `text-zinc-400`; altura 32px; gap 64px.
+- Rótulo com contraste legível (`text-zinc-300`, semibold).
+- Logos em altura 32px; filtro claro + opacidade ~0,9, hover a 1; gap 64px.
 - Marquee contínuo para a esquerda (`speed: 60`).
 - `pauseOnHover` e `fadeOut` nas bordas (cor `#0a0a0a`, igual ao fundo).
 

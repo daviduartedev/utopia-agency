@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import LogoLoop, { type LogoLoopItem } from "./ui/LogoLoop";
+import { cn } from "./ui/utils";
 
 const clientLogos: LogoLoopItem[] = [
   { src: "/logos/acme.svg", alt: "Acme", title: "Acme" },
@@ -14,8 +15,7 @@ const clientLogos: LogoLoopItem[] = [
 
 /**
  * Prova social rápida, logo abaixo da seção Problema.
- * Logos de clientes em marquee horizontal contínuo; todos mono-cor (zinc-400)
- * via `currentColor` herdado do wrapper.
+ * SVGs em <img> não herdam currentColor no DOM — aplicamos filtro claro no wrapper.
  */
 export function ClientLogos() {
   return (
@@ -33,13 +33,19 @@ export function ClientLogos() {
       >
         <p
           id="clientes-heading"
-          className="mb-8 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-500 md:text-xs"
+          className="mb-8 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-300 md:text-xs"
           style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         >
           Quem já trabalhou com a Utopia
         </p>
 
-        <div className="relative w-full text-zinc-400">
+        <div
+          className={cn(
+            "relative w-full",
+            "[&_img]:brightness-0 [&_img]:invert [&_img]:opacity-90 [&_img]:transition-opacity [&_img]:duration-200",
+            "hover:[&_img]:opacity-100",
+          )}
+        >
           <LogoLoop
             logos={clientLogos}
             speed={60}
