@@ -14,7 +14,7 @@ Responder à pergunta "por que você e não outra agência/freelancer?" em até 
 - **Title**: `Feito para quem não quer perder tempo.`
 - **Description**: `Cada projeto é tratado como se fosse o produto principal do nosso portfólio. Porque é.`
 
-### Quatro cards (BentoGrid, ordem fixa)
+### Quatro pontos (BentoGrid *ou* composição equivalente, ordem fixa)
 
 1. **Entrega ágil** — status `Ritmo`, ícone `Zap` (amber-400)
    `Da proposta ao ar com processo enxuto, sem reuniões desnecessárias e sem fases de aprovação intermináveis.`
@@ -31,8 +31,9 @@ Responder à pergunta "por que você e não outra agência/freelancer?" em até 
 ## 3. Visual
 
 - Container: `max-w-[1300px]` com padding lateral responsivo, hairlines top/bottom.
-- `BentoGrid` do design system.
-- Ícones coloridos são **os únicos acentos cromáticos** da seção — não usar outros em cópia, bordas ou fundos.
+- **Intenção:** diferenciais legíveis como **bloco com assinatura própria** — faixas alternadas full-width, trilha com ícones grandes, rails assimétricos, etc. Evitar a sensação de “mais um grid 2×2 de cards iguais” se o restante da página já repete esse padrão.
+- Ícones coloridos (`amber-400`, `violet-400`, `sky-400`, `emerald-400`) permanecem os acentos principais **desta seção**; um relaxamento leve de fundo/borda é aceitável se documentado no design system.
+- Motion: scroll e stagger alinhados a §8 do design system.
 
 ## 4. CTA
 

@@ -14,7 +14,7 @@
 - **Title**: `O que você recebe, quando e por quanto.`
 - **Description**: `Sem letras miúdas. Escopo e condições definidos na proposta.`
 
-### Três cards (ordem fixa)
+### Três produtos (ordem fixa; layout de apresentação livre)
 
 #### Card 1 — Landing Page (**destaque**)
 
@@ -59,23 +59,24 @@
 
 ### Rodapé do bloco (barra de condições)
 
-Texto único, logo abaixo dos três cards, em `zinc-400` 13–14px:
+Texto único, logo abaixo do bloco de produtos (seja qual for o formato visual), em `zinc-400` 13–14px:
 
 > `Para iniciar: sinal mínimo de 30% (ou 1 parcela). O restante é combinado na proposta — sem surpresa depois.`
 
 ## 3. Visual
 
 - `bg-page-surface py-20 md:py-24`, hairlines top/bottom.
-- Grid `1 / 1 / 3` (mobile / tablet / desktop).
-- Card destaque (Landing Page): border `white/15` (um degrau mais visível); os outros dois em `white/10`.
-- Preço em `font-display` 28–32px (destaque visual do número); "a partir de" em caixa pequena 12px zinc-500 acima.
-- Inclusões: `<ul>` com ícone `Check` (`lucide-react`) cor `emerald-400`.
-- CTA: botão `rounded-full`, full-width dentro do card.
+- **Formato:** pode ser grid de cartões, **tabela comparativa**, **accordion por produto**, ou bloco hero de preço + detalhes — desde que os três produtos na ordem Landing → SaaS → App e os dados de cada um (preço, prazo, bullets, CTA) permaneçam evidentes.
+- Destaque visual para **Landing Page** (preço âncora): hierarquia clara — border/fundo ligeiramente mais forte que SaaS/App.
+- Preço em `font-display` grande no destaque; "a partir de" pode ir em label pequeno `zinc-500`.
+- Inclusões: lista com ícone `Check` (`lucide-react`) cor `emerald-400` ou equivalente legível.
+- CTA: botão primário `rounded-full` por produto; em layouts tabulares, área de clique clara por linha/bloco.
+- Motion: reveal ou destaque ao rolar sem esconder preço ou condições.
 
 ## 4. Acessibilidade
 
 - `<section aria-labelledby="oferta-heading">` com `<h2 id="oferta-heading">`.
-- Cada card dentro de `<article aria-labelledby="oferta-<slug>-title">`.
+- Cada produto dentro de `<article aria-labelledby="oferta-<slug>-title">` (ou linha equivalente em tabela/lista, mantendo rótulos associados).
 - CTAs são `<a target="_blank" rel="noopener noreferrer">` com `aria-label` redundante ("Falar sobre landing page no WhatsApp").
 
 ## 5. Mensagens WhatsApp associadas

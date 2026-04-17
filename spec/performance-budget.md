@@ -12,10 +12,12 @@ Este ciclo **não altera** a performance nem instrumenta budgets. O que segue é
 
 ## 2. Dependências pesadas em uso
 
+Ciclos de **refinamento visual** podem trocar ou acrescentar libs leves de layout/animação nas seções centrais; manter **lazy-loading** de seções e preferir reutilizar `motion` antes de importar novos pesos. Depoimentos deixou de usar `react-responsive-masonry` (removido do `package.json`) em favor de layout editorial + grid.
+
 | Lib | Uso | Risco |
 |---|---|---|
 | `gsap` + `lenis` | smooth-scroll e ScrollStack | grande; mitigado por ser lazy junto com a seção Serviços |
-| `framer-motion` / `motion` | entrada de seções | médio; tree-shaking ok |
+| `framer-motion` / `motion` | entrada de seções; transições ao scroll no refinamento | médio; tree-shaking ok |
 | `@tsparticles/*` | disponível, **não usado** na LP | risco de import acidental — cuidado em PR |
 | `ogl` | Plasma do hero | médio; lazy + skip em mobile |
 | `recharts`, `react-dnd`, `react-day-picker`, `vaul` | disponíveis, **não usados** na LP | idem — não importar em arquivos da LP |

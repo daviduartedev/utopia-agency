@@ -6,159 +6,81 @@
 
 ---
 
-## 1. Objetivo do ciclo
+## 1. Objetivo do ciclo (estado canônico + refinamento)
 
-Reestruturar a landing da Utopia para cumprir, de ponta a ponta, a estrutura de funil exigida em `request.md`:
+### 1.1 Entrega já coberta pelo plano anterior
 
-> Hero → **Problema** → Solução → Diferenciais → Prova → **Oferta** → CTA
+Reestruturar a landing da Utopia para cumprir a estrutura de funil (Hero → Problema → … → Oferta → CTA), novas seções Problema/Oferta, Portfólio/Depoimentos refeitos, auditoria de copy, hub `spec/`, etc. — conforme histórico do repositório e `tasks.md` já executado.
 
-…fechando duas lacunas estruturais (Problema e Oferta), refazendo dois blocos de prova (Portfólio e Depoimentos) e auditando a copy para remover clichês de marketing.
+### 1.2 Refinamento acordado (este documento, pós-respostas)
 
-O visitante-alvo deste ciclo é o **fundador solo** (pequeno negócio/SaaS nascente) — tom e preço calibrados para essa persona.
+**Problema:** Todas as seções **Oferta**, **Depoimentos**, **Como funciona**, **Por que a Utopia (diferenciais)** e **Problema** não podem parecer **cinco variações do mesmo card sombreado**. Cada uma deve ter um **layout com intenção própria** (ritmo, hierarquia, superfície), equilibrando impacto visual e custo de bundle.
 
----
+**Oferta:** O formato **não** precisa permanecer em três colunas de cards; aceita-se tabela, accordion por produto, comparador ou outro padrão, desde que a **copy, preços, inclusões, CTAs WhatsApp e barra de condições** permaneçam conforme `spec/features/conversion-landing/sections/offer.md` e mensagens em `integrations.md` / `whatsapp-messages.ts`.
 
-## 2. Delta contra o estado atual
+**Fora do escopo deste refinamento:** Hero, Logos de clientes, Serviços (`ScrollStack`), Portfólio, FAQ, CTA final, Formulário, Footer, Navbar — **sem redesenho estrutural** só por este delta. (Ajustes mínimos de integração visual ou motion global que não alterem copy/ordem podem ocorrer.)
 
-### 2.1 Ordem de seções (novo)
+**Design system:** Este ciclo **pode relaxar** levemente cores/superfícies sem abandonar o posicionamento premium (vide `design-system.md` § atualização).
 
-```
-Hero → Problema → Serviços (Solução) → Diferenciais → Como funciona
-  → Portfólio → Depoimentos → Oferta → FAQ → CTA final → Formulário → Footer
-```
+**Motion:** Introduzir sensação **moderna (referência Webflow/Framer)** — animações de **entrada e saída ao rolar** (e coerência na LP), respeitando `prefers-reduced-motion`. Escopo preferencial: sistema de motion reutilizável + aplicação forte nas **cinco seções** nomeadas; extensão ao restante da página onde for barato e sem redesenhar seções fora de escopo.
 
-Hoje, em `src/app/App.tsx`, faltam `Problema` e `Oferta`; os demais blocos existem e serão mantidos (exceto Portfólio/Depoimentos, refeitos — ver 2.4).
+**Bibliotecas:** Pode-se remover ou adicionar dependências **à escolha** (incl. referências como 21st.dev / React Bits), priorizando libs **confiáveis** e impacto aceitável no bundle.
 
-### 2.2 Nova seção: Problema
+**Conteúdo:** Copy, número de itens, ordem, mensagens WhatsApp e regras comerciais **permanecem** os dos arquivos em `spec/features/conversion-landing/sections/*.md` — mudança só de **apresentação**.
 
-- Componente novo: `src/app/components/Problem.tsx`.
-- Identifica três dores do fundador solo, em cards/bullets curtos:
-  1. **Site que não converte visita em contatos** — tráfego existe, mas não chega mensagem.
-  2. **Orçamento caro, prazo longo e entrega burocrática** — proposta cheia de etapas, reuniões intermináveis, preço opaco.
-  3. **Agência que desaparece pós-entrega** — nada de suporte, bugs esquecidos, evolução travada.
-- Copy: descritiva, sem vitimização. Cada dor encerra numa frase-gancho que antecipa a solução da próxima seção.
-- Visual: alinhado ao resto da página (bg `page-surface`, hairline top/bottom, `SectionHeader`). Sem ilustração — texto + ícone `lucide-react`.
+**Acessibilidade:** Sem requisitos **adicionais** além do baseline já descrito nos section docs (landmarks, headings, foco onde já exigido). Carrossel com requisitos extra de teclado **não** é obrigatório para este refinamento onde não houver carrossel.
 
-### 2.3 Nova seção: Oferta
-
-- Componente novo: `src/app/components/Offer.tsx`.
-- Três cards (ou um card destaque + dois secundários) mostrando exatamente o que é vendido:
-  - **Landing Page** — **a partir de R$ 999** (parcelável em até 3×), entrega em **até 7 dias**.
-  - **Sistema SaaS** — **sob consulta** (parcelável em até 3×).
-  - **Aplicativo** — **sob consulta** (parcelável em até 3×).
-- Inclusões fixas em cada card:
-  - design no Figma + código-fonte entregue,
-  - domínio + hospedagem configurados,
-  - SEO técnico básico e analytics,
-  - **1 mês de suporte gratuito pós-entrega**,
-  - revisões inclusas na proposta.
-- Condição comercial explícita no rodapé do bloco: **sinal mínimo de 30% (ou 1 parcela) para iniciar**.
-- CTA por card: WhatsApp pré-preenchido (texto novo em `whatsapp-messages.ts`).
-
-### 2.4 Seções refeitas
-
-**Portfólio** (`src/app/components/Portfolio.tsx`)
-- Substituir o marquee atual por **carrossel horizontal** com snap e controles (prev/next + drag + teclado).
-- Lib: `embla-carousel-react` (já instalada, v8).
-- Cases atuais permanecem como placeholders realistas com descrição qualitativa curta (sem métrica inventada) — ver `spec/features/conversion-landing/sections/portfolio.md`.
-
-**Depoimentos** (`src/app/components/Testimonials.tsx`)
-- Substituir as colunas em marquee vertical por um layout distinto do resto da página: **grid masonry estático** com `react-responsive-masonry` (já instalada).
-- 6 depoimentos placeholders com cargo + contexto de projeto; nomes e avatares fictícios sinalizados como tal em `spec/features/conversion-landing/sections/testimonials.md`.
-
-### 2.5 Logos de clientes (novo na composição)
-
-- Incluir `LogoCloud` (componente já existente em `src/app/components/LogoCloud.tsx`) na página, entre Problema e Serviços, reforçando prova social acima da dobra longa.
-- Criar 6–8 SVGs de logo placeholder em `public/logos/` (nomes fictícios plausíveis: `acme`, `northwind`, `helix-labs`, `umbra`, `tessera`, `lumen`, `paraglide`, `vantage`). SVG mono-cor (zinc-400) para manter o tom premium.
-
-### 2.6 Hierarquia de CTA
-
-CTA primário em toda a página: **WhatsApp**. Formulário fica como alternativa explícita para quem prefere escrita assíncrona.
-
-- Todos os botões "Quero meu projeto / Falar agora / Agendar" permanecem apontando para `whatsappHref(...)`.
-- O formulário em `ContactFormSection` continua gravando em `contact_submissions` e abrindo WhatsApp no submit (sem alteração no back).
-- Texto de apoio ao formulário reforça: *"Prefere escrever? Envie pelo formulário — respondemos e continuamos no WhatsApp."*
-
-### 2.7 Floating WhatsApp button
-
-- `src/app/components/ui/floating-consult-button.tsx`: trocar o ícone atual pelo **logo oficial do WhatsApp** (`react-icons/si` já instalada → `SiWhatsapp`) mantendo aria-label e contraste.
-
-### 2.8 Auditoria de copy
-
-Remoção/ reescrita de frases de marketing genérico. Exemplos já detectados:
-
-- `CtaSection`: *"Criamos sites profissionais que não só impressionam, mas convertem."* → reescrever para algo factual, ex.: *"Sites rápidos, claros e no ar em até 7 dias."*
-- `cta-4` items como *"Integração completa"*, *"Do zero ao lançamento sem complicação"* → reescrever com substantivos concretos.
-- Depoimentos genéricos (*"muito mais previsibilidade"*) → substituir por frases plausíveis citando escopo entregue, não resultado inventado.
-- Verificar o resto da página contra a blacklist definida em `spec/content-guidelines.md`.
-
-### 2.9 Fora de escopo deste ciclo
-
-O usuário confirmou **sem alteração** em:
-- Captura extra no lead (sem UTM/referrer/user-agent) — tabela permanece como está.
-- Webhook Discord para leads — fica para próximo ciclo (será acionado com dados separados).
-- CRM.
-- Deploy/domínio (já configurado).
-- Analytics e SEO (G) — não introduzir GA4/Plausible/JSON-LD agora; manter o que há em `index.html`.
-- LGPD/legal (H) — não criar páginas de Termos/Privacidade nem banner de cookies.
-- Testes automatizados e budgets de performance (I) — manter QA manual, budgets atuais implícitos.
+**Qualidade:** QA manual dos cenários em `scenarios.feature`; sem obrigação de checklist por screenshot nem gate formal de Lighthouse.
 
 ---
 
-## 3. Estrutura do hub `spec/` a fundar
+## 2. Delta contra specs anteriores (refinamento visual)
 
-Este ciclo inaugura o hub canônico (ver tarefa em `tasks.md`):
+| Área | Antes (implícito) | Depois (acordado) |
+|------|-------------------|-------------------|
+| Problema, Diferenciais, Como funciona, Depoimentos, Oferta | Vários padrões baseados em cards (`SpotlightCard`, `BentoGrid`, masonry, grid de ofertas) podendo **parecer** o mesmo tipo de bloco | Padrões **visualmente distintos** entre si; não “cinco cards com canto arredondado” |
+| Oferta | Três cards em grid | Formato **livre** mantendo conteúdo canônico |
+| Motion | Principalmente `whileInView` de entrada em seções | Entrada **e** saída / parallax leve ao scroll onde fizer sentido, estilo produção alta |
+| Outras seções | — | **Sem** obrigação de redesenho além do necessário para motion global |
 
-```
-spec/
-  README.md
-  product.md
-  design-system.md
-  content-guidelines.md
-  integrations.md
-  seo.md
-  analytics.md
-  performance-budget.md
-  accessibility.md
-  privacy-lgpd.md
-  features/
-    conversion-landing/
-      readme.md
-      sections/
-        hero.md
-        problem.md
-        solution.md
-        differentiators.md
-        how-it-works.md
-        portfolio.md
-        testimonials.md
-        offer.md
-        faq.md
-        final-cta.md
-        contact-form.md
-        footer.md
-```
+---
 
-Os docs transversais descrevem o **estado-alvo pós-ciclo**. Os que fotografam áreas fora do escopo (`analytics.md`, `seo.md`, `privacy-lgpd.md`, `performance-budget.md`, `accessibility.md`) documentam o **estado atual** e marcam explicitamente o que fica como TODO de ciclos futuros.
+## 3. Direções de layout sugeridas (não prescritivas)
+
+O implementador escolhe os padrões finais; exemplos de **diferenciação** aceitáveis:
+
+- **Problema:** coluna editorial + lista numerada, timeline vertical ou painel dividido — evitando três tiles idênticos.
+- **Diferenciais:** faixas alternadas full-width, grade assimétrica ou “feature rails” — não apenas grade 2×2 de cards iguais.
+- **Como funciona:** passos em linha com conectores, ou vertical com trilha — reduzindo homogeneidade dos cinco blocos iguais.
+- **Depoimentos:** destaque assimétrado + secundários, carrossel de citações com snap, ou colunas com pesos diferentes — evitando “masonry de mesmos retângulos”.
+- **Oferta:** tabela comparativa, accordion por linha de produto, ou hero de preço + detalhes — desde que LP/SaaS/App e condições fiquem claros.
+
+Referências de inspiração: [21st.dev — componentes](https://21st.dev/community/components), [React Bits](https://reactbits.dev/).
 
 ---
 
 ## 4. Riscos e mitigações
 
 | Risco | Mitigação |
-|---|---|
-| Copy nova cair em novos clichês | Usar `spec/content-guidelines.md` como checklist obrigatório em PR (mini-review manual antes do merge). |
-| Nova seção Oferta virar "tabela de preços genérica" | Manter cards com foco em **o que você recebe** e **como começa**, não em comparar planos. |
-| Carrossel de portfólio não-acessível | Embla já tem suporte a teclado; garantir `aria-label` nos botões e `aria-roledescription="carousel"` no container. |
-| Masonry de depoimentos quebrar em mobile | Fallback: em `< 640px` virar coluna simples. |
-| Preço exibido (R$999) abrir discussão comercial fora de escopo | Copy explícito "a partir de" + CTA imediato para WhatsApp resolve caso-a-caso. |
+|-------|-----------|
+| Bundle crescer demais | Lazy-load de seções já existente; motion compartilhado; medir antes/depois informalmente |
+| Excesso de animação | Respeitar `prefers-reduced-motion`; evitar loop pesado em foreground |
+| Oferta confusa em formato novo | Revisar contra `offer.md` linha a linha (preço, parcelas, sinal, bullets, três produtos) |
+| Perda de coerência de marca | Manter `SectionHeader`, tipografia base e tom da copy; relaxamento só dentro do guardrail em `design-system.md` |
 
 ---
 
-## 5. Critério de pronto do ciclo
+## 5. Critério de pronto do refinamento
 
-- Todas as tarefas em `tasks.md` concluídas (inclusive atualização do `spec/`).
-- Cenários em `scenarios.feature` validados manualmente no navegador (desktop + mobile).
-- Nenhuma das frases da blacklist de `spec/content-guidelines.md` aparece no código.
-- Hierarquia de CTA consistente: WhatsApp é o botão primário em Hero, Navbar, HowItWorks, Portfólio, Depoimentos, Oferta, CTA final e Floating.
-- `spec/features/conversion-landing/readme.md` descreve a LP como ela realmente ficou (sem divergência com o código).
+- `spec/features/conversion-landing/` e `spec/design-system.md` refletem layouts e motion acordados.
+- Implementação: as cinco seções nomeadas são **claramente distinguíveis** como padrões diferentes (revisão visual rápida).
+- Cenários novos/atualizados em `scenarios.feature` validados manualmente.
+- Nenhuma regressão de conteúdo versus `sections/*.md` para Oferta, Problema, Depoimentos, Diferenciais, Como funciona.
+
+---
+
+## 6. Decisões de dependências (implementação)
+
+- **`react-responsive-masonry`:** removida — depoimentos passaram a ser bloco em destaque + citações em lista com borda esquerda (sem masonry).
+- **Animação:** nenhuma lib nova; uso de `motion` + utilitários em `src/app/lib/motion-pref.ts`.
+- **Oferta:** `@radix-ui/react-accordion` (já na stack) via `src/app/components/ui/accordion.tsx`.

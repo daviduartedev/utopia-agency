@@ -17,7 +17,7 @@ Fonte da verdade: [`src/styles/theme.css`](../src/styles/theme.css).
 - **Hairlines/bordas**: `border-white/10`.
 - **Hero**: gradiente radial escuro + WebGL Plasma (`#52525b`, `opacity 0.72`).
 
-Não usar cores de acento fortes na LP principal. Acentos pontuais em ícones (`amber-400`, `violet-400`, `sky-400`, `emerald-400`) exclusivamente na `WhyUs`.
+Não usar cores de acento fortes na LP principal. Acentos pontuais em ícones (`amber-400`, `violet-400`, `sky-400`, `emerald-400`) têm **origem na `WhyUs`**; em ciclos de refinamento, pode-se **relaxar levemente** essa regra em outras seções se ajudar a diferenciar superfícies — sem virar arco-íris nem competir com o hero.
 
 ## 3. Tipografia
 
@@ -44,8 +44,8 @@ Componentes reutilizáveis que são a "base" da LP:
 | `BrandLogo` | `components/BrandLogo.tsx` | Logo + wordmark. Usar no Navbar e Footer. |
 | `BookCallWidget` | `components/BookCallWidget.tsx` | Cartão branco com CTA WhatsApp para conversa de 15 min. |
 | `FloatingConsultButton` | `ui/floating-consult-button.tsx` | Botão flutuante fixo. Ícone = logo WhatsApp oficial. |
-| `SpotlightCard` | `ui/spotlight-card.tsx` | Card com efeito spotlight, usado em `HowItWorks`. |
-| `BentoGrid` | `ui/bento-grid.tsx` | Grid de cards para `WhyUs`. |
+| `SpotlightCard` | `ui/spotlight-card.tsx` | Card com efeito spotlight — **opcional** nas seções centrais se outro padrão fizer melhor o papel. |
+| `BentoGrid` | `ui/bento-grid.tsx` | Agrupamento tipo bento — **opcional** para `WhyUs` se a composição migrar para rails/faixas alternadas ou outro arranjo. |
 | `Cta4` | `ui/cta-4.tsx` | Bloco de CTA final com checklist. |
 | `ScrollStack` | `ui/ScrollStack.tsx` | Cards que empilham no scroll — usado em Serviços. |
 
@@ -64,9 +64,11 @@ Componentes reutilizáveis que são a "base" da LP:
 
 ## 8. Motion
 
-- Entrada padrão de seção: `initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }}`, `duration: 0.45`.
+- **Contrato implementado:** [`src/app/lib/motion-pref.ts`](../src/app/lib/motion-pref.ts) — `usePrefersReducedMotion()` + `scrollRevealMotion(reduced, { delayIndex })`. Com movimento permitido, `viewport.once: false` faz o bloco **recuar** ao sair da área visível; com `reduce`, animações viram instantâneas e `once: true`.
+- **Baseline** (ainda válido): entrada de seção com `whileInView` (ex.: opacidade + leve `y`), `viewport` com margem negativa para antecipar, duração curta (~0,45s).
+- **Refinamento (LP completa, ênfase nas cinco seções centrais — ver `conversion-landing/readme.md` §1.1):** além da entrada, usar **transições ao rolar** que comuniquem profundidade — por exemplo variação de opacidade/offset ao **entrar e sair** do viewport, ou sequenciamento de filhos (stagger), no espírito de sites feitos em Webflow/Framer. Implementação preferencial: `motion` já no projeto; GSAP/Lenis apenas onde já existir ou for necessário.
 - Animações pesadas (marquee, colunas infinitas) pausam fora de viewport via `section-anim-paused` (ver `theme.css`).
-- Respeitar `prefers-reduced-motion`: marquees e colunas já têm fallback em `theme.css`.
+- **Obrigatório:** respeitar `prefers-reduced-motion` — reduzir duração, desativar parallax agressivo ou efeitos de saída que persistam fora da tela; reutilizar fallbacks em `theme.css` onde aplicável.
 
 ## 9. Imagens
 
@@ -84,4 +86,4 @@ Alvo: funcionar limpo em `320px` até `1920px`.
 ## TODO (futuros ciclos)
 
 - Documentar tokens de focus-ring e estado disabled de forma explícita.
-- Consolidar variantes de card (SpotlightCard vs BentoGrid item vs Offer card) sob uma convenção única.
+- Se sobrou mais de um padrão de superfície após o refinamento, documentar **quando** usar cada variante (sem forçar tudo num único card).

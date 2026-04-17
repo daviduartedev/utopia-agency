@@ -10,9 +10,7 @@ Reforço de confiança qualitativa: mostrar que **pessoas reais** passaram pelo 
 
 ## 2. Estrutura pós-ciclo
 
-- Substituir o **marquee vertical em duas colunas** atual por um **grid masonry estático** usando `react-responsive-masonry` (já em `package.json`).
-- 3 colunas no desktop, 2 no tablet, 1 no mobile.
-- Sem auto-scroll, sem marquee, sem animação de coluna. Um hover sutil no border é aceitável.
+- **Implementação atual:** primeiro depoimento em **bloco em destaque** (gradiente + tipografia display); os outros cinco em **grid** de duas colunas com citação e barra lateral (`border-l`), sem masonry e sem `react-responsive-masonry`.
 
 ## 3. Copy canônica
 
@@ -38,8 +36,9 @@ Avatares: **iniciais em círculo** (ex.: "RA") com gradiente suave por depoiment
 ## 5. Visual
 
 - `bg-page-surface py-20 md:py-28`.
-- Cards: `bg-white/[0.03]` ou `bg-black/20`, border `white/10`, radius `2xl`, padding `p-6 md:p-7`.
+- Superfícies de citação podem ser cartões, blocos tipo pull-quote ou slides — **tom** continua sóbrio (fundos escuros, bordas discretas).
 - Tipografia: citação em `font-sans` 15–16px, nome em 14px peso 600, cargo em 12–13px `zinc-500`.
+- Motion: entrada/saída ou reveal ao scroll; sem depender de animação contínua para ler o texto.
 
 ## 6. Acessibilidade
 
@@ -49,7 +48,7 @@ Avatares: **iniciais em círculo** (ex.: "RA") com gradiente suave por depoiment
 
 ## 7. Não fazer
 
-- Não manter em paralelo o marquee vertical antigo.
+- Não voltar ao marquee vertical em duas colunas em loop.
 - Não inventar resultado numérico ("faturamos +400% em um mês").
 - Não usar fotos stock de pessoas (Unsplash genérico) — iniciais em círculo ou o avatar neutro.
 

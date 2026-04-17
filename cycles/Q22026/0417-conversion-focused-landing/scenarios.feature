@@ -108,3 +108,20 @@ Funcionalidade: Landing focada em conversão da Utopia
     Quando o visitante lê qualquer seção da página
     Então ele não encontra as frases proibidas listadas em `spec/content-guidelines.md`
     E os depoimentos, portfólio e diferenciais descrevem entregas concretas, não promessas genéricas
+
+  # --- Refinamento visual (cinco seções + motion) ---
+
+  Cenário: Nota composições distintas na jornada central
+    Quando o visitante percorre em sequência as seções "Problema", "Por que a Utopia", "Como funciona", "Depoimentos" e "Oferta"
+    Então cada uma dessas seções apresenta um arranjo visual claramente diferente das outras
+    E a experiência não parece repetir o mesmo padrão de blocos sombreados de um título para o seguinte
+
+  Cenário: Oferta permanece clara com novo formato de apresentação
+    Quando o visitante chega à seção "Oferta"
+    Então ele continua a ver os três produtos (Landing Page, Sistema SaaS, Aplicativo) com as mesmas informações de preço e escopo definidas no site
+    E a regra de início com sinal mínimo continua visível junto aos CTAs para WhatsApp
+
+  Cenário: Movimento ao rolar acompanha a leitura sem irritar
+    Quando o visitante rola a página do topo até a oferta
+    Então os elementos das seções centrais respondem ao scroll com uma sensação de profundidade ou transição coerente
+    E, com preferência por reduzir movimento ativada no sistema, esse efeito não bloqueia nem distrai a leitura

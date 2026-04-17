@@ -14,7 +14,7 @@ Fazer o visitante **se reconhecer** em pelo menos uma das dores. Sem reconhecime
 - **Title**: `Seu site hoje não está fazendo a parte dele.`
 - **Description**: `Três situações que consomem oportunidade todo mês — e que a gente resolve por padrão.`
 
-### Três cards (ordem fixa)
+### Três pontos de dor (ordem fixa; apresentação livre)
 
 1. **`Visita que não vira contato`**
    O tráfego chega, mas ninguém te chama. A página não diz o que você vende, não aponta um próximo passo claro e o visitante sai antes de decidir.
@@ -30,9 +30,9 @@ Cada card tem um ícone discreto (`lucide-react`): `ArrowDownRight`, `Hourglass`
 ## 3. Visual
 
 - `section` padrão: `bg-page-surface py-20 md:py-24`, hairlines top/bottom.
-- Grid de 3 colunas (desktop), 1 coluna (mobile).
-- Cards usando o estilo base existente (`SpotlightCard` reaproveitado **ou** variante nova registrada em `design-system.md`).
-- Tipografia: title do card em `font-sans`, peso 600, 16–17px; body `text-zinc-400`, 14–15px, line-height relaxado.
+- **Intenção:** não três “cards spotlight” iguais lado a lado; preferir **um padrão com leitura própria** — por exemplo coluna editorial + lista numerada, timeline curta, painel dividido (dor / consequência) ou blocos de alturas distintas — desde que as três dores e textos canônicos permaneçam.
+- Tipografia: títulos curtos em `font-sans`, peso 600; corpo `text-zinc-400`, 14–15px, line-height relaxado.
+- Motion: entrada/saída ao scroll coerente com `design-system.md` §8.
 
 ## 4. CTA
 

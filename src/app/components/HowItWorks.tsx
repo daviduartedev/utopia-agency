@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { BookCallWidget } from "./BookCallWidget";
 import { SectionHeader } from "./ui/section-header";
-import { SpotlightCard } from "./ui/spotlight-card";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
 const steps = [
   {
@@ -32,6 +32,9 @@ const steps = [
 ];
 
 export function HowItWorks() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+
   return (
     <section
       id="como-funciona"
@@ -45,12 +48,7 @@ export function HowItWorks() {
         <div className="h-px w-full bg-white/10" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45 }}
-      >
+      <motion.div {...headerMotion}>
         <SectionHeader
           id="howitworks-heading"
           eyebrow="Como funciona"
@@ -60,57 +58,58 @@ export function HowItWorks() {
         />
       </motion.div>
 
-      <div className="mx-auto max-w-[1300px] px-4 sm:px-8 md:px-12">
-        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-5 xl:gap-4">
+      <div className="mx-auto max-w-[900px] px-4 sm:px-8 md:px-12">
+        <ol className="relative">
           {steps.map((step, i) => (
             <motion.li
               key={step.number}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="min-h-[200px] list-none sm:min-h-[220px] xl:min-h-[280px]"
+              {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+              className="relative list-none pb-12 last:pb-0"
             >
-              <SpotlightCard className="flex h-full min-h-0 flex-col justify-between p-6 sm:p-7 md:p-8">
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute right-4 top-3 select-none text-[3.25rem] font-bold leading-none tabular-nums text-white/[0.05] sm:right-5 sm:text-[3.75rem] md:text-[4rem]"
-                >
-                  {step.number}
-                </span>
-
-                <div className="relative">
-                  <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-                    {step.number}
-                  </p>
-                  <p
-                    className="mb-2 text-base font-semibold text-white"
-                    style={{
-                      fontFamily: "var(--font-sans), system-ui, sans-serif",
-                    }}
-                  >
-                    {step.title}
-                  </p>
-                  <p
-                    className="text-sm leading-relaxed text-zinc-400"
-                    style={{
-                      fontFamily: "var(--font-sans), system-ui, sans-serif",
-                    }}
-                  >
-                    {step.body}
-                  </p>
+              <div className="relative flex gap-5 md:gap-8">
+                <div className="flex w-12 shrink-0 flex-col items-stretch md:w-14">
+                  <div className="flex flex-1 flex-col items-center">
+                    <span className="relative z-10 flex size-11 items-center justify-center rounded-full border border-white/15 bg-page-surface text-[11px] font-semibold tabular-nums text-zinc-300 md:size-12 md:text-xs">
+                      {step.number}
+                    </span>
+                    {i < steps.length - 1 ? (
+                      <span
+                        aria-hidden
+                        className="mt-2 w-px flex-1 bg-gradient-to-b from-white/30 via-white/12 to-white/5 md:min-h-[3.5rem]"
+                      />
+                    ) : null}
+                  </div>
                 </div>
-              </SpotlightCard>
+
+                <div className="min-w-0 flex-1 pb-1 pt-0.5">
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 md:p-7">
+                    <h3
+                      className="mb-3 text-base font-semibold tracking-[-0.01em] text-white"
+                      style={{
+                        fontFamily: "var(--font-sans), system-ui, sans-serif",
+                      }}
+                    >
+                      <span className="text-zinc-500">{step.number} ·</span>{" "}
+                      {step.title}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed text-zinc-400"
+                      style={{
+                        fontFamily: "var(--font-sans), system-ui, sans-serif",
+                      }}
+                    >
+                      {step.body}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </motion.li>
           ))}
         </ol>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45, delay: 0.15 }}
-          className="mx-auto mt-10 max-w-xl md:mt-14"
+          {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 5 })}
+          className="mx-auto mt-6 max-w-xl md:mt-10"
         >
           <BookCallWidget />
         </motion.div>

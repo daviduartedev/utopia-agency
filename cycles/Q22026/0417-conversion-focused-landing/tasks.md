@@ -154,3 +154,28 @@ Criar **todos** os arquivos abaixo já populados (ver estrutura em `plan.md` §3
 - [ ] Páginas `/termos` e `/privacidade`.
 - [ ] Rate-limit no endpoint de submissão (Turnstile/hCaptcha).
 - [ ] E2E automatizado (Playwright) para os cenários desta feature.
+
+---
+
+## 13. Refinamento visual — cinco seções + motion (pós-`plan.md` §1.2)
+
+> Objetivo: layout **distinto** entre Problema, Diferenciais, Como funciona, Depoimentos e Oferta; motion ao scroll estilo produção moderna; **sem** redesenhar Hero, ClientLogos, Serviços, Portfólio, FAQ, CTA, Form, Footer (salvo integração mínima).
+
+- [x] Definir ou reutilizar um **padrão de motion** (entrada/saída ao viewport, coerente com `motion`/Framer já no projeto) e documentar em `spec/design-system.md` §8.
+- [x] Garantir **fallback** quando `prefers-reduced-motion: reduce` (reduzir ou desativar animações de scroll).
+- [x] **Problema** (`Problem.tsx`): substituir padrão “três cards iguais” por layout com intenção própria; atualizar `spec/features/conversion-landing/sections/problem.md` § Visual.
+- [x] **Por que a Utopia** (`WhyUs.tsx`): distanciar visual dos outros blocos (ex.: faixas alternadas, rails, grade assimétrica — não só bento de cards uniformes); atualizar `spec/.../sections/differentiators.md` § Visual.
+- [x] **Como funciona** (`HowItWorks.tsx`): reduzir homogeneidade dos cinco blocos (timeline, conectores, passo horizontal, etc.); manter copy e `BookCallWidget`; atualizar `spec/.../sections/how-it-works.md` § Visual.
+- [x] **Depoimentos** (`Testimonials.tsx`): novo padrão que não leia como “mais um grid de cards sombreados”; atualizar `spec/.../sections/testimonials.md` § Visual.
+- [x] **Oferta** (`Offer.tsx`): formato alternativo ao grid de três cards (tabela, accordion, comparador, etc.), preservando conteúdo de `offer.md`; atualizar `spec/.../sections/offer.md` § Visual e estruturas quando necessário.
+- [x] Avaliar **deps**: remover libs obsoletas ou adicionar só o necessário; registrar decisão curta em `plan.md` ou comentário de PR se relevante para `performance-budget.md`.
+- [x] **Atualizar `spec/features/conversion-landing/readme.md`**: mencionar critério de diversidade de layout nas cinco seções e motion ao scroll.
+- [x] **Atualizar `spec/performance-budget.md`** se novas libs pesadas forem introduzidas (contrato implícito / lista de deps).
+- [x] Smoke manual: rolagem completa nas cinco seções + regressão rápida do restante da página (sem redesign obrigatório fora das cinco).
+
+---
+
+## 14. QA manual — refinamento (após §13)
+
+- [x] Validar cenários novos ou atualizados em `scenarios.feature` relacionados a diversidade visual e motion.
+- [x] Confirmar que copy e CTAs das cinco seções batem com `sections/*.md` (grep ou revisão dirigida).

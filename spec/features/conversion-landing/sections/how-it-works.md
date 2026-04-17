@@ -26,9 +26,10 @@ Reduzir risco percebido. Mostrando um processo de **5 etapas numeradas**, o fund
 
 ## 3. Visual
 
-- Grid `1 / 2 / 5` colunas (mobile / tablet / xl).
-- Cada passo em `SpotlightCard`; número grande em water-mark (`text-white/[0.05]`).
-- Abaixo dos 5 cards, `BookCallWidget` centralizado (max-w-xl).
+- **Intenção:** cinco etapas reconhecíveis em sequência com **ritmo próprio** — timeline vertical com linha, passos horizontais com conectores, ou colunas progressivas — não obrigatoriamente cinco `SpotlightCard` idênticas.
+- Número em destaque por etapa (water-mark ou badge) permanece viável; semântica `ol` preservada.
+- Abaixo dos passos, `BookCallWidget` centralizado (max-w-xl), inalterado em copy e CTA.
+- Motion: transições ao rolar entre etapas ou stagger dos itens, sem atrapalhar leitura.
 
 ## 4. CTA
 
