@@ -33,12 +33,15 @@ const painPoints: PainPoint[] = [
 
 export function Problem() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
+    delayIndex: 0,
+    lateral: true,
+  });
 
   return (
     <section
       id="problema"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
       aria-labelledby="problema-heading"
     >
       <div
@@ -63,7 +66,10 @@ export function Problem() {
           {painPoints.map((pain, i) => (
             <motion.li
               key={pain.title}
-              {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+              {...scrollRevealMotion(prefersReducedMotion, {
+                delayIndex: i,
+                lateral: true,
+              })}
               className="relative list-none"
             >
               <div className="flex gap-5 pb-12 md:gap-8 md:pb-14 lg:gap-10">

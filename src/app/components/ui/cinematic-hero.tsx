@@ -78,7 +78,7 @@ export function CinematicHero({
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-transparent to-black/50"
       />
-      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-28 text-center pointer-events-none">
+      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24">
         <p className="mb-5 text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
           Utopia Studio
         </p>

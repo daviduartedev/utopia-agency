@@ -45,7 +45,7 @@ export function Cta4({
       id="cta"
       aria-labelledby="cta-heading"
       className={cn(
-        "dark scroll-mt-24 py-16 md:py-24",
+        "dark scroll-mt-24 py-12 md:py-16",
         sectionClassName,
       )}
     >

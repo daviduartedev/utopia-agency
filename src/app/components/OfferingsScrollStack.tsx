@@ -94,13 +94,13 @@ export function OfferingsScrollStack() {
     >
       <SectionHeader
         id="ofertas-heading"
-        className="pb-10 pt-20 md:pb-12 md:pt-28"
+        className="pb-6 pt-12 md:pb-8 md:pt-16"
         title="Nossos serviços"
         description="Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega."
       />
 
       {narrowMobile ? (
-        <div className="flex flex-col gap-8 px-4 pb-24">
+        <div className="flex flex-col gap-8 px-4 pb-14">
           {STACK_ITEMS.map((item) => (
             <OfferingServiceCard
               key={item.id}
@@ -110,7 +110,7 @@ export function OfferingsScrollStack() {
           ))}
         </div>
       ) : (
-        <div className="min-h-[130vh] w-full pb-28">
+        <div className="min-h-[130vh] w-full pb-16">
           <ScrollStack
             useWindowScroll
             className="!h-auto block min-h-[150vh] w-full"

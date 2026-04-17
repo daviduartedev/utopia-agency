@@ -25,9 +25,6 @@ export default function DemoOne() {
       }
       revolvingText="FALAR NO WHATSAPP — UTOPIA — "
       revolvingSpeed={8}
-      popupHeading="Bora começar?"
-      popupDescription="Um clique e você fala direto com a gente no WhatsApp — landing, SaaS ou app."
-      ctaButtonText="Falar no WhatsApp agora"
       ctaButtonAction={() => {
         openWhatsApp(WA_MSG_FLOATING);
       }}

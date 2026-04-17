@@ -22,7 +22,7 @@ export function ClientLogos() {
     <section
       id="clientes"
       aria-labelledby="clientes-heading"
-      className="relative z-10 w-full overflow-hidden bg-page-surface py-14 md:py-16"
+      className="relative z-10 w-full overflow-hidden bg-page-surface py-10 md:py-12"
     >
       <motion.div
         initial={{ opacity: 0, y: 8 }}

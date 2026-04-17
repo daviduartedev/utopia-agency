@@ -1,31 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "motion/react";
 import { useIsNarrowMobile } from "../../lib/use-media-query";
-import { Button } from "./button";
 
 interface FloatingConsultButtonProps {
-  // Button appearance
   buttonSize?: number;
   imageSize?: number;
   imageSrc?: string;
   imageAlt?: string;
-  /** Quando fornecido, renderiza este nó no centro em vez da imagem. */
   centerContent?: React.ReactNode;
-
-  // Revolving text
   revolvingText?: string;
   revolvingSpeed?: number;
-
-  // Popup content
-  popupHeading?: string;
-  popupDescription?: string;
-  popupBadgeText?: string;
-  ctaButtonText?: string;
+  /** Um toque abre o WhatsApp direto (sem modal). */
   ctaButtonAction?: () => void;
-
-  // Positioning
   position?: {
     bottom?: string;
     right?: string;
@@ -42,19 +30,13 @@ export const FloatingConsultButton = ({
   centerContent,
   revolvingText = "CONSULTA GRÁTIS — FALE CONOSCO — ",
   revolvingSpeed = 10,
-  popupHeading = "Chamada rápida",
-  popupDescription =
-    "Uma conversa breve e sem custo com a nossa equipe para entender seu projeto e ver se faz sentido trabalharmos juntos.",
-  popupBadgeText = "Grátis",
-  ctaButtonText = "Agendar chamada",
-  ctaButtonAction = () => console.log("CTA clicked"),
+  ctaButtonAction = () => {},
   position = {
     bottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
     right: "max(0.75rem, env(safe-area-inset-right, 0px))",
   },
 }: FloatingConsultButtonProps): React.ReactElement => {
   const narrowMobile = useIsNarrowMobile();
-  const [isOpen, setIsOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
@@ -63,258 +45,174 @@ export const FloatingConsultButton = ({
 
   const hasMascot = !!centerContent;
 
-  // Responsive sizes with defaults
   const lgButtonSize = buttonSize || 160;
   const smButtonSize = buttonSize ? buttonSize * 0.8 : 128;
   const lgImageSize = imageSize || 96;
   const smImageSize = imageSize ? imageSize * 0.833 : 80;
 
-  return (
+  const core = (
     <>
-      {/* Backdrop with Blur */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={
-              narrowMobile
-                ? "fixed inset-0 z-40 bg-black/65"
-                : "fixed inset-0 z-40 bg-page-surface/20 backdrop-blur-sm"
-            }
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+      {!narrowMobile ? (
+        <motion.div
+          className="absolute inset-0"
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: revolvingSpeed,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
+            <defs>
+              <path
+                id="circlePath"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+              />
+            </defs>
+            <text className="fill-gray-600 text-[20.4px] font-medium uppercase tracking-wider">
+              <textPath href="#circlePath" startOffset="0%">
+                {revolvingText}
+              </textPath>
+            </text>
+          </svg>
+        </motion.div>
+      ) : null}
 
-      {/* Popup Modal */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed bottom-[max(6.25rem,calc(env(safe-area-inset-bottom,0px)+5rem))] left-1/2 z-50 max-h-[min(85dvh,calc(100vh-2rem))] w-[min(100%,calc(100vw-1.5rem))] max-w-md -translate-x-1/2 overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:bottom-[max(10rem,calc(env(safe-area-inset-bottom,0px)+2rem))] sm:left-auto sm:right-[max(1rem,env(safe-area-inset-right,0px))] sm:translate-x-0 sm:p-8 lg:p-10"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="floating-consult-heading"
-          >
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="absolute right-3 top-3 rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 sm:right-4 sm:top-4"
-              aria-label="Fechar"
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-shadow group-hover:shadow-xl"
+          style={{
+            width: `${smImageSize}px`,
+            height: `${smImageSize}px`,
+            background: hasMascot ? "transparent" : "#18181b",
+          }}
+        >
+          {hasMascot ? (
+            <div className="flex h-full w-full items-center justify-center">
+              {centerContent}
+            </div>
+          ) : imageFailed ? (
+            <div
+              className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+              }}
+              aria-hidden
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 40 40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden
-              >
-                <line x1="10" y1="10" x2="30" y2="30" />
-                <line x1="30" y1="10" x2="10" y2="30" />
-              </svg>
-            </button>
-
-            <div className="space-y-5 pt-2 sm:space-y-6 sm:pt-0">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <h3
-                  id="floating-consult-heading"
-                  className="pr-10 text-2xl font-bold leading-tight text-black sm:pr-0 sm:text-3xl lg:text-4xl xl:text-5xl"
-                >
-                  {popupHeading}
-                </h3>
-                <span className="inline-flex w-fit shrink-0 rounded-full border-2 border-black px-3 py-1.5 text-xs font-medium text-black sm:px-4 sm:py-2 sm:text-sm">
-                  {popupBadgeText}
-                </span>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
-                {popupDescription}
-              </p>
-
-              <Button
-                className="w-full rounded-full bg-page-surface px-6 py-3 text-sm font-medium text-white hover:bg-neutral-900 sm:px-8 sm:py-4 sm:text-base"
-                onClick={ctaButtonAction}
-              >
-                {ctaButtonText}
-              </Button>
+              ?
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Floating Button — desktop: anel + hover; celular: só avatar (sem rotate infinito). */}
-      <div className="fcc-float-wrap fixed z-50" style={position}>
-        {narrowMobile ? (
-          <button
-            type="button"
-            className="fcc-float-trigger relative cursor-pointer touch-manipulation rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
-            style={{
-              width: `${smButtonSize}px`,
-              height: `${smButtonSize}px`,
-            }}
-            aria-haspopup="dialog"
-            aria-expanded={isOpen}
-            aria-label="Abrir convite para falar no WhatsApp"
-            onClick={() => setIsOpen((o) => !o)}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-zinc-900 shadow-lg"
-                style={{
-                  width: `${smImageSize}px`,
-                  height: `${smImageSize}px`,
-                  background: hasMascot ? "transparent" : "#18181b",
-                }}
-              >
-                {hasMascot ? (
-                  <div className="flex h-full w-full items-center justify-center">
-                    {centerContent}
-                  </div>
-                ) : imageFailed ? (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                ) : imageSrc ? (
-                  <img
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={160}
-                    height={160}
-                    decoding="async"
-                    loading="lazy"
-                    fetchPriority="low"
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover"
-                    onError={() => setImageFailed(true)}
-                  />
-                ) : (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                )}
-              </div>
+          ) : imageSrc ? (
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              width={256}
+              height={256}
+              decoding="async"
+              referrerPolicy="no-referrer"
+              className="h-full w-full object-cover"
+              onError={() => setImageFailed(true)}
+            />
+          ) : (
+            <div
+              className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+              }}
+              aria-hidden
+            >
+              ?
             </div>
-          </button>
-        ) : (
-          <motion.div
-            className="fcc-float-trigger group relative cursor-pointer"
-            style={{
-              width: `${smButtonSize}px`,
-              height: `${smButtonSize}px`,
-            }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            role="button"
-            tabIndex={0}
-            aria-haspopup="dialog"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen(!isOpen)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setIsOpen(!isOpen);
-              }
-            }}
-          >
-            <motion.div
-              className="absolute inset-0"
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: revolvingSpeed,
-                repeat: Infinity,
-                ease: "linear",
+          )}
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="fcc-float-wrap fixed z-50" style={position}>
+      {narrowMobile ? (
+        <button
+          type="button"
+          className="fcc-float-trigger group relative cursor-pointer touch-manipulation rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
+          style={{
+            width: `${smButtonSize}px`,
+            height: `${smButtonSize}px`,
+          }}
+          aria-label="Falar no WhatsApp"
+          onClick={() => ctaButtonAction()}
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full border border-white/10 bg-zinc-900 shadow-lg"
+              style={{
+                width: `${smImageSize}px`,
+                height: `${smImageSize}px`,
+                background: hasMascot ? "transparent" : "#18181b",
               }}
             >
-              <svg viewBox="0 0 200 200" className="h-full w-full">
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
-                  />
-                </defs>
-                <text className="text-[20.4px] font-medium uppercase tracking-wider fill-gray-600">
-                  <textPath href="#circlePath" startOffset="0%">
-                    {revolvingText}
-                  </textPath>
-                </text>
-              </svg>
-            </motion.div>
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="fcc-float-inner flex items-center justify-center overflow-hidden rounded-full shadow-lg transition-shadow group-hover:shadow-xl"
-                style={{
-                  width: `${smImageSize}px`,
-                  height: `${smImageSize}px`,
-                  background: hasMascot ? "transparent" : "#18181b",
-                }}
-              >
-                {hasMascot ? (
-                  <div className="flex h-full w-full items-center justify-center">
-                    {centerContent}
-                  </div>
-                ) : imageFailed ? (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                ) : imageSrc ? (
-                  <img
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={256}
-                    height={256}
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover"
-                    onError={() => setImageFailed(true)}
-                  />
-                ) : (
-                  <div
-                    className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
-                    }}
-                    aria-hidden
-                  >
-                    ?
-                  </div>
-                )}
-              </div>
+              {hasMascot ? (
+                <div className="flex h-full w-full items-center justify-center">
+                  {centerContent}
+                </div>
+              ) : imageFailed ? (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              ) : imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={160}
+                  height={160}
+                  decoding="async"
+                  loading="lazy"
+                  fetchPriority="low"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full object-cover"
+                  onError={() => setImageFailed(true)}
+                />
+              ) : (
+                <div
+                  className="flex h-full w-full items-center justify-center text-lg font-semibold text-white"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgb(99 102 241), rgb(236 72 153))",
+                  }}
+                  aria-hidden
+                >
+                  ?
+                </div>
+              )}
             </div>
-          </motion.div>
-        )}
-        
-        {/* Responsive sizing for larger screens */}
-        <style>{`
+          </div>
+        </button>
+      ) : (
+        <motion.button
+          type="button"
+          className="fcc-float-trigger group relative cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
+          style={{
+            width: `${smButtonSize}px`,
+            height: `${smButtonSize}px`,
+          }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+          aria-label="Falar no WhatsApp"
+          onClick={() => ctaButtonAction()}
+        >
+          {core}
+        </motion.button>
+      )}
+
+      <style>{`
           @media (max-width: 639px) {
             .fcc-float-wrap .fcc-float-trigger {
               width: min(${smButtonSize}px, 32vw) !important;
@@ -336,7 +234,6 @@ export const FloatingConsultButton = ({
             }
           }
         `}</style>
-      </div>
-    </>
+    </div>
   );
 };

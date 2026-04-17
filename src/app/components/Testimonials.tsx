@@ -70,20 +70,23 @@ function Initials({ name }: { name: string }) {
 
 export function Testimonials() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
+    delayIndex: 0,
+    lateral: true,
+  });
   const [featured, ...rest] = testimonials;
 
   return (
     <section
       id="depoimentos"
       aria-labelledby="depoimentos-heading"
-      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-20 text-zinc-100 md:py-28"
+      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-12 text-zinc-100 md:py-16"
     >
       <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
         <motion.div {...headerMotion}>
           <SectionHeader
             id="depoimentos-heading"
-            className="mb-12 md:mb-16"
+            className="mb-8 md:mb-10"
             eyebrow="Depoimentos"
             title="O que dizem nossos clientes"
             description="Feedback de quem confiou na Utopia para landing pages, produtos SaaS e apps."
@@ -91,7 +94,10 @@ export function Testimonials() {
         </motion.div>
 
         <motion.div
-          {...scrollRevealMotion(prefersReducedMotion)}
+          {...scrollRevealMotion(prefersReducedMotion, {
+            delayIndex: 0,
+            lateral: true,
+          })}
           className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 via-page-surface to-page-surface p-8 md:p-12"
         >
           <Quote
@@ -127,7 +133,10 @@ export function Testimonials() {
           {rest.map((t, i) => (
             <motion.figure
               key={t.id}
-              {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+              {...scrollRevealMotion(prefersReducedMotion, {
+                delayIndex: i + 1,
+                lateral: true,
+              })}
               className="group relative m-0 border-l-2 border-white/15 pl-6 transition-colors hover:border-emerald-400/40"
             >
               <blockquote

@@ -99,7 +99,7 @@ export function ContactFormSection() {
   return (
     <section
       id="contato"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
       aria-labelledby="contato-heading"
     >
       <div

@@ -31,7 +31,7 @@ Não usar cores de acento fortes na LP principal. Acentos pontuais em ícones (`
 
 - Container da LP: `max-w-[1300px]` centralizado.
 - Padding lateral responsivo: `px-4 sm:px-8 md:px-12`.
-- Seções: `py-20 md:py-24` (seções densas) ou `py-24 md:py-32` (seções com headline grande).
+- Seções da LP: ~`py-12 md:py-16` (ritmo mais compacto); hero/CTA podem variar.
 - Hairlines top/bottom em praticamente toda seção (`bg-white/10 h-px`) como selo de ritmo vertical.
 
 ## 5. Componentes canônicos
@@ -43,7 +43,7 @@ Componentes reutilizáveis que são a "base" da LP:
 | `SectionHeader` | `ui/section-header.tsx` | Eyebrow + title + description. Obrigatório em toda seção. |
 | `BrandLogo` | `components/BrandLogo.tsx` | Logo + wordmark. Usar no Navbar e Footer. |
 | `BookCallWidget` | `components/BookCallWidget.tsx` | Cartão branco com CTA WhatsApp para conversa de 15 min. |
-| `FloatingConsultButton` | `ui/floating-consult-button.tsx` | Botão flutuante fixo. Ícone = logo WhatsApp oficial. |
+| `FloatingConsultButton` | `ui/floating-consult-button.tsx` | Botão flutuante fixo; toque abre WhatsApp direto (sem modal). Ícone = logo WhatsApp oficial. |
 | `SpotlightCard` | `ui/spotlight-card.tsx` | Card com efeito spotlight — **opcional** nas seções centrais se outro padrão fizer melhor o papel. |
 | `BentoGrid` | `ui/bento-grid.tsx` | Agrupamento tipo bento — **opcional** para `WhyUs` se a composição migrar para rails/faixas alternadas ou outro arranjo. |
 | `Cta4` | `ui/cta-4.tsx` | Bloco de CTA final com checklist. |
@@ -64,7 +64,7 @@ Componentes reutilizáveis que são a "base" da LP:
 
 ## 8. Motion
 
-- **Contrato implementado:** [`src/app/lib/motion-pref.ts`](../src/app/lib/motion-pref.ts) — `usePrefersReducedMotion()` + `scrollRevealMotion(reduced, { delayIndex })`. Com movimento permitido, `viewport.once: false` faz o bloco **recuar** ao sair da área visível; com `reduce`, animações viram instantâneas e `once: true`.
+- **Contrato implementado:** [`src/app/lib/motion-pref.ts`](../src/app/lib/motion-pref.ts) — `usePrefersReducedMotion()` + `scrollRevealMotion(reduced, { delayIndex, lateral })`. Com `lateral: true`, entradas alternam eixo X (par da esquerda, ímpar da direita) + leve Y. Com movimento permitido, `viewport.once: false` faz o bloco **recuar** ao sair da área visível; com `reduce`, animações viram instantâneas e `once: true`.
 - **Baseline** (ainda válido): entrada de seção com `whileInView` (ex.: opacidade + leve `y`), `viewport` com margem negativa para antecipar, duração curta (~0,45s).
 - **Refinamento (LP completa, ênfase nas cinco seções centrais — ver `conversion-landing/readme.md` §1.1):** além da entrada, usar **transições ao rolar** que comuniquem profundidade — por exemplo variação de opacidade/offset ao **entrar e sair** do viewport, ou sequenciamento de filhos (stagger), no espírito de sites feitos em Webflow/Framer. Implementação preferencial: `motion` já no projeto; GSAP/Lenis apenas onde já existir ou for necessário.
 - Animações pesadas (marquee, colunas infinitas) pausam fora de viewport via `section-anim-paused` (ver `theme.css`).

@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "motion/react";
 import {
   Accordion,
@@ -6,6 +8,7 @@ import {
   AccordionTrigger,
 } from "./ui/accordion";
 import { SectionHeader } from "./ui/section-header";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
 const faqs = [
   {
@@ -35,10 +38,12 @@ const faqs = [
 ];
 
 export function Faq() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <section
       id="faq"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
       aria-labelledby="faq-heading"
     >
       <div
@@ -48,26 +53,18 @@ export function Faq() {
         <div className="h-px w-full bg-white/10" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45 }}
-      >
+      <motion.div {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}>
         <SectionHeader
           id="faq-heading"
           eyebrow="Dúvidas frequentes"
           title="Perguntas que todo cliente faz."
           description="Se a sua dúvida não estiver aqui, é só mandar uma mensagem — respondemos rápido."
-          className="mb-14"
+          className="mb-8 md:mb-10"
         />
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.45, delay: 0.1 }}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1, lateral: true })}
         className="mx-auto max-w-3xl px-4 sm:px-8 md:px-12"
       >
         <Accordion type="single" collapsible className="w-full">

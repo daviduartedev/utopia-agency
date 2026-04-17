@@ -33,12 +33,15 @@ const steps = [
 
 export function HowItWorks() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
+    delayIndex: 0,
+    lateral: true,
+  });
 
   return (
     <section
       id="como-funciona"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
       aria-labelledby="howitworks-heading"
     >
       <div
@@ -63,7 +66,10 @@ export function HowItWorks() {
           {steps.map((step, i) => (
             <motion.li
               key={step.number}
-              {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+              {...scrollRevealMotion(prefersReducedMotion, {
+                delayIndex: i,
+                lateral: true,
+              })}
               className="relative list-none pb-12 last:pb-0"
             >
               <div className="relative flex gap-5 md:gap-8">
@@ -108,7 +114,10 @@ export function HowItWorks() {
         </ol>
 
         <motion.div
-          {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 5 })}
+          {...scrollRevealMotion(prefersReducedMotion, {
+            delayIndex: 5,
+            lateral: true,
+          })}
           className="mx-auto mt-6 max-w-xl md:mt-10"
         >
           <BookCallWidget />

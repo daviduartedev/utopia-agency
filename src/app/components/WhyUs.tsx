@@ -53,12 +53,15 @@ const features: FeatureCell[] = [
 
 export function WhyUs() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
+    delayIndex: 0,
+    lateral: true,
+  });
 
   return (
     <section
       id="diferenciais"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
       aria-labelledby="whyus-heading"
     >
       <div
@@ -89,6 +92,7 @@ export function WhyUs() {
                 <motion.div
                   {...scrollRevealMotion(prefersReducedMotion, {
                     delayIndex: index,
+                    lateral: true,
                   })}
                   className="flex h-full flex-col"
                 >

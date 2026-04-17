@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SectionHeader } from "./ui/section-header";
 import { cn } from "./ui/utils";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
 type PortfolioLayout = "web" | "phone";
 
@@ -126,6 +127,7 @@ function Slide({ project, index, total }: { project: PortfolioProject; index: nu
 }
 
 export function Portfolio() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -175,7 +177,7 @@ export function Portfolio() {
     <section
       id="portfolio"
       aria-labelledby="portfolio-heading"
-      className="relative z-10 flex w-full flex-col items-center bg-page-surface pb-28 pt-8"
+      className="relative z-10 flex w-full flex-col items-center bg-page-surface pb-16 pt-6"
     >
       <style>{`
         .portfolio-embla-viewport { overflow: hidden; width: 100%; }
@@ -234,15 +236,12 @@ export function Portfolio() {
       `}</style>
 
       <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45 }}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
         className="w-full"
       >
         <SectionHeader
           id="portfolio-heading"
-          className="pb-10 pt-16 md:pb-12 md:pt-20"
+          className="pb-6 pt-10 md:pb-8 md:pt-14"
           eyebrow="Portfólio"
           title="Trabalhos selecionados"
           description="Alguns tipos de entrega — do site de produto ao app que a equipe usa no dia a dia."

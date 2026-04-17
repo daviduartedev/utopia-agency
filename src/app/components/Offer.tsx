@@ -100,14 +100,17 @@ const offers: OfferRow[] = [
 
 export function Offer() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion);
+  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
+    delayIndex: 0,
+    lateral: true,
+  });
   const [openOffer, setOpenOffer] = useState<OfferRow["id"]>("landing");
 
   return (
     <section
       id="oferta"
       aria-labelledby="oferta-heading"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-20 md:py-24"
+      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
     >
       <div
         aria-hidden="true"
@@ -127,7 +130,12 @@ export function Offer() {
       </motion.div>
 
       <div className="mx-auto max-w-[720px] px-4 sm:px-8 md:px-12">
-        <motion.div {...scrollRevealMotion(prefersReducedMotion)}>
+        <motion.div
+          {...scrollRevealMotion(prefersReducedMotion, {
+            delayIndex: 0,
+            lateral: true,
+          })}
+        >
           <Accordion
             type="single"
             collapsible={false}
