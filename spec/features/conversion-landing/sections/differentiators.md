@@ -31,8 +31,8 @@ Responder à pergunta "por que você e não outra agência/freelancer?" em até 
 ## 3. Visual
 
 - Container: `max-w-[1300px]` com padding lateral responsivo, hairlines top/bottom.
-- **Intenção:** diferenciais legíveis como **bloco com assinatura própria** — faixas alternadas full-width, trilha com ícones grandes, rails assimétricos, etc. Evitar a sensação de “mais um grid 2×2 de cards iguais” se o restante da página já repete esse padrão.
-- Ícones coloridos (`amber-400`, `violet-400`, `sky-400`, `emerald-400`) permanecem os acentos principais **desta seção**; um relaxamento leve de fundo/borda é aceitável se documentado no design system.
+- **Implementação:** quadro único com **grade 2×2** (`gap-px` + fundo `white/10` para fios), cantos `rounded-3xl`, células internas retas (sem cartões com gradiente como em Problema). Cada célula: **barra de acento** colorida no topo + ícone em quadradinho + status + título + texto.
+- Ícones coloridos (`amber`, `violet`, `sky`, `emerald`) e barras correspondentes — contraste intencional com a seção Problema (timeline vertical + painéis arredondados em gradiente).
 - Motion: scroll e stagger alinhados a §8 do design system.
 
 ## 4. CTA
