@@ -10,27 +10,27 @@ import { SectionHeader } from "./ui/section-header";
 const faqs = [
   {
     q: "Qual é o prazo médio de entrega?",
-    a: "Uma landing page simples sai em 1–2 semanas. Sites mais elaborados ou sistemas SaaS ficam entre 3 e 8 semanas, dependendo do escopo. O prazo é definido na proposta e comprometido antes de você confirmar.",
+    a: "Landing page em até 7 dias. Sistemas SaaS e aplicativos ficam sob consulta — o prazo é combinado na proposta, antes de você confirmar qualquer coisa.",
   },
   {
     q: "Preciso ter todo o conteúdo pronto para começar?",
-    a: "Não. Trabalhamos com o que você tem e ajudamos a estruturar o restante. Textos, imagens e outros materiais podem ser desenvolvidos ao longo do projeto — inclusive com apoio de copywriting se necessário.",
+    a: "Não. Trabalhamos com o que você tem e ajudamos a estruturar o resto. Textos, imagens e materiais podem ser desenvolvidos ao longo do projeto — inclusive com apoio de copy quando necessário.",
   },
   {
     q: "Como funciona o pagamento?",
-    a: "Geralmente dividimos em duas parcelas: 50% na aprovação da proposta e 50% na entrega final. Para projetos maiores, podemos combinar um cronograma de pagamentos alinhado às entregas.",
+    a: "Sinal mínimo de 30% (ou 1 parcela) para iniciar. O restante é parcelado em até 3×, alinhado às entregas na proposta.",
   },
   {
     q: "Posso solicitar alterações durante o projeto?",
-    a: "Sim. Mantemos rodadas de revisão em cada etapa — design e desenvolvimento. Alterações fora do escopo acordado são tratadas como adicionais e cotadas com transparência.",
+    a: "Sim. Existem rodadas de revisão previstas em cada etapa — design e desenvolvimento. Alterações fora do escopo acordado são tratadas como adicional, sempre com cotação transparente.",
   },
   {
     q: "Vocês fazem manutenção pós-entrega?",
-    a: "Oferecemos suporte nos primeiros dias após o lançamento sem custo adicional. Para manutenção contínua, atualizações e novas funcionalidades, temos planos mensais que podemos combinar ao final do projeto.",
+    a: "Todo projeto já inclui 1 mês de suporte gratuito após o lançamento. Para manutenção contínua, atualizações e novas funcionalidades, fechamos um plano mensal ao final do projeto.",
   },
   {
-    q: "Vocês trabalham com clientes fora do Brasil?",
-    a: "Sim. Trabalhamos 100% remoto e atendemos clientes em qualquer país. As comunicações podem ser em português ou inglês, e os pagamentos em BRL ou USD.",
+    q: "Vocês atendem fora do Brasil?",
+    a: "Sim. Trabalhamos 100% remoto. Atendimento em português ou inglês; pagamento em BRL ou USD.",
   },
 ];
 

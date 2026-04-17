@@ -11,7 +11,7 @@ const links = [
   { href: "#ofertas", label: "Serviços" },
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#portfolio", label: "Trabalhos" },
-  { href: "#depoimentos", label: "Depoimentos" },
+  { href: "#oferta", label: "Oferta" },
   { href: whatsappHref(WA_MSG_NAV), label: "Falar agora" },
 ] as const;
 

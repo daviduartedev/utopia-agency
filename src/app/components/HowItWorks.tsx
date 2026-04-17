@@ -27,7 +27,7 @@ const steps = [
   {
     number: "05",
     title: "Entrega e suporte",
-    body: "Produto no ar com domínio, CI/CD e documentação incluídos. Suporte nos primeiros dias para garantir um lançamento sem sustos.",
+    body: "Produto no ar com domínio, CI/CD e documentação incluídos. Um mês de suporte gratuito para garantir um lançamento sem sustos.",
   },
 ];
 

@@ -4,11 +4,10 @@ import { WA_MSG_CTA_SECTION } from "../lib/whatsapp-messages";
 import { Cta4 } from "./ui/cta-4";
 
 const ctaItems = [
-  "Design estratégico",
-  "Alta performance",
-  "Integração completa",
-  "Processo ágil e transparente",
-  "Do zero ao lançamento sem complicação",
+  "Design e código entregues",
+  "Domínio e hospedagem inclusos",
+  "1 mês de suporte gratuito",
+  "Sinal mínimo de 30% para iniciar",
 ];
 
 export function CtaSection() {
@@ -29,11 +28,11 @@ export function CtaSection() {
         className="relative w-full"
       >
         <Cta4
-          title="Seu site pronto, rápido e do jeito certo."
-          description="Criamos sites profissionais que não só impressionam, mas convertem."
-          buttonText="Quero meu projeto agora →"
+          title="Seu site no ar em até 7 dias."
+          description="Landing page a partir de R$ 999. A gente começa pela conversa, sem proposta de 30 páginas."
+          buttonText="Falar com a Utopia agora"
           buttonUrl={whatsappHref(WA_MSG_CTA_SECTION)}
-          showArrowIcon={false}
+          showArrowIcon
           items={ctaItems}
         />
       </motion.div>

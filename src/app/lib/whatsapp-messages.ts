@@ -24,3 +24,15 @@ export const WA_MSG_BOOK_CALL =
 /** Fallback para Cta4 ou outros blocos genéricos */
 export const WA_MSG_DEFAULT_IMPACT =
   "Quero começar meu projeto com a Utopia AGORA — me chamem no WhatsApp.";
+
+/** Seção Oferta — Landing page a partir de R$ 999 */
+export const WA_MSG_OFFER_LANDING =
+  'Quero uma Landing Page da Utopia — vim pela seção Oferta do site. Entendi "a partir de R$ 999" e queria alinhar escopo e prazo.';
+
+/** Seção Oferta — SaaS sob consulta */
+export const WA_MSG_OFFER_SAAS =
+  "Quero conversar sobre um Sistema SaaS com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.";
+
+/** Seção Oferta — Aplicativos sob consulta */
+export const WA_MSG_OFFER_APP =
+  "Quero conversar sobre um Aplicativo com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.";
