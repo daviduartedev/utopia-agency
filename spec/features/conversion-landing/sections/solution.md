@@ -30,6 +30,7 @@ Depois de a dor ser nomeada (seção Problema), esta seção mostra **em que for
 
 ## 3. Visual
 
+- Cabeçalho: `SectionHeader` com `compactDescription` — margem entre o `h2` e o parágrafo um pouco menor que o padrão global.
 - Desktop: `ScrollStack` (3 cards que empilham no scroll) com `baseScale 0.88`, `itemScale 0.038`, `stackPosition 21%`.
 - Mobile estreito: fallback de 3 cards empilhados em coluna simples (sem ScrollStack) — `useIsNarrowMobile()`.
 - Cada card: background image Unsplash otimizada (`w=1400 q=80` desktop, `w=720 q=68` mobile) + véu `bg-page-surface/45` + texto embaixo.

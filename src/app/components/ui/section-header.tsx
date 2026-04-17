@@ -7,6 +7,8 @@ export interface SectionHeaderProps {
   eyebrow?: string;
   /** Parágrafo de apoio abaixo do título */
   description?: string;
+  /** Margem título→descrição um pouco menor (ex.: serviços). */
+  compactDescription?: boolean;
   id?: string;
   className?: string;
 }
@@ -18,6 +20,7 @@ export function SectionHeader({
   title,
   eyebrow,
   description,
+  compactDescription,
   id,
   className,
 }: SectionHeaderProps) {
@@ -37,7 +40,10 @@ export function SectionHeader({
       </h2>
       {description ? (
         <p
-          className="mx-auto mt-5 max-w-2xl text-base font-normal leading-relaxed text-zinc-400 md:text-lg"
+          className={cn(
+            "mx-auto max-w-2xl text-base font-normal leading-relaxed text-zinc-400 md:text-lg",
+            compactDescription ? "mt-3 md:mt-3.5" : "mt-5",
+          )}
           style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         >
           {description}

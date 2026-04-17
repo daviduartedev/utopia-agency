@@ -97,6 +97,7 @@ export function OfferingsScrollStack() {
         className="pb-6 pt-12 md:pb-8 md:pt-16"
         title="Nossos serviços"
         description="Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega."
+        compactDescription
       />
 
       {narrowMobile ? (
