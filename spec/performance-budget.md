@@ -1,6 +1,6 @@
 # Performance budget
 
-Este ciclo **não altera** a performance nem instrumenta budgets. O que segue é o contrato implícito atual e o que está em vigor via arquitetura.
+Documento vivo: o contrato abaixo reflete a arquitetura atual da LP e é **atualizado** quando ciclos de refinamento introduzem novos custos. Ainda **não** há instrumentação automática de budget em CI.
 
 ## 1. Contrato implícito atual
 
@@ -8,7 +8,7 @@ Este ciclo **não altera** a performance nem instrumenta budgets. O que segue é
 - Seções abaixo do hero são todas **code-split** via `src/app/lazy-pages.tsx` + `LazySection` + `Suspense`, com `minHeight` explícito para não quebrar layout antes do chunk chegar.
 - Marquees e colunas em animação pausam quando fora do viewport (`section-anim-paused` em `theme.css`), reduzindo uso de CPU/GPU.
 - Imagens de portfólio e testimonials usam `loading="lazy"` + `decoding="async"` + `sizes`.
-- `prefers-reduced-motion` é respeitado para marquees.
+- `prefers-reduced-motion` é respeitado para marquees e demais animações conforme `motion-pref.ts` e `theme.css`.
 
 ## 2. Dependências pesadas em uso
 
@@ -16,7 +16,7 @@ Ciclos de **refinamento visual** podem trocar ou acrescentar libs leves de layou
 
 | Lib | Uso | Risco |
 |---|---|---|
-| `gsap` + `lenis` | smooth-scroll e ScrollStack | grande; mitigado por ser lazy junto com a seção Serviços |
+| `gsap` + `lenis` | smooth-scroll e legado em seções lazy | grande; mitigado por lazy; evitar expandir o uso a novos blocos sem medir |
 | `framer-motion` / `motion` | entrada de seções; transições ao scroll no refinamento | médio; tree-shaking ok |
 | `@tsparticles/*` | disponível, **não usado** na LP | risco de import acidental — cuidado em PR |
 | `ogl` | Plasma do hero | médio; lazy + skip em mobile |

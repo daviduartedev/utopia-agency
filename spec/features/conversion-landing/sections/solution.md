@@ -1,6 +1,6 @@
 # Solução — Serviços
 
-**Componente:** `src/app/components/OfferingsScrollStack.tsx`.
+**Componente:** `src/app/components/OfferingsScrollStack.tsx` (nome do arquivo pode permanecer; o **layout interno** deve seguir este spec e não é mais prescrito como `ScrollStack` empilhando três cartões no scroll).
 **Posição:** 4ª seção (depois de ClientLogos).
 **Âncora:** `#ofertas` (mantida por retrocompatibilidade de navegação).
 
@@ -31,9 +31,9 @@ Depois de a dor ser nomeada (seção Problema), esta seção mostra **em que for
 ## 3. Visual
 
 - Cabeçalho: `SectionHeader` com `compactDescription` — margem entre o `h2` e o parágrafo um pouco menor que o padrão global.
-- Desktop: `ScrollStack` (3 cards que empilham no scroll) com `baseScale 0.88`, `itemScale 0.038`, `stackPosition 21%`.
-- Mobile estreito: fallback de 3 cards empilhados em coluna simples (sem ScrollStack) — `useIsNarrowMobile()`.
-- Cada card: background image Unsplash otimizada (`w=1400 q=80` desktop, `w=720 q=68` mobile) + véu `bg-page-surface/45` + texto embaixo.
+- **Formato livre (ciclo atual):** a apresentação dos três serviços **não** usa mais o padrão canônico de três cartões com **`ScrollStack`** empilhando no scroll. O implementador escolhe um arranjo **claramente diferenciado** (ex.: faixas horizontais alternadas, painel em destaque + secundários, bento assimétrico, sequência editorial), mantendo a ordem e a copy dos três itens.
+- Imagens de apoio (se houver) continuam otimizadas (`loading`/`sizes` adequados) e não devem competir com o texto.
+- Mobile estreito (`<640px`): priorizar leitura e rolagem fluida; evitar gestos ou efeitos que dependam de scroll “preso”.
 
 ## 4. CTA
 
@@ -48,3 +48,4 @@ Nenhum CTA explícito por card. O card serve de apresentação; a conversão aco
 
 - Não mudar `#ofertas` para outra âncora sem atualizar `Navbar` e `Footer` juntos.
 - Não reordenar os três cards — Landing é a porta de entrada comercial (preço-âncora), vem primeiro.
+- Não voltar ao layout canônico antigo de **três cartões + `ScrollStack`** como padrão principal desta seção neste ciclo.

@@ -28,7 +28,9 @@ Navbar e Floating button são persistentes por cima da página.
 
 As seções **Problema**, **Diferenciais** (`WhyUs`), **Como funciona**, **Depoimentos** e **Oferta** devem usar **composições visualmente distintas** entre si. O visitante não deve ter a impressão de cinco blocos feitos com o mesmo molde de “cartões sombreados”. A **copy**, número de itens, preços, CTAs WhatsApp e mensagens associadas continuam definidos em [`sections/`](sections/); a **apresentação** pode mudar (incluindo formato da Oferta que não seja mais grid 1/1/3 de três cards).
 
-**Motion:** a landing deve explorar animações de **entrada e transição ao rolar** em estilo moderno (referência: produções tipo Webflow/Framer), com respeito a `prefers-reduced-motion`, conforme [`../../design-system.md`](../../design-system.md) §8. O refinamento foca essas cinco seções; o restante da página não exige redesenho estrutural, podendo receber o mesmo sistema de motion onde for natural.
+**Motion (LP inteira):** toda a página deve poder usar o mesmo vocabulário de **entrada, laterais e transição ao rolar** em estilo moderno (referência: Webflow/Framer), **desde que** a sensação permaneça leve: sem jank perceptível na rolagem nem atraso em CTAs, conforme [`../../design-system.md`](../../design-system.md) §8 e [`../../performance-budget.md`](../../performance-budget.md). Inclui, onde fizer sentido, **Hero**, **Logos**, **Portfólio**, **FAQ**, **CTA final**, **Formulário**, **Navbar** e **Floating** — sem alterar ordem das seções nem copy, salvo ajustes mínimos de hierarquia visual.
+
+**Serviços (Solução):** a seção “Nossos serviços” deve ter **layout e comportamento distintos** do padrão anterior baseado em `ScrollStack` empilhando cartões; ver [`sections/solution.md`](sections/solution.md).
 
 ## 2. Funil de conversão
 
@@ -65,7 +67,7 @@ Cada seção tem um arquivo próprio em [`sections/`](sections/) descrevendo: ob
 Este ciclo mantém como placeholders:
 
 - **8 logos de clientes** em `public/logos/` (SVG mono-cor `currentColor`, nomes genéricos).
-- **5 cases de portfólio** — 3 com imagem existente, 2 com card tipo "Case em breve".
+- **6 cases de portfólio** — 4 com imagem em `public/`, 2 com card tipo "Case em breve"; três slides com **link de demo** em nova aba (ver [`sections/portfolio.md`](sections/portfolio.md)).
 - **6 depoimentos** com primeiros nomes + papel (ex.: "Fundador solo • SaaS B2B"), sem fotos; avatar em gradiente com iniciais.
 
 Todos estão marcados nos respectivos section docs. A troca por conteúdo real será ciclo futuro, condicional a autorização de clientes.
@@ -78,5 +80,7 @@ A feature está "pronta" (deste ciclo) quando:
 - Todos os cenários de `scenarios.feature` passam em QA manual.
 - Nenhuma frase da blacklist de `../../content-guidelines.md` aparece em busca da base de código.
 - Os 13 componentes listados em §1 estão montados em `App.tsx` nessa exata ordem.
-- As cinco seções de §1.1 são **claramente distinguíveis** em layout umas das outras; motion ao scroll está aplicado conforme o design system.
+- As cinco seções de §1.1 são **claramente distinguíveis** em layout umas das outras; motion ao scroll está aplicado conforme o design system **e** estendido ao restante da página conforme §1.1, sem sensação de lentidão.
+- A seção **Serviços** está visualmente e estruturalmente **diferente** do empilhamento scroll-driven anterior, mantendo copy e âncora `#ofertas`.
+- O **Portfólio** reflete os seis cases e URLs de demo descritos em `sections/portfolio.md`.
 - Este arquivo e os docs de `sections/` refletem 1:1 o que está em produção.

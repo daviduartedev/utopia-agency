@@ -1,8 +1,10 @@
 "use client";
 
-import ScrollStack, { ScrollStackItem } from "./ui/ScrollStack";
+import { motion } from "motion/react";
 import { SectionHeader } from "./ui/section-header";
 import { useIsNarrowMobile } from "../lib/use-media-query";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
+import { cn } from "./ui/utils";
 
 const STACK_ITEMS = [
   {
@@ -47,44 +49,9 @@ function optimizeServiceImage(url: string, mobile: boolean): string {
   }
 }
 
-function OfferingServiceCard({
-  item,
-  imageUrl,
-}: {
-  item: (typeof STACK_ITEMS)[number];
-  imageUrl: string;
-}) {
-  return (
-    <article className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-2xl border border-white/10 bg-page-surface !p-0 shadow-none h-[min(30rem,88vw)] md:h-[40rem] lg:h-[44rem]">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-page-surface/45" />
-      <div className="relative z-10 flex h-full flex-col justify-end p-7 text-left md:p-10 lg:p-12">
-        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-400 md:text-xs">
-          {item.kicker}
-        </p>
-        <h3
-          className="mb-3 text-3xl font-medium tracking-[-0.02em] text-white md:text-4xl lg:text-[2.75rem] lg:leading-tight"
-          style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-        >
-          {item.title}
-        </h3>
-        <p
-          className="max-w-prose text-base leading-relaxed text-zinc-300 md:text-lg"
-          style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-        >
-          {item.body}
-        </p>
-      </div>
-    </article>
-  );
-}
-
 export function OfferingsScrollStack() {
   const narrowMobile = useIsNarrowMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <section
@@ -94,71 +61,75 @@ export function OfferingsScrollStack() {
     >
       <SectionHeader
         id="ofertas-heading"
-        className="pb-6 pt-12 md:pb-8 md:pt-16"
+        className="pb-8 pt-12 md:pb-10 md:pt-16"
         title="Nossos serviços"
         description="Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega."
         compactDescription
       />
 
-      {narrowMobile ? (
-        <div className="flex flex-col gap-8 px-4 pb-14">
-          {STACK_ITEMS.map((item) => (
-            <OfferingServiceCard
+      <div className="mx-auto flex max-w-[1300px] flex-col gap-10 px-4 pb-16 sm:px-8 md:gap-12 md:px-12">
+        {STACK_ITEMS.map((item, index) => {
+          const imageFirst = index % 2 === 0;
+          const imageUrl = optimizeServiceImage(item.image, narrowMobile);
+
+          return (
+            <motion.article
               key={item.id}
-              item={item}
-              imageUrl={optimizeServiceImage(item.image, true)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="min-h-[130vh] w-full pb-16">
-          <ScrollStack
-            useWindowScroll
-            className="!h-auto block min-h-[150vh] w-full"
-            innerClassName="flex flex-col items-center !px-4 sm:!px-6 md:!px-10"
-            itemDistance={128}
-            itemStackDistance={24}
-            baseScale={0.88}
-            itemScale={0.038}
-            blurAmount={0}
-            stackPosition="21%"
-            scaleEndPosition="17%"
-          >
-            {STACK_ITEMS.map((item) => (
-              <ScrollStackItem
-                key={item.id}
-                itemClassName="!border !border-white/10 overflow-hidden !p-0 w-full max-w-7xl !h-[min(34rem,92vw)] md:!h-[40rem] lg:!h-[44rem] mx-auto bg-page-surface"
+              {...scrollRevealMotion(prefersReducedMotion, {
+                delayIndex: index,
+                lateral: true,
+              })}
+              aria-labelledby={`oferta-${item.id}-title`}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/40 shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+            >
+              <div
+                className={cn(
+                  "grid grid-cols-1 md:min-h-[min(22rem,52vw)] lg:min-h-[20rem]",
+                  "md:grid-cols-2",
+                )}
               >
                 <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${optimizeServiceImage(item.image, false)})`,
-                  }}
-                  aria-hidden
-                />
-                <div className="absolute inset-0 bg-page-surface/45" />
-                <div className="relative z-10 flex h-full flex-col justify-end p-7 text-left md:p-10 lg:p-12">
-                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-400 md:text-xs">
+                  className={cn(
+                    "relative min-h-[14rem] overflow-hidden md:min-h-0",
+                    imageFirst ? "md:order-1" : "md:order-2",
+                  )}
+                >
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${imageUrl})` }}
+                    aria-hidden
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-page-surface/25 to-transparent md:bg-gradient-to-r md:from-black/55 md:via-page-surface/20 md:to-transparent" />
+                </div>
+
+                <div
+                  className={cn(
+                    "relative z-30 flex flex-col justify-center gap-3 px-6 py-8 sm:px-8 md:py-10 md:pl-10 md:pr-12",
+                    imageFirst ? "md:order-2" : "md:order-1",
+                  )}
+                >
+                  <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-zinc-400 md:text-xs">
                     {item.kicker}
                   </p>
                   <h3
-                    className="mb-3 text-3xl font-medium tracking-[-0.02em] text-white md:text-4xl lg:text-[2.75rem] lg:leading-tight"
+                    id={`oferta-${item.id}-title`}
+                    className="text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl md:text-[2.1rem] md:leading-tight"
                     style={{ fontFamily: "var(--font-display), Georgia, serif" }}
                   >
                     {item.title}
                   </h3>
                   <p
-                    className="max-w-prose text-base leading-relaxed text-zinc-300 md:text-lg"
+                    className="max-w-prose text-[15px] leading-relaxed text-zinc-300 md:text-base"
                     style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
                   >
                     {item.body}
                   </p>
                 </div>
-              </ScrollStackItem>
-            ))}
-          </ScrollStack>
-        </div>
-      )}
+              </div>
+            </motion.article>
+          );
+        })}
+      </div>
     </section>
   );
 }

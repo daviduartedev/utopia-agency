@@ -17,6 +17,8 @@ type PortfolioProject = {
   scope: string;
   image: string | null;
   layout: PortfolioLayout;
+  /** Demo pública; preview do slide vira link (nova aba). */
+  demoUrl?: string;
 };
 
 const projects: PortfolioProject[] = [
@@ -33,6 +35,7 @@ const projects: PortfolioProject[] = [
     scope: "Site de produto com simulador e captação de contato.",
     image: "/portfolio-emera-solar.png",
     layout: "web",
+    demoUrl: "https://emerasolar.vercel.app/",
   },
   {
     id: 3,
@@ -40,6 +43,7 @@ const projects: PortfolioProject[] = [
     scope: "Agenda, clientes e lembretes em uma interface enxuta.",
     image: "/portfolio-appweb-barbearia.png",
     layout: "phone",
+    demoUrl: "https://sua-barbearia-sistema.vercel.app/",
   },
   {
     id: 4,
@@ -55,10 +59,52 @@ const projects: PortfolioProject[] = [
     image: null,
     layout: "web",
   },
+  {
+    id: 6,
+    title: "Site para jogos eletrônicos (CS2)",
+    scope: "Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.",
+    image: "/portfolio-dr-black-skins.png",
+    layout: "web",
+    demoUrl: "https://drblack-skins.vercel.app/",
+  },
 ];
 
 function Slide({ project, index, total }: { project: PortfolioProject; index: number; total: number }) {
   const isPhone = project.layout === "phone";
+
+  const preview = (
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-[15px] border border-white/10 bg-zinc-950",
+        isPhone ? "portfolio-frame-phone" : "portfolio-frame-web",
+      )}
+    >
+      {project.image ? (
+        <ImageWithFallback
+          src={project.image}
+          alt={project.demoUrl ? "" : project.title}
+          loading="lazy"
+          decoding="async"
+          sizes={isPhone ? "250px" : "820px"}
+          className="block h-full max-h-full min-h-0 w-full object-contain object-center"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-6 text-center">
+          <div>
+            <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-500">
+              Case em breve
+            </p>
+            <p
+              className="text-xl font-medium tracking-tight text-zinc-200 sm:text-2xl"
+              style={{ fontFamily: "var(--font-display), Georgia, serif" }}
+            >
+              {project.title}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <article
@@ -70,37 +116,19 @@ function Slide({ project, index, total }: { project: PortfolioProject; index: nu
         isPhone ? "portfolio-slide-phone" : "portfolio-slide-web",
       )}
     >
-      <div
-        className={cn(
-          "relative overflow-hidden rounded-[15px] border border-white/10 bg-zinc-950",
-          isPhone ? "portfolio-frame-phone" : "portfolio-frame-web",
-        )}
-      >
-        {project.image ? (
-          <ImageWithFallback
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            sizes={isPhone ? "250px" : "820px"}
-            className="block h-full max-h-full min-h-0 w-full object-contain object-center"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-6 text-center">
-            <div>
-              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-500">
-                Case em breve
-              </p>
-              <p
-                className="text-xl font-medium tracking-tight text-zinc-200 sm:text-2xl"
-                style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-              >
-                {project.title}
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
+      {project.demoUrl ? (
+        <a
+          href={project.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block rounded-[15px] outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
+          aria-label={`Abrir demo do case ${project.title} em nova aba`}
+        >
+          {preview}
+        </a>
+      ) : (
+        preview
+      )}
 
       <div className="mt-4 flex items-start gap-2 pl-0.5">
         <span
@@ -248,13 +276,14 @@ export function Portfolio() {
         />
       </motion.div>
 
-      <div
+      <motion.div
         ref={containerRef}
         role="region"
         aria-roledescription="carousel"
         aria-label="Trabalhos selecionados da Utopia"
         tabIndex={0}
         onKeyDown={onKeyDown}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1, lateral: true })}
         className="relative w-full max-w-full outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-page-surface"
         style={{ contain: "layout paint" }}
       >
@@ -300,7 +329,7 @@ export function Portfolio() {
             <ArrowRight className="size-5" aria-hidden />
           </button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

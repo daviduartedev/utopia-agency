@@ -3,6 +3,7 @@
 import React, { useEffect, useId, useState } from "react";
 import { motion } from "motion/react";
 import { useIsNarrowMobile } from "../../lib/use-media-query";
+import { usePrefersReducedMotion } from "../../lib/motion-pref";
 
 /** Anel de texto no viewBox 200×200 (maior que o disco central). */
 const REVOLVE_RADIUS = 87;
@@ -42,6 +43,7 @@ export const FloatingConsultButton = ({
 }: FloatingConsultButtonProps): React.ReactElement => {
   const revolvingPathId = useId().replace(/:/g, "");
   const narrowMobile = useIsNarrowMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
@@ -55,19 +57,8 @@ export const FloatingConsultButton = ({
   const lgImageSize = imageSize || 96;
   const smImageSize = imageSize ? imageSize * 0.833 : 80;
 
-  const core = (
-    <>
-      {!narrowMobile ? (
-        <motion.div
-          className="absolute inset-0"
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: revolvingSpeed,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
+  const revolvingSvg = (
+    <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden>
             <defs>
               <path
                 id={revolvingPathId}
@@ -91,7 +82,26 @@ export const FloatingConsultButton = ({
               </textPath>
             </text>
           </svg>
-        </motion.div>
+  );
+
+  const core = (
+    <>
+      {!narrowMobile ? (
+        prefersReducedMotion ? (
+          <div className="absolute inset-0">{revolvingSvg}</div>
+        ) : (
+          <motion.div
+            className="absolute inset-0"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: revolvingSpeed,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {revolvingSvg}
+          </motion.div>
+        )
       ) : null}
 
       <div className="absolute inset-0 flex items-center justify-center">
@@ -147,7 +157,21 @@ export const FloatingConsultButton = ({
   );
 
   return (
-    <div className="fcc-float-wrap fixed z-50" style={position}>
+    <motion.div
+      className="fcc-float-wrap fixed z-50"
+      style={position}
+      initial={
+        prefersReducedMotion
+          ? { opacity: 1, y: 0, scale: 1 }
+          : { opacity: 0, y: 24, scale: 0.94 }
+      }
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.55,
+        ease: [0.22, 0.65, 0.36, 1],
+        delay: prefersReducedMotion ? 0 : 0.06,
+      }}
+    >
       {narrowMobile ? (
         <button
           type="button"
@@ -250,6 +274,6 @@ export const FloatingConsultButton = ({
             }
           }
         `}</style>
-    </div>
+    </motion.div>
   );
 };
