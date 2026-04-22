@@ -2,9 +2,11 @@
 "use client";
 
 import React, { lazy, Suspense, useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { whatsappHref } from "../../lib/whatsapp";
 import { WA_MSG_HERO } from "../../lib/whatsapp-messages";
 import { useIsNarrowMobile } from "../../lib/use-media-query";
+import { usePrefersReducedMotion } from "../../lib/motion-pref";
 import { cn } from "./utils";
 
 const PlasmaLazy = lazy(() => import("./plasma"));
@@ -26,6 +28,7 @@ export function CinematicHero({
   ...props
 }: CinematicHeroProps) {
   const narrowMobile = useIsNarrowMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [desktopPlasmaReady, setDesktopPlasmaReady] = useState(false);
 
   useEffect(() => {
@@ -78,7 +81,19 @@ export function CinematicHero({
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-transparent to-black/50"
       />
-      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24">
+      <motion.div
+        className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24"
+        initial={
+          prefersReducedMotion
+            ? { opacity: 1, y: 0, x: 0 }
+            : { opacity: 0, y: 28, x: -18 }
+        }
+        animate={{ opacity: 1, y: 0, x: 0 }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : 0.72,
+          ease: [0.22, 0.65, 0.36, 1],
+        }}
+      >
         <p className="mb-5 text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
           Utopia Studio
         </p>
@@ -120,7 +135,7 @@ export function CinematicHero({
             </svg>
           </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

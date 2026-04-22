@@ -26,17 +26,22 @@ Opções do Embla (referência):
 
 ## 4. Cases (placeholders realistas)
 
-Lista canônica. Enquanto não houver autorização dos clientes reais, mantêm-se nomes genéricos já usados no `public/` + 2 adicionais a criar neste ciclo.
+Lista canônica. Enquanto não houver autorização dos clientes reais, mantêm-se nomes genéricos já usados no `public/` + placeholders onde indicado.
 
-| # | Título visível | Imagem | Layout |
-|---|---|---|---|
-| 1 | `ERP para lojistas` | `/portfolio-movix-erp.png` | `web` |
-| 2 | `LP para loja de painéis solares` | `/portfolio-emera-solar.png` | `web` |
-| 3 | `App de agendamento para barbearia` | `/portfolio-appweb-barbearia.png` | `phone` |
-| 4 | `Painel administrativo para clínica` | `[placeholder]` | `web` |
-| 5 | `Site institucional com blog` | `[placeholder]` | `web` |
+| # | Título visível | Imagem | Layout | Demo (nova aba) |
+|---|---|---|---|---|
+| 1 | `ERP para lojistas` | `/portfolio-movix-erp.png` | `web` | — |
+| 2 | `LP para loja de painéis solares` | `/portfolio-emera-solar.png` | `web` | `https://emerasolar.vercel.app/` |
+| 3 | `App de agendamento para barbearia` | `/portfolio-appweb-barbearia.png` | `phone` | `https://sua-barbearia-sistema.vercel.app/` |
+| 4 | `Painel administrativo para clínica` | `[placeholder]` | `web` | — |
+| 5 | `Site institucional com blog` | `[placeholder]` | `web` | — |
+| 6 | `Site para jogos eletrônicos (CS2)` | `/portfolio-dr-black-skins.png` | `web` | `https://drblack-skins.vercel.app/` |
+
+Quando houver **demo**, o mockup (área da captura) é um link: `target="_blank"`, `rel="noopener noreferrer"`, `aria-label` explícito (“Abrir demo do case … em nova aba”). A legenda textual abaixo do slide **não** precisa repetir a URL.
 
 Legendas abaixo do slide: **título + 1 frase de escopo** (ex.: `ERP para lojistas — catálogo, estoque e pedidos num painel único.`). **Nunca** incluir "+X%" ou "+N leads" (regra `content-guidelines.md`).
+
+Copy canônica do case 6 — **scope:** `Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.`
 
 ## 5. Visual
 
@@ -66,3 +71,4 @@ Legendas abaixo do slide: **título + 1 frase de escopo** (ex.: `ERP para lojist
 ## 9. Placeholders
 
 - Cases 4 e 5 (`Painel administrativo para clínica`, `Site institucional com blog`) precisam de screenshots. Enquanto não existirem, usar retângulos escuros com título textual (aceitável) ou gerar mocks simples em `public/portfolio-placeholder-<slug>.png`.
+- Case 6 usa asset versionado em `public/portfolio-dr-black-skins.png` (screenshot da demo Dr. Black Skins).

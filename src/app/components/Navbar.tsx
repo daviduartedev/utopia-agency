@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { BrandLogo } from "./BrandLogo";
 import { whatsappHref } from "../lib/whatsapp";
 import { WA_MSG_NAV } from "../lib/whatsapp-messages";
 import { useIsNarrowMobile } from "../lib/use-media-query";
+import { usePrefersReducedMotion } from "../lib/motion-pref";
 import { cn } from "./ui/utils";
 
 const links = [
@@ -44,7 +46,19 @@ function MenuToggleIcon({ open }: { open: boolean }) {
 
 export function Navbar() {
   const narrowMobile = useIsNarrowMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navEntrance = {
+    initial: prefersReducedMotion
+      ? { opacity: 1, y: 0, x: 0 }
+      : { opacity: 0, y: -12, x: 14 },
+    animate: { opacity: 1, y: 0, x: 0 },
+    transition: {
+      duration: prefersReducedMotion ? 0 : 0.5,
+      ease: [0.22, 0.65, 0.36, 1] as const,
+    },
+  };
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -69,7 +83,10 @@ export function Navbar() {
 
   if (!narrowMobile) {
     return (
-      <header className="flex w-full flex-col gap-3 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3 md:px-6 md:py-3.5">
+      <motion.header
+        {...navEntrance}
+        className="flex w-full flex-col gap-3 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3 md:px-6 md:py-3.5"
+      >
         <BrandLogo className="shrink-0 self-start sm:self-center" />
 
         <nav
@@ -93,12 +110,15 @@ export function Navbar() {
             );
           })}
         </nav>
-      </header>
+      </motion.header>
     );
   }
 
   return (
-    <header className="flex w-full flex-col gap-0 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5">
+    <motion.header
+      {...navEntrance}
+      className="flex w-full flex-col gap-0 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5"
+    >
       <div className="flex w-full min-w-0 items-center justify-between gap-3">
         <BrandLogo className="min-w-0" onClick={closeMenu} />
         <button
@@ -139,6 +159,6 @@ export function Navbar() {
           );
         })}
       </nav>
-    </header>
+    </motion.header>
   );
 }

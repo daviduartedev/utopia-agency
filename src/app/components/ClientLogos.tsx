@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import LogoLoop, { type LogoLoopItem } from "./ui/LogoLoop";
 import { cn } from "./ui/utils";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
 const clientLogos: LogoLoopItem[] = [
   { src: "/logos/acme.svg", alt: "Acme", title: "Acme" },
@@ -18,6 +19,8 @@ const clientLogos: LogoLoopItem[] = [
  * SVGs em <img> não herdam currentColor no DOM — aplicamos filtro claro no wrapper.
  */
 export function ClientLogos() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <section
       id="clientes"
@@ -25,10 +28,7 @@ export function ClientLogos() {
       className="relative z-10 w-full overflow-hidden bg-page-surface py-10 md:py-12"
     >
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.4 }}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
         className="mx-auto max-w-[1300px] px-4 sm:px-8 md:px-12"
       >
         <p

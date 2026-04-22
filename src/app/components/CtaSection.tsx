@@ -1,7 +1,10 @@
+"use client";
+
 import { motion } from "motion/react";
 import { whatsappHref } from "../lib/whatsapp";
 import { WA_MSG_CTA_SECTION } from "../lib/whatsapp-messages";
 import { Cta4 } from "./ui/cta-4";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
 const ctaItems = [
   "Design e código entregues",
@@ -11,6 +14,8 @@ const ctaItems = [
 ];
 
 export function CtaSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <div className="relative z-10 w-full">
       <div
@@ -21,10 +26,7 @@ export function CtaSection() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45 }}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
         className="relative w-full"
       >
         <Cta4

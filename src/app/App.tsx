@@ -61,7 +61,7 @@ export default function App() {
 
       {/* 4. Serviços (solução) */}
       <div className="relative z-10 w-full">
-        <LazySection minHeight="120vh">
+        <LazySection minHeight="76vh">
           <Suspense fallback={<SectionFallback />}>
             <OfferingsScrollStack />
           </Suspense>

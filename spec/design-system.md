@@ -47,7 +47,7 @@ Componentes reutilizáveis que são a "base" da LP:
 | `SpotlightCard` | `ui/spotlight-card.tsx` | Card com efeito spotlight — **opcional** nas seções centrais se outro padrão fizer melhor o papel. |
 | `BentoGrid` | `ui/bento-grid.tsx` | Agrupamento tipo bento — **opcional** para `WhyUs` se a composição migrar para rails/faixas alternadas ou outro arranjo. |
 | `Cta4` | `ui/cta-4.tsx` | Bloco de CTA final com checklist. |
-| `ScrollStack` | `ui/ScrollStack.tsx` | Cards que empilham no scroll — usado em Serviços. |
+| `ScrollStack` | `ui/ScrollStack.tsx` | Cards que empilham no scroll — **não** é mais o padrão canônico da seção Serviços; mantido no codebase para outros usos ou migração. |
 
 ## 6. Botões — hierarquia
 
@@ -66,7 +66,7 @@ Componentes reutilizáveis que são a "base" da LP:
 
 - **Contrato implementado:** [`src/app/lib/motion-pref.ts`](../src/app/lib/motion-pref.ts) — `usePrefersReducedMotion()` + `scrollRevealMotion(reduced, { delayIndex, lateral })`. Com `lateral: true`, entradas alternam eixo X (par da esquerda, ímpar da direita) + leve Y. Com movimento permitido, `viewport.once: false` faz o bloco **recuar** ao sair da área visível; com `reduce`, animações viram instantâneas e `once: true`.
 - **Baseline** (ainda válido): entrada de seção com `whileInView` (ex.: opacidade + leve `y`), `viewport` com margem negativa para antecipar, duração curta (~0,45s).
-- **Refinamento (LP completa, ênfase nas cinco seções centrais — ver `conversion-landing/readme.md` §1.1):** além da entrada, usar **transições ao rolar** que comuniquem profundidade — por exemplo variação de opacidade/offset ao **entrar e sair** do viewport, ou sequenciamento de filhos (stagger), no espírito de sites feitos em Webflow/Framer. Implementação preferencial: `motion` já no projeto; GSAP/Lenis apenas onde já existir ou for necessário.
+- **Refinamento (LP completa — ver `conversion-landing/readme.md` §1.1):** motion pode percorrer **toda** a landing (hero, logos, portfólio, FAQ, CTA, formulário, navegação), além das cinco seções centrais, com o mesmo contrato de leveza. Além da entrada, usar **transições ao rolar** que comuniquem profundidade — por exemplo variação de opacidade/offset ao **entrar e sair** do viewport, ou sequenciamento de filhos (stagger), no espírito de sites feitos em Webflow/Framer. Implementação preferencial: `motion` já no projeto; GSAP/Lenis apenas onde já existir ou for necessário.
 - Animações pesadas (marquee, colunas infinitas) pausam fora de viewport via `section-anim-paused` (ver `theme.css`).
 - **Obrigatório:** respeitar `prefers-reduced-motion` — reduzir duração, desativar parallax agressivo ou efeitos de saída que persistam fora da tela; reutilizar fallbacks em `theme.css` onde aplicável.
 

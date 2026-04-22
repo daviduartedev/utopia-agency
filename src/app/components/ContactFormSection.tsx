@@ -5,6 +5,7 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { SectionHeader } from "./ui/section-header";
+import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
@@ -27,6 +28,7 @@ function friendlySupabaseError(message: string): string {
 }
 
 export function ContactFormSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [sent, setSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -109,12 +111,7 @@ export function ContactFormSection() {
         <div className="h-px w-full bg-white/10" />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45 }}
-      >
+      <motion.div {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}>
         <SectionHeader
           id="contato-heading"
           eyebrow="Contato"
@@ -125,10 +122,7 @@ export function ContactFormSection() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.45, delay: 0.08 }}
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1, lateral: true })}
         className="mx-auto max-w-xl px-4 sm:px-8 md:px-12"
       >
         <form
