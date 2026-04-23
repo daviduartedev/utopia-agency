@@ -34,7 +34,7 @@ export function SectionHeader({
       <h2
         id={id}
         className="text-[clamp(1.65rem,3.8vw,2.6rem)] font-medium leading-[1.22] tracking-[-0.02em] text-white"
-        style={{ fontFamily: "var(--font-display), Georgia, serif" }}
+        style={{ fontFamily: "var(--font-display)" }}
       >
         {title}
       </h2>

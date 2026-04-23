@@ -14,7 +14,7 @@ const links = [
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#portfolio", label: "Trabalhos" },
   { href: "#oferta", label: "Oferta" },
-  { href: whatsappHref(WA_MSG_NAV), label: "Falar agora" },
+  { href: whatsappHref(WA_MSG_NAV), label: "Quero meu site" },
 ] as const;
 
 function MenuToggleIcon({ open }: { open: boolean }) {

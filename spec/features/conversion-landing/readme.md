@@ -2,6 +2,8 @@
 
 Landing page pública da Utopia, em `/`. Objetivo: transformar visitante (fundador solo) em **conversa no WhatsApp**, com formulário como caminho alternativo.
 
+**Narrativa (copy):** a página segue um arco **dor → reconhecimento → caminho → prova → fechamento**, inspirado em páginas de conversão directas (clareza no hero, problema nomeado, prova qualitativa, CTA com verbo). Não há secção dedicada “antes/depois”; o contraste fica na sequência das secções e na copy, sempre dentro de `content-guidelines.md` (sem métricas inventadas, sem blacklist).
+
 ## 1. Composição final (pós-ciclo)
 
 Ordem canônica das seções montadas em `src/app/App.tsx`:
@@ -14,7 +16,7 @@ Ordem canônica das seções montadas em `src/app/App.tsx`:
 | 4 | Serviços (Solução) | `OfferingsScrollStack` | Mostrar o que a Utopia faz |
 | 5 | Diferenciais | `WhyUs` | Por que escolher a Utopia |
 | 6 | Como funciona | `HowItWorks` | Previsibilidade de processo + BookCallWidget |
-| 7 | Portfólio | `Portfolio` (novo carrossel Embla) | Prova de entregas |
+| 7 | Portfólio | `Portfolio` → `CardSwap` (pilha 3D + cases canónicos) | Prova de entregas |
 | 8 | Depoimentos | `Testimonials` | Prova de experiência |
 | 9 | Oferta | `Offer` | O que exatamente está sendo vendido |
 | 10 | FAQ | `Faq` | Derrubar últimas objeções |
@@ -23,6 +25,8 @@ Ordem canônica das seções montadas em `src/app/App.tsx`:
 | 13 | Rodapé | `Footer` | Navegação + selos + legal |
 
 Navbar e Floating button são persistentes por cima da página.
+
+**Fundo em duas camadas:** o **hero** usa gradiente radial + **Plasma** (WebGL) conforme `sections/hero.md`. **Todas as secções abaixo do hero** partilham fundo **`ShapeGrid`** (canvas 2D, discreto, interactivo sem rasto), documentado em [`../shape-grid-background/readme.md`](../shape-grid-background/readme.md). Os dois sistemas são independentes (sem ShapeGrid dentro do bloco do hero).
 
 ### 1.1 Diversidade de layout e motion (refinamento)
 

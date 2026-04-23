@@ -1,7 +1,7 @@
 # Formulário de contato
 
 **Componente:** `src/app/components/ContactFormSection.tsx`.
-**Posição:** 12ª seção (última antes do Footer).
+**Posição:** 12ª secção (última antes do Footer).
 **Âncora:** `#contato`.
 
 ## 1. Objetivo de funil
@@ -11,10 +11,10 @@ Caminho **alternativo** para quem não quer ou não pode abrir o WhatsApp agora.
 ## 2. Copy canônica
 
 - **Eyebrow**: `Contato`
-- **Title**: `Fale com a gente sobre o seu projeto.`
-- **Description**: `Prefere escrever? Envie pelo formulário — respondemos em até um dia útil e continuamos a conversa no WhatsApp.`
+- **Title**: `Prefere escrever primeiro?`
+- **Description**: `Deixa os dados aqui. A gente lê, responde em até um dia útil e já te chama no WhatsApp com o contexto.`
 
-> Substitui a descrição anterior ("Sem spam — só o que precisamos...") por algo que explicite a **hierarquia**: este é o caminho secundário, o primário é o WhatsApp.
+> Hierarquia explícita: caminho secundário; o primário continua a ser o WhatsApp.
 
 ## 3. Campos
 
@@ -51,7 +51,7 @@ Validação central: `validateContactForm(payload)` em `src/app/lib/contact-vali
 - Form dentro de um card `rounded-2xl border border-white/10 bg-black/20`.
 - Inputs: `border-white/15 bg-black/30` com focus-ring `white/15`.
 - Select com fundo `zinc-900` para opções (contrast-safe).
-- Botão submit: `Enviar e abrir WhatsApp` (substitui apenas se o copy-audit pedir — atualmente OK).
+- Botão submit: `Enviar e abrir WhatsApp`.
 
 ## 7. Acessibilidade
 

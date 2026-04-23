@@ -1,74 +1,74 @@
 # Portfólio
 
-**Componente (reescrito neste ciclo):** `src/app/components/Portfolio.tsx`.
-**Posição:** 7ª seção.
+**Componente:** `src/app/components/Portfolio.tsx` (compõe `CardSwap` + conteúdo de cases).  
+**Módulo reutilizável:** `src/app/components/CardSwap/`.  
+**Posição:** 7ª secção.  
 **Âncora:** `#portfolio`.
 
 ## 1. Objetivo de funil
 
 Mostrar de forma tangível **o tipo de entrega** que a Utopia faz — LP de produto, sistema interno, app de agendamento. Evidência qualitativa, sem métrica inventada.
 
-## 2. Estrutura pós-ciclo
+A apresentação é uma **pilha 3D** com rotação automática em ciclo: cada “cartão” de topo representa um case; a animação revela, ao longo do tempo, a variedade de trabalhos — **não** é carrossel horizontal com slides e setas (Embla foi substituído **nesta secção**).
 
-- Substituir o **marquee horizontal infinito** atual por um **carrossel horizontal com snap** usando `embla-carousel-react` (já em `package.json`).
-- Controles visíveis: botões `Prev` / `Next`, drag com mouse, swipe em touch, setas do teclado quando o container tem foco.
+## 2. Comportamento
 
-Opções do Embla (referência):
-```ts
-{ loop: true, align: "start", dragFree: false, skipSnaps: false, containScroll: "trimSnaps" }
-```
+- A pilha contém **um** cartão lógico por case da tabela canónica; ordem = ordem de dados. `delay` / GSAP: intervalo entre trocas (configuração actual: **~3,5s**, ajustável).
+- **Pausa ao passar o rato** (hover) **só** no rectângulo do stack (não abrange a legenda de baixo), quando a animação estiver activa, para o visitante inspeccionar sem competir com o ciclo; fora do stack, o timer mantém o ritmo.
+- **`prefers-reduced-motion: reduce`:** nenhuma rotação 3D automática; a pilha permanece **estática**; o conteúdo (imagens, títulos) permanece acessível e legível. Alinhar a `usePrefersReducedMotion` / implementação de `CardSwap` ao resto do site.
+- **Sem links de demo** nos cards: a acção de conversão continua a ser CTAs e WhatsApp a jusante; a legenda (título + escopo) segue o case em destaque via `onFrontIndexChange` (ou equivalente) para o título alinhado ao card da frente.
+- Não auto-play além do ciclo da pilha. Não paginação por “bolinhas”.
 
-## 3. Copy canônica
+## 3. Copy canônica (secção)
 
-- **Eyebrow**: `Portfólio`
-- **Title**: `Trabalhos selecionados`
-- **Description**: `Alguns tipos de entrega — do site de produto ao app que a equipe usa no dia a dia.`
+- **Eyebrow:** `Portfólio`
+- **Title:** `Prova no mundo real`
+- **Description:** `Seleção de entregas — de site de produto a painel que a equipe usa todo dia, sem número inventado.`
 
 ## 4. Cases (placeholders realistas)
 
-Lista canônica. Enquanto não houver autorização dos clientes reais, mantêm-se nomes genéricos já usados no `public/` + placeholders onde indicado.
+Lista canónica. Enquanto não houver autorização dos clientes reais, mantêm-se nomes genéricos já usados no `public/` + placeholders onde indicado.
 
-| # | Título visível | Imagem | Layout | Demo (nova aba) |
-|---|---|---|---|---|
-| 1 | `ERP para lojistas` | `/portfolio-movix-erp.png` | `web` | — |
-| 2 | `LP para loja de painéis solares` | `/portfolio-emera-solar.png` | `web` | `https://emerasolar.vercel.app/` |
-| 3 | `App de agendamento para barbearia` | `/portfolio-appweb-barbearia.png` | `phone` | `https://sua-barbearia-sistema.vercel.app/` |
-| 4 | `Painel administrativo para clínica` | `[placeholder]` | `web` | — |
-| 5 | `Site institucional com blog` | `[placeholder]` | `web` | — |
-| 6 | `Site para jogos eletrônicos (CS2)` | `/portfolio-dr-black-skins.png` | `web` | `https://drblack-skins.vercel.app/` |
+| # | Título visível | Imagem | Layout |
+|---|---|---|---|
+| 1 | `ERP para lojistas` | `/portfolio-movix-erp.png` | `web` |
+| 2 | `LP para loja de painéis solares` | `/portfolio-emera-solar.png` | `web` |
+| 3 | `App de agendamento para barbearia` | `/mobile.png` | `phone` |
+| 4 | `Painel administrativo para clínica` | `[placeholder]` | `web` |
+| 5 | `Site institucional com blog` | `[placeholder]` | `web` |
+| 6 | `Site para jogos eletrônicos (CS2)` | `/portfolio-dr-black-skins.png` | `web` |
 
-Quando houver **demo**, o mockup (área da captura) é um link: `target="_blank"`, `rel="noopener noreferrer"`, `aria-label` explícito (“Abrir demo do case … em nova aba”). A legenda textual abaixo do slide **não** precisa repetir a URL.
+**Legendas (sempre visíveis, preferencialmente junto do stack):** título + 1 frase de escopo alinhada ao case **em destaque** (o cartão de topo a cada momento), sincronizados com a prop `onFrontIndexChange` do `CardSwap`. Nunca métricas inventadas (`content-guidelines.md`).
 
-Legendas abaixo do slide: **título + 1 frase de escopo** (ex.: `ERP para lojistas — catálogo, estoque e pedidos num painel único.`). **Nunca** incluir "+X%" ou "+N leads" (regra `content-guidelines.md`).
-
-Copy canônica do case 6 — **scope:** `Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.`
+**Case 6 —** escopo canónico: `Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.`
 
 ## 5. Visual
 
-- Largura máxima do slide web ~`820px` (viewport menos margens); altura pela proporção **880×550** (mesma escala que antes, só um pouco menor em telas largas). Phone: 250×550.
-- Fades laterais (mask) mantidos para lembrar ao usuário que há mais cases fora do viewport.
-- Radius `rounded-[15px]`, border `border-[0.5px] border-transparent` (mantida para evitar serrilhado).
+- A pilha 3D usa `perspective` e offsets coerentes com a implementação (CardSwap); todos os cases (incl. `phone`) usam a **área do card** com `object-contain` em largura/altura completas, sem recorte a um “telemóvel” estreito no meio; o rótulo `phone` no dado canónico só descreve o conteúdo, não a moldura.
+- Superfície, bordas, sombra: alinhar a `design-system.md` (`border-white/10`, `rounded-2xl` / equivalente, fundo alinhado à página).
+- Em ecrãs < 768px, reduzir largura, altura e offsets de forma a não transbordar; manter a mesma ordem e conteúdo.
+- Pode manter leves *fades* ou hachuras laterais na secção se ajudarem a ancorar o bloco, desde que não simulem “há slides horizontais” de forma falsa; não são obrigatórios pós-migração.
 
 ## 6. Acessibilidade
 
-- Container: `role="region"` + `aria-roledescription="carousel"` + `aria-label="Trabalhos selecionados"`.
-- Cada slide: `aria-roledescription="slide"` + `aria-label="Case N de Total"`.
-- Botões `prev`/`next` com `aria-label` em texto ("Ver case anterior", "Ver próximo case").
-- Teclado: quando o container estiver focado, `ArrowLeft` / `ArrowRight` devem navegar (hook do Embla).
-- `prefers-reduced-motion`: desativar o auto-scroll (se houver) e a animação de transição (Embla suporta via plugin ou via CSS).
+- Secção: `<section aria-labelledby="portfolio-heading">` (inalterado).
+- Região do stack: `role="region"` (ou `group` com `aria-label`) com **rótulo** coerente com a secção, **não** forçar `aria-roledescription="carousel"` de slides horizontais se a UX for só pilha + ciclo; ver [`../../../accessibility.md`](../../../accessibility.md) §5.
+- Imagens: `alt` informativo com o título do case (a legenda reforça título + escopo).
+- Quando o case em frente muda, **actualizar** a legenda visível; opcional: `aria-live="polite"` com o título (curto) para anunciar a rotação — a implementação concreta vs. risco de *spam* fica a critério, preferindo o mínimo necessário.
+- Foco: estados de foco visíveis alinhados ao desing system; ao foco em teclado, o fluxo de tab não fica “preso” a um widget sem equivalente a carrossel clássico.
+- Não requerer setas esquerda/direita como padrão único de avanço (a pilha é outro padrão).
 
-## 7. Estados
+## 7. Não fazer
 
-- Sem auto-play por padrão. Se for habilitado no futuro, pausar em `hover`/`focus` e respeitar `prefers-reduced-motion`.
-- Loop infinito habilitado.
+- Não reintroduzir o carrossel horizontal (Embla) **nesta secção** (outros componentes podem continuar a usar Embla no codebase).
+- Não inventar métricas; não dobrar copy canónica.
+- Página de demo estática separada na raiz (ex.: outra `index.html` só para CardSwap) — **não** é requisito; a secção no `/` cumpre o “demo” de produto.
 
-## 8. Não fazer
+## 8. Placeholders
 
-- Não manter em paralelo o marquee antigo. O componente fica com uma única abordagem.
-- Não adicionar paginação (bolinhas) — as laterais em fade + botões Prev/Next já dão o recado.
-- Não inventar métricas nos cards.
+- Cases 4 e 5: enquanto não houver `public/portfolio-placeholder-<slug>.png` ou similares, o placeholder escuro com título textual (como o código de referência) permanece canónico.
 
-## 9. Placeholders
+## TODO (futuros ciclos)
 
-- Cases 4 e 5 (`Painel administrativo para clínica`, `Site institucional com blog`) precisam de screenshots. Enquanto não existirem, usar retângulos escuros com título textual (aceitável) ou gerar mocks simples em `public/portfolio-placeholder-<slug>.png`.
-- Case 6 usa asset versionado em `public/portfolio-dr-black-skins.png` (screenshot da demo Dr. Black Skins).
+- Controlo “anterior/seguinte” explícito se a pesquisa com utilizadores o pedir.
+- Eventos de analytics no portfólio (se aplicável) — quando `analytics.md` tiver o contrato.

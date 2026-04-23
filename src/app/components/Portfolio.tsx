@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
+import { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SectionHeader } from "./ui/section-header";
+import { Card, CardSwap } from "./CardSwap";
 import { cn } from "./ui/utils";
 import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
+import { useIsNarrowMobile } from "../lib/use-media-query";
+import { motion } from "motion/react";
 
 type PortfolioLayout = "web" | "phone";
 
@@ -17,8 +17,6 @@ type PortfolioProject = {
   scope: string;
   image: string | null;
   layout: PortfolioLayout;
-  /** Demo pública; preview do slide vira link (nova aba). */
-  demoUrl?: string;
 };
 
 const projects: PortfolioProject[] = [
@@ -35,15 +33,13 @@ const projects: PortfolioProject[] = [
     scope: "Site de produto com simulador e captação de contato.",
     image: "/portfolio-emera-solar.png",
     layout: "web",
-    demoUrl: "https://emerasolar.vercel.app/",
   },
   {
     id: 3,
     title: "App de agendamento para barbearia",
     scope: "Agenda, clientes e lembretes em uma interface enxuta.",
-    image: "/portfolio-appweb-barbearia.png",
+    image: "/mobile.png",
     layout: "phone",
-    demoUrl: "https://sua-barbearia-sistema.vercel.app/",
   },
   {
     id: 4,
@@ -65,38 +61,35 @@ const projects: PortfolioProject[] = [
     scope: "Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.",
     image: "/portfolio-dr-black-skins.png",
     layout: "web",
-    demoUrl: "https://drblack-skins.vercel.app/",
   },
 ];
 
-function Slide({ project, index, total }: { project: PortfolioProject; index: number; total: number }) {
-  const isPhone = project.layout === "phone";
-
-  const preview = (
+function CasePreview({ project }: { project: PortfolioProject }) {
+  return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[15px] border border-white/10 bg-zinc-950",
-        isPhone ? "portfolio-frame-phone" : "portfolio-frame-web",
+        "relative flex h-full min-h-0 w-full items-stretch overflow-hidden border border-white/10 bg-zinc-950",
+        "rounded-2xl",
       )}
     >
       {project.image ? (
         <ImageWithFallback
           src={project.image}
-          alt={project.demoUrl ? "" : project.title}
+          alt={project.title}
           loading="lazy"
           decoding="async"
-          sizes={isPhone ? "250px" : "820px"}
-          className="block h-full max-h-full min-h-0 w-full object-contain object-center"
+          sizes="(max-width: 767px) 92vw, 640px"
+          className="h-full w-full min-h-0 min-w-0 object-contain object-center"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-6 text-center">
+        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-4 text-center">
           <div>
             <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-500">
               Case em breve
             </p>
             <p
               className="text-xl font-medium tracking-tight text-zinc-200 sm:text-2xl"
-              style={{ fontFamily: "var(--font-display), Georgia, serif" }}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               {project.title}
             </p>
@@ -105,229 +98,85 @@ function Slide({ project, index, total }: { project: PortfolioProject; index: nu
       )}
     </div>
   );
-
-  return (
-    <article
-      role="group"
-      aria-roledescription="slide"
-      aria-label={`Case ${index + 1} de ${total}: ${project.title}`}
-      className={cn(
-        "portfolio-slide flex shrink-0 flex-col",
-        isPhone ? "portfolio-slide-phone" : "portfolio-slide-web",
-      )}
-    >
-      {project.demoUrl ? (
-        <a
-          href={project.demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block rounded-[15px] outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
-          aria-label={`Abrir demo do case ${project.title} em nova aba`}
-        >
-          {preview}
-        </a>
-      ) : (
-        preview
-      )}
-
-      <div className="mt-4 flex items-start gap-2 pl-0.5">
-        <span
-          className="mt-1.5 inline-block size-2 shrink-0 rounded-[2px] bg-zinc-500/90"
-          aria-hidden
-        />
-        <div>
-          <p
-            className="text-[13px] font-medium text-zinc-300 sm:text-sm"
-            style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-          >
-            {project.title}
-          </p>
-          <p
-            className="mt-0.5 text-[11px] leading-relaxed text-zinc-500 sm:text-[12px]"
-            style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-          >
-            {project.scope}
-          </p>
-        </div>
-      </div>
-    </article>
-  );
 }
 
 export function Portfolio() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "start",
-    dragFree: false,
-    skipSnaps: false,
-    containScroll: "trimSnaps",
-  });
+  const narrow = useIsNarrowMobile();
+  const [frontIndex, setFrontIndex] = useState(0);
+  const w = narrow ? 340 : 640;
+  const h = Math.max(212, Math.round((w * 550) / 880));
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onSelect);
-    };
-  }, [emblaApi, onSelect]);
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        scrollPrev();
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        scrollNext();
-      }
-    },
-    [scrollPrev, scrollNext],
-  );
+  const current = projects[frontIndex] ?? projects[0];
 
   return (
     <section
       id="portfolio"
       aria-labelledby="portfolio-heading"
-      className="relative z-10 flex w-full flex-col items-center bg-page-surface pb-16 pt-6"
+      className="relative z-10 flex w-full flex-col items-center bg-section-over-gradient pb-16 pt-6"
     >
-      <style>{`
-        .portfolio-embla-viewport { overflow: hidden; width: 100%; }
-        .portfolio-embla-container {
-          display: flex;
-          gap: 2rem;
-          padding-inline: max(1rem, calc((100vw - 1300px) / 2));
-          touch-action: pan-y pinch-zoom;
-          --web-w: min(820px, calc(100vw - 2rem));
-          --slide-h: calc(var(--web-w) * 550 / 880);
-        }
-        @media (min-width: 768px) {
-          .portfolio-embla-container { gap: 2.5rem; }
-        }
-        @media (min-width: 1024px) {
-          .portfolio-embla-container { gap: 3rem; }
-        }
-        .portfolio-slide { flex: 0 0 auto; }
-        .portfolio-slide-web { width: var(--web-w); }
-        .portfolio-slide-phone {
-          width: min(calc(var(--slide-h) * 250 / 550), 250px);
-        }
-        .portfolio-frame-web,
-        .portfolio-frame-phone {
-          overflow: hidden;
-          line-height: 0;
-          height: var(--slide-h);
-          max-height: var(--slide-h);
-        }
-        .portfolio-frame-web { width: 100%; }
-        .portfolio-frame-phone { width: 100%; }
-        .portfolio-carousel-edge {
-          pointer-events: none;
-          background: linear-gradient(
-            to right,
-            #0a0a0a 0%,
-            rgba(10, 10, 10, 0.78) 38%,
-            rgba(10, 10, 10, 0.15) 82%,
-            transparent 100%
-          );
-          -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-        }
-        .portfolio-carousel-edge-right {
-          pointer-events: none;
-          background: linear-gradient(
-            to left,
-            #0a0a0a 0%,
-            rgba(10, 10, 10, 0.78) 38%,
-            rgba(10, 10, 10, 0.15) 82%,
-            transparent 100%
-          );
-          -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-        }
-      `}</style>
-
       <motion.div
         {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
         className="w-full"
       >
         <SectionHeader
           id="portfolio-heading"
-          className="pb-6 pt-10 md:pb-8 md:pt-14"
+          className="pb-10 pt-10 md:pb-14 md:pt-14"
           eyebrow="Portfólio"
-          title="Trabalhos selecionados"
-          description="Alguns tipos de entrega — do site de produto ao app que a equipe usa no dia a dia."
+          title="Páginas e painéis que já estão no ar"
+          description="Seleção de trabalhos reais, de landing que pede contato a painel que a equipe usa todo dia."
         />
       </motion.div>
 
       <motion.div
-        ref={containerRef}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Trabalhos selecionados da Utopia"
-        tabIndex={0}
-        onKeyDown={onKeyDown}
         {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1, lateral: true })}
-        className="relative w-full max-w-full outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-4 focus-visible:ring-offset-page-surface"
-        style={{ contain: "layout paint" }}
+        className="relative mt-20 flex w-full max-w-full flex-col items-center px-4 md:mt-28 lg:mt-36"
       >
-        <div className="portfolio-embla-viewport" ref={emblaRef}>
-          <div className="portfolio-embla-container">
-            {projects.map((project, index) => (
-              <Slide
-                key={project.id}
-                project={project}
-                index={index}
-                total={projects.length}
-              />
-            ))}
+        <div className="relative flex w-full max-w-[min(100%,1300px)] flex-col items-center">
+          <div className="flex min-h-[min(560px,72vw)] w-full flex-col items-center justify-start sm:min-h-[600px]">
+            <CardSwap
+              width={w}
+              height={h}
+              cardDistance={60}
+              verticalDistance={70}
+              delay={3500}
+              pauseOnHover={false}
+              skewAmount={6}
+              easing="linear"
+              onFrontIndexChange={setFrontIndex}
+              className="outline-none"
+            >
+              {projects.map((p) => (
+                <Card key={p.id}>
+                  <div className="h-full w-full p-0.5">
+                    <CasePreview project={p} />
+                  </div>
+                </Card>
+              ))}
+            </CardSwap>
           </div>
-        </div>
 
-        <div
-          aria-hidden
-          className="portfolio-carousel-edge absolute inset-y-0 left-0 z-20 w-12 sm:w-20 md:w-28"
-        />
-        <div
-          aria-hidden
-          className="portfolio-carousel-edge-right absolute inset-y-0 right-0 z-20 w-12 sm:w-20 md:w-28"
-        />
-
-        <div className="mt-8 flex items-center justify-center gap-3 md:mt-10">
-          <button
-            type="button"
-            onClick={scrollPrev}
-            disabled={!canScrollPrev}
-            aria-label="Ver case anterior"
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
+          <div
+            key={frontIndex}
+            className="mx-auto mt-8 max-w-xl px-2 text-center sm:mt-10 sm:px-0"
+            role="status"
+            aria-live="polite"
+            aria-atomic
           >
-            <ArrowLeft className="size-5" aria-hidden />
-          </button>
-          <button
-            type="button"
-            onClick={scrollNext}
-            disabled={!canScrollNext}
-            aria-label="Ver próximo case"
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
-          >
-            <ArrowRight className="size-5" aria-hidden />
-          </button>
+            <p
+              id={`portfolio-active-case-title-${current.id}`}
+              className="text-sm font-medium text-zinc-300 sm:text-base"
+              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+            >
+              {current.title}
+            </p>
+            <p
+              className="mt-1.5 text-xs leading-relaxed text-zinc-500 sm:text-sm"
+              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+            >
+              {current.scope}
+            </p>
+          </div>
         </div>
       </motion.div>
     </section>

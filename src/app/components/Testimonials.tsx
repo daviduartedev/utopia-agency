@@ -16,44 +16,44 @@ type Testimonial = {
 const testimonials: Testimonial[] = [
   {
     id: "rafaela",
-    text: "A landing saiu em menos de duas semanas e, pela primeira vez, o site conversa com o cliente que a gente quer atrair.",
+    text: "Antes o link era bonito e vazio. Hoje a página diz o serviço em uma frase e o WhatsApp enche. Pela primeira vez o Google virou canal de verdade.",
     name: "Rafaela",
-    role: "Fundadora • estúdio de design",
+    role: "Dona de serviço local",
     gradient: "from-rose-500/60 to-amber-500/60",
   },
   {
     id: "diego",
-    text: "A Utopia me entregou um painel SaaS direto, sem tela inútil. Entramos no ritmo em poucos dias — o time adotou sem atrito.",
+    text: "A gente vivia de indicação. Com a página certa, cliente novo chega sabendo o que quer. O time parou de perder tempo explicando o básico.",
     name: "Diego",
-    role: "Fundador • SaaS de RH",
+    role: "Prestador de serviço B2B",
     gradient: "from-indigo-500/60 to-sky-500/60",
   },
   {
     id: "tatiana",
-    text: "Pedi site em até 7 dias e foi o que aconteceu. Proposta curta, sinal e entrega em cima do cronograma.",
+    text: "Pedi prazo curto na proposta e foi o que aconteceu. Sinal pago, site no ar na data. Sem desculpa técnica no meio.",
     name: "Tatiana",
-    role: "Consultora solo",
+    role: "Empreendedora solo",
     gradient: "from-emerald-500/60 to-teal-500/60",
   },
   {
     id: "bruno",
-    text: "O que mudou foi a clareza: a gente consegue explicar o produto em uma frase e a página mostra exatamente isso.",
+    text: "Hoje a busca no celular mostra nosso nome com cara de empresa séria. Antes era só Instagram e sorte.",
     name: "Bruno",
-    role: "Co-founder • fintech early-stage",
+    role: "Negócio local em expansão",
     gradient: "from-violet-500/60 to-fuchsia-500/60",
   },
   {
     id: "isadora",
-    text: "Depois do lançamento, eles continuaram disponíveis pelo WhatsApp. Dúvida rápida vira conversa, não chamado novo.",
+    text: "Depois do ar continuaram no WhatsApp. Ajuste pequeno não virou cobrança absurda. Isso compra paz.",
     name: "Isadora",
-    role: "E-commerce de nicho",
+    role: "Loja de nicho",
     gradient: "from-amber-500/60 to-orange-500/60",
   },
   {
     id: "pedro",
-    text: "Orçamento claro, escopo enxuto e entrega rápida. Serviu exatamente para eu validar a ideia antes de escalar.",
+    text: "Orçamento legível, escopo curto. Serviu pra validar se fazia sentido investir maior depois.",
     name: "Pedro",
-    role: "Fundador solo • SaaS B2B",
+    role: "Dono de pequeno negócio",
     gradient: "from-sky-500/60 to-cyan-500/60",
   },
 ];
@@ -80,16 +80,16 @@ export function Testimonials() {
     <section
       id="depoimentos"
       aria-labelledby="depoimentos-heading"
-      className="relative z-10 w-full scroll-mt-28 bg-page-surface py-12 text-zinc-100 md:py-16"
+      className="relative z-10 w-full scroll-mt-28 bg-section-over-gradient py-12 text-zinc-100 md:py-16"
     >
       <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
         <motion.div {...headerMotion}>
           <SectionHeader
             id="depoimentos-heading"
             className="mb-8 md:mb-10"
-            eyebrow="Depoimentos"
-            title="O que dizem nossos clientes"
-            description="Feedback de quem confiou na Utopia para landing pages, produtos SaaS e apps."
+            eyebrow="Prova"
+            title="Quem já saiu da invisibilidade"
+            description="Negócios que precisavam de página clara, prazo cumprido e alguém que respondesse depois do ar."
           />
         </motion.div>
 
@@ -109,7 +109,7 @@ export function Testimonials() {
             <blockquote
               className="m-0 border-none p-0 text-[clamp(1.125rem,2.4vw,1.5rem)] font-medium leading-snug tracking-[-0.02em] text-white"
               style={{
-                fontFamily: "var(--font-display), Georgia, serif",
+                fontFamily: "var(--font-display)",
               }}
             >
               <p className="m-0">{featured.text}</p>

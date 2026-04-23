@@ -1,7 +1,7 @@
 # CTA final
 
 **Componente:** `src/app/components/CtaSection.tsx` → `src/app/components/ui/cta-4.tsx`.
-**Posição:** 11ª seção (entre FAQ e Formulário).
+**Posição:** 11ª secção (entre FAQ e Formulário).
 **Âncora:** não tem (não aparece na navegação).
 
 ## 1. Objetivo de funil
@@ -10,16 +10,14 @@
 
 ## 2. Copy canônica
 
-- **Title**: `Seu site no ar em até 7 dias.`
-- **Description**: `Landing page a partir de R$ 999. A gente começa pela conversa, sem proposta de 30 páginas.`
+- **Title**: `Chega de página bonita que não vende`
+- **Description**: `Landing a partir de R$ 999, no ar em até 7 dias. A conversa começa pelo WhatsApp, sem PDF de 30 páginas.`
 - **Items (checklist)**:
-  - `Design e código entregues`
-  - `Domínio e hospedagem inclusos`
+  - `Design e código no pacote`
+  - `Domínio e hospedagem configurados`
   - `1 mês de suporte gratuito`
-  - `Sinal mínimo de 30% para iniciar`
-- **Botão**: `Falar com a Utopia agora` → `whatsappHref(WA_MSG_CTA_SECTION)`
-
-> Reescrita vs. versão antiga: saem os clichês `"Seu site pronto, rápido e do jeito certo"` e `"sites profissionais que não só impressionam, mas convertem"`. A nova copy reforça o compromisso comercial real (7 dias, R$ 999, suporte de 1 mês, sinal de 30%) para fechar coerência com `offer.md`.
+  - `Sinal de 30% para começar`
+- **Botão**: `Falar no WhatsApp` → `whatsappHref(WA_MSG_CTA_SECTION)`
 
 ## 3. Visual
 
@@ -35,4 +33,4 @@
 ## 5. Não fazer
 
 - Não adicionar um segundo botão (ex.: "rolar até o formulário"). Um único CTA primário WhatsApp.
-- Não reintroduzir as frases "impressionam e convertem" ou "do zero ao lançamento sem complicação" (blacklist).
+- Não reintroduzir frases da blacklist (`content-guidelines.md` §4).

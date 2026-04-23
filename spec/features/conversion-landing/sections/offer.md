@@ -1,18 +1,18 @@
 # Oferta
 
 **Componente (novo):** `src/app/components/Offer.tsx`.
-**Posição:** 9ª seção (entre Depoimentos e FAQ).
+**Posição:** 9ª secção (entre Depoimentos e FAQ).
 **Âncora:** `#oferta`.
 
 ## 1. Objetivo de funil
 
-É a seção que o request classifica como obrigatória: **o que exatamente está sendo vendido**. O visitante sai daqui sabendo preço-âncora, prazo, o que está incluso e como iniciar.
+É a secção que fecha o ciclo comercial: **o que está à venda**, preço-âncora, prazo, inclusões e como iniciar — sem esconder "sob consulta" nos formatos maiores.
 
 ## 2. Copy canônica
 
 - **Eyebrow**: `Oferta`
-- **Title**: `O que você recebe, quando e por quanto.`
-- **Description**: `Sem letras miúdas. Escopo e condições definidos na proposta.`
+- **Title**: `Preço claro. Escopo fechado.`
+- **Description**: `Landing com valor de entrada; SaaS e app só depois de conversa — nada de prometer prazo mágico no ar.`
 
 ### Três produtos (ordem fixa; layout de apresentação livre)
 
@@ -81,11 +81,11 @@ Texto único, logo abaixo do bloco de produtos (seja qual for o formato visual),
 
 ## 5. Mensagens WhatsApp associadas
 
-A criar em `src/app/lib/whatsapp-messages.ts`:
+Em `src/app/lib/whatsapp-messages.ts`:
 
-- `WA_MSG_OFFER_LANDING` — `Quero uma Landing Page da Utopia — vim pela seção Oferta do site. Entendi "a partir de R$ 999" e queria alinhar escopo e prazo.`
-- `WA_MSG_OFFER_SAAS` — `Quero conversar sobre um Sistema SaaS com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.`
-- `WA_MSG_OFFER_APP` — `Quero conversar sobre um Aplicativo com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.`
+- `WA_MSG_OFFER_LANDING` — `Oi — abri a Oferta e quero a landing a partir de R$ 999. Quero alinhar escopo e data de publicação.`
+- `WA_MSG_OFFER_SAAS` — `Oi — vim da Oferta, card SaaS. Preciso saber se vocês pegam meu sistema e qual é o próximo passo.`
+- `WA_MSG_OFFER_APP` — `Oi — vim da Oferta, card aplicativo. Quero conversar sobre app ou PWA e próximos passos.`
 
 ## 6. Não fazer
 

@@ -2,8 +2,8 @@
 
 :root {
   --font-size: 16px;
-  --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Satoshi", sans-serif;
+  --font-sans: "Satoshi", sans-serif;
   /** Quase preto (#000 → #0a por canal); uso em secções fora da hero */
   --page-surface: #0a0a0a;
   --background: #ffffff;
@@ -140,8 +140,8 @@
   }
 
   body {
-    @apply bg-page-surface text-white;
-    font-family: var(--font-sans), system-ui, sans-serif;
+    @apply bg-black text-white;
+    font-family: var(--font-sans);
     position: relative;
     overflow-x: hidden;
   }
@@ -197,6 +197,16 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  /**
+   * Secções pós-hero: transparente para o fundo ShapeGrid (canvas fixo z baixo) aparecer;
+   * o preto base vem de `App` (`bg-black` / `--page-surface`). Plasma continua só na hero.
+   */
+  .bg-section-over-gradient {
+    background-color: transparent;
   }
 }
 

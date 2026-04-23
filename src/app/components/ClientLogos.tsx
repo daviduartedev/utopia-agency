@@ -16,7 +16,7 @@ const clientLogos: LogoLoopItem[] = [
 
 /**
  * Prova social rápida, logo abaixo da seção Problema.
- * SVGs em <img> não herdam currentColor no DOM — aplicamos filtro claro no wrapper.
+ * SVGs em <img> não herdam currentColor no DOM; aplicamos filtro claro no wrapper.
  */
 export function ClientLogos() {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -25,7 +25,7 @@ export function ClientLogos() {
     <section
       id="clientes"
       aria-labelledby="clientes-heading"
-      className="relative z-10 w-full overflow-hidden bg-page-surface py-10 md:py-12"
+      className="relative z-10 w-full overflow-hidden bg-section-over-gradient py-10 md:py-12"
     >
       <motion.div
         {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
@@ -36,7 +36,7 @@ export function ClientLogos() {
           className="mb-8 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-300 md:text-xs"
           style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         >
-          Quem já trabalhou com a Utopia
+          Quem já confiou a presença digital na gente
         </p>
 
         <div

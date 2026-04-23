@@ -5,7 +5,7 @@
 - **Tailwind CSS v4** com tokens via `@theme inline` em `src/styles/theme.css`.
 - **Radix UI** + wrappers locais em `src/app/components/ui/`.
 - Animação: `motion` (Framer Motion v12), `gsap`, `lenis` para smooth-scroll.
-- Efeitos de fundo: `Plasma` (OGL/WebGL) no hero; `DarkVeil`, `Iridescence`, `Orb` disponíveis mas não usados na LP principal.
+- Efeitos de fundo: `Plasma` (OGL/WebGL) **só no hero**; canvas **`ShapeGrid`** como fundo subtil e contínuo **nas secções abaixo do hero** (ver `spec/features/shape-grid-background/readme.md`). `DarkVeil`, `Iridescence`, `Orb` disponíveis mas não usados na LP principal.
 
 ## 2. Paleta
 
@@ -48,6 +48,7 @@ Componentes reutilizáveis que são a "base" da LP:
 | `BentoGrid` | `ui/bento-grid.tsx` | Agrupamento tipo bento — **opcional** para `WhyUs` se a composição migrar para rails/faixas alternadas ou outro arranjo. |
 | `Cta4` | `ui/cta-4.tsx` | Bloco de CTA final com checklist. |
 | `ScrollStack` | `ui/ScrollStack.tsx` | Cards que empilham no scroll — **não** é mais o padrão canônico da seção Serviços; mantido no codebase para outros usos ou migração. |
+| `CardSwap` + `Card` | `app/components/CardSwap/` | Pilha 3D com rotação cíclica (GSAP); usado em **Portfólio** para exibir os cases. Ver `spec/features/card-swap/readme.md`. Atribuição: ReactBits (ver README do componente). |
 
 ## 6. Botões — hierarquia
 
@@ -68,6 +69,7 @@ Componentes reutilizáveis que são a "base" da LP:
 - **Baseline** (ainda válido): entrada de seção com `whileInView` (ex.: opacidade + leve `y`), `viewport` com margem negativa para antecipar, duração curta (~0,45s).
 - **Refinamento (LP completa — ver `conversion-landing/readme.md` §1.1):** motion pode percorrer **toda** a landing (hero, logos, portfólio, FAQ, CTA, formulário, navegação), além das cinco seções centrais, com o mesmo contrato de leveza. Além da entrada, usar **transições ao rolar** que comuniquem profundidade — por exemplo variação de opacidade/offset ao **entrar e sair** do viewport, ou sequenciamento de filhos (stagger), no espírito de sites feitos em Webflow/Framer. Implementação preferencial: `motion` já no projeto; GSAP/Lenis apenas onde já existir ou for necessário.
 - Animações pesadas (marquee, colunas infinitas) pausam fora de viewport via `section-anim-paused` (ver `theme.css`).
+- `CardSwap` (portfólio): rotação GSAP da pilha; com `reduce`, pilha estática, sem rotação automática (ver `features/card-swap/readme.md`).
 - **Obrigatório:** respeitar `prefers-reduced-motion` — reduzir duração, desativar parallax agressivo ou efeitos de saída que persistam fora da tela; reutilizar fallbacks em `theme.css` onde aplicável.
 
 ## 9. Imagens

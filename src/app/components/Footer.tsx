@@ -9,6 +9,7 @@ import {
   SiSupabase,
   SiStrapi,
   SiClaude,
+  SiInstagram,
 } from "react-icons/si";
 
 const stackItems = [
@@ -25,7 +26,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 w-full border-t border-white/10 bg-page-surface">
+    <footer className="relative z-10 w-full border-t border-white/10 bg-section-over-gradient">
       <div className="mx-auto max-w-[1300px] px-4 py-12 sm:px-8 sm:py-14 md:px-12">
         <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-3 md:items-start">
@@ -38,7 +39,7 @@ export function Footer() {
               className="max-w-sm text-center text-sm leading-relaxed text-zinc-500 md:text-left"
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
             >
-              Landing pages, SaaS e apps — entrega rápida com padrão premium.
+              Site que gera contato primeiro. Se o negócio pedir, evolui pra painel ou app, sempre com combinado por escrito.
             </p>
 
             {/* Stack logos */}
@@ -87,7 +88,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="transition-colors hover:text-white"
             >
-              Quero meu projeto
+              Quero meu site profissional
             </a>
           </nav>
         </div>
@@ -100,6 +101,15 @@ export function Footer() {
             © {currentYear} Utopia Studio. Todos os direitos reservados.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end">
+            <a
+              href="https://www.instagram.com/utopia_digital.lab/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 transition-colors hover:text-[#E4405F]"
+              aria-label="Utopia Studio no Instagram"
+            >
+              <SiInstagram className="size-6 shrink-0" aria-hidden />
+            </a>
             <a href="#" className="transition-colors hover:text-zinc-300">
               Termos
             </a>

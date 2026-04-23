@@ -18,35 +18,35 @@ type FeatureCell = {
 
 const features: FeatureCell[] = [
   {
-    title: "Entrega ágil",
+    title: "Cliente te acha mais rápido",
     description:
-      "Da proposta ao ar com processo enxuto, sem reuniões desnecessárias e sem fases de aprovação intermináveis.",
+      "Página organizada pra quem busca no celular. Menos “quem é esse?” e mais gente chegando no seu contato com intenção.",
     icon: <Zap className="size-5 text-amber-300" strokeWidth={1.75} />,
-    status: "Ritmo",
+    status: "Resultado",
     barClass: "bg-amber-400/85",
   },
   {
-    title: "Qualidade de produto",
+    title: "Você para de passar vergonha no link",
     description:
-      "UI polida, código limpo e performance real — não só bonito na apresentação, funciona de verdade no ar.",
+      "Texto direto, visual limpo, prova onde precisa. Quem clica entende o que compra e por que confiar.",
     icon: <Star className="size-5 text-violet-300" strokeWidth={1.75} />,
-    status: "Padrão",
+    status: "Credibilidade",
     barClass: "bg-violet-400/85",
   },
   {
-    title: "Comunicação direta",
+    title: "Você sabe o que está pagando",
     description:
-      "Você acompanha cada etapa: sem surpresas de escopo e sem respostas que nunca chegam.",
+      "Combinamos escopo e prazo por escrito. Sem surpresa no meio. Sem sumiço depois que publica.",
     icon: <MessageSquare className="size-5 text-sky-300" strokeWidth={1.75} />,
-    status: "Transparência",
+    status: "Clareza",
     barClass: "bg-sky-400/85",
   },
   {
-    title: "Do zero ao deploy",
+    title: "Tudo no mesmo pacote",
     description:
-      "Não entregamos só telas ou só repositório: produto no ar com domínio, hospedagem e apoio nos primeiros dias.",
+      "Endereço do site, hospedagem e página no ar. Você não fica com arquivo morto que ninguém sabe colocar online.",
     icon: <PackageCheck className="size-5 text-emerald-300" strokeWidth={1.75} />,
-    status: "Entrega",
+    status: "No ar de verdade",
     barClass: "bg-emerald-400/85",
   },
 ];
@@ -61,7 +61,7 @@ export function WhyUs() {
   return (
     <section
       id="diferenciais"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="whyus-heading"
     >
       <div
@@ -74,9 +74,9 @@ export function WhyUs() {
       <motion.div {...headerMotion}>
         <SectionHeader
           id="whyus-heading"
-          eyebrow="Por que a Utopia"
-          title="Feito para quem não quer perder tempo."
-          description="Cada projeto é tratado como se fosse o produto principal do nosso portfólio. Porque é."
+          eyebrow="O que você ganha"
+          title="Menos promessa vazia. Mais contato entrando."
+          description="Não vendemos tecnologia. Entregamos presença que explica, convence e chama."
           className="mb-10 md:mb-14"
         />
       </motion.div>
@@ -87,7 +87,7 @@ export function WhyUs() {
             {features.map((item, index) => (
               <article
                 key={item.title}
-                className="bg-page-surface p-6 sm:p-8 md:p-9"
+                className="bg-zinc-950/80 p-6 sm:p-8 md:p-9"
               >
                 <motion.div
                   {...scrollRevealMotion(prefersReducedMotion, {
@@ -116,7 +116,7 @@ export function WhyUs() {
                   <h3
                     className="mb-3 text-lg font-semibold tracking-[-0.02em] text-white md:text-xl"
                     style={{
-                      fontFamily: "var(--font-display), Georgia, serif",
+                      fontFamily: "var(--font-display)",
                     }}
                   >
                     {item.title}

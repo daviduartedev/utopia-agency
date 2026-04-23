@@ -5,6 +5,14 @@ export const Problem = lazy(() =>
   import("./components/Problem").then((m) => ({ default: m.Problem })),
 );
 
+export const ImpactSection = lazy(() =>
+  import("./components/ImpactSection").then((m) => ({ default: m.ImpactSection })),
+);
+
+export const Transformation = lazy(() =>
+  import("./components/Transformation").then((m) => ({ default: m.Transformation })),
+);
+
 export const ClientLogos = lazy(() =>
   import("./components/ClientLogos").then((m) => ({ default: m.ClientLogos })),
 );
