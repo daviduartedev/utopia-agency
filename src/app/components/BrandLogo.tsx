@@ -1,7 +1,7 @@
 import type { MouseEventHandler } from "react";
 import { cn } from "./ui/utils";
 
-/** Marca no header/footer — `public/logo.png`. Favicons: `public/favicon.ico`, PNGs e `site.webmanifest` (index.html). */
+/** Marca no header/footer; `public/logo.png`. Favicons: `public/favicon.ico`, PNGs e `site.webmanifest` (index.html). */
 const LOGO_SRC = "/logo.png";
 
 type BrandLogoProps = {
@@ -27,7 +27,7 @@ export function BrandLogo({
         "group flex shrink-0 items-center gap-2.5 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface",
         className,
       )}
-      aria-label="Utopia — início"
+      aria-label="Utopia, início"
     >
       <img
         src={LOGO_SRC}

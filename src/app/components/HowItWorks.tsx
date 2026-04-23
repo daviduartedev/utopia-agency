@@ -7,27 +7,27 @@ const steps = [
   {
     number: "01",
     title: "Briefing",
-    body: "Entendemos seu negócio, público e objetivos. Uma chamada rápida ou formulário detalhado — sem burocracia.",
+    body: "Uma conversa curta ou formulário. A gente entende o que você vende, pra quem e o que você quer que o visitante faça no fim.",
   },
   {
     number: "02",
     title: "Proposta",
-    body: "Escopo detalhado, prazo e valor fixo. Você sabe exatamente o que vai receber e quando, antes de confirmar qualquer coisa.",
+    body: "Escopo fechado, prazo e valor na mesma folha. Você olha, aprova ou não. Só paga sinal quando estiver claro.",
   },
   {
     number: "03",
-    title: "Design",
-    body: "Layout aprovado por você antes do código começar. Iterações rápidas em Figma com foco em conversão e identidade.",
+    title: "Layout",
+    body: "Você vê a página antes do código. Ajustamos texto e ordem até ficar óbvio: o que é, por que importa, como chamar você.",
   },
   {
     number: "04",
-    title: "Desenvolvimento",
-    body: "Código limpo, stack moderno e links de pré-visualização para acompanhar ao vivo. Você vê o progresso a cada entrega.",
+    title: "Publicação",
+    body: "Montamos tudo, testamos no celular e colocamos no ar. Você acompanha o link até abrir bonito do seu lado.",
   },
   {
     number: "05",
-    title: "Entrega e suporte",
-    body: "Produto no ar com domínio, CI/CD e documentação incluídos. Um mês de suporte gratuito para garantir um lançamento sem sustos.",
+    title: "Suporte no começo",
+    body: "Um mês de ajuste fino depois do lançamento. Dúvida pequena não vira desculpa. A gente responde.",
   },
 ];
 
@@ -41,7 +41,7 @@ export function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="howitworks-heading"
     >
       <div
@@ -55,8 +55,8 @@ export function HowItWorks() {
         <SectionHeader
           id="howitworks-heading"
           eyebrow="Como funciona"
-          title="Do briefing ao lançamento."
-          description="Um processo claro em cinco etapas — para você saber o que esperar em cada fase."
+          title="Cinco passos. Você sempre sabe o que vem."
+          description="Do primeiro ‘oi’ à página no ar, sem passo escondido."
           className="mb-12 md:mb-16"
         />
       </motion.div>

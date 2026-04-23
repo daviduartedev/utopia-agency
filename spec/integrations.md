@@ -24,21 +24,20 @@ Todas as mensagens pré-preenchidas vivem em `src/app/lib/whatsapp-messages.ts`.
 
 Mensagens canônicas atuais:
 
-| Constante | Origem do clique |
-|---|---|
-| `WA_MSG_HERO` | CTA primário do hero |
-| `WA_MSG_NAV` | Item "Falar agora" do menu |
-| `WA_MSG_FOOTER` | Link do rodapé |
-| `WA_MSG_CTA_SECTION` | `CtaSection` (pré-FAQ na composição antiga; pré-formulário na nova) |
-| `WA_MSG_FLOATING` | Botão flutuante |
-| `WA_MSG_BOOK_CALL` | `BookCallWidget` dentro de `HowItWorks` |
-| `WA_MSG_DEFAULT_IMPACT` | Fallback genérico |
+| Constante | Origem do clique | Texto canónico (referência) |
+|---|---|---|
+| `WA_MSG_HERO` | CTA primário do hero | `Oi — vim pelo botão principal do site da Utopia. Meu site não traz contato; quero ver se uma landing em até 7 dias faz sentido.` |
+| `WA_MSG_NAV` | Item "Falar agora" do menu | `Oi — vim pelo menu do site da Utopia. Quero falar sobre landing ou produto digital.` |
+| `WA_MSG_FOOTER` | Link do rodapé | `Oi — vim pelo rodapé da Utopia. Quero levar meu projeto para conversa no WhatsApp.` |
+| `WA_MSG_CTA_SECTION` | `CtaSection` (antes do formulário) | `Oi — vim da faixa de chamada final antes do formulário. Quero começar com landing ou alinhar outro escopo.` |
+| `WA_MSG_FLOATING` | Botão flutuante | `Oi — vim do botão flutuante. Quero falar agora com a Utopia.` |
+| `WA_MSG_BOOK_CALL` | `BookCallWidget` dentro de `HowItWorks` | `Oi — vim da secção Como funciona. Quero os 15 min gratuitos no WhatsApp.` |
+| `WA_MSG_DEFAULT_IMPACT` | Fallback genérico (`Cta4`) | `Oi — quero começar um projeto com a Utopia. Me chamem no WhatsApp.` |
+| `WA_MSG_OFFER_LANDING` | Oferta — Landing Page | `Oi — abri a Oferta e quero a landing a partir de R$ 999. Quero alinhar escopo e data de publicação.` |
+| `WA_MSG_OFFER_SAAS` | Oferta — SaaS | `Oi — vim da Oferta, card SaaS. Preciso saber se vocês pegam meu sistema e qual é o próximo passo.` |
+| `WA_MSG_OFFER_APP` | Oferta — Aplicativo | `Oi — vim da Oferta, card aplicativo. Quero conversar sobre app ou PWA e próximos passos.` |
 
-A serem adicionadas neste ciclo (ver `cycles/Q22026/0417-conversion-focused-landing/tasks.md` §7):
-
-- `WA_MSG_OFFER_LANDING` — CTA do card Landing Page na seção Oferta.
-- `WA_MSG_OFFER_SAAS` — CTA do card SaaS.
-- `WA_MSG_OFFER_APP` — CTA do card Aplicativo.
+A fonte única continua a ser o ficheiro TypeScript; a coluna "Texto canónico" resume o conteúdo acordado — pequenos ajustes de pontuação podem ocorrer no código desde que mantenham origem, 1ª pessoa e limites de tamanho.
 
 ### 1.4 Regras de escrita das mensagens
 

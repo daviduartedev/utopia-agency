@@ -4,35 +4,35 @@
  */
 
 export const WA_MSG_NAV =
-  "Quero falar com a Utopia AGORA — vim pelo menu do site. Podemos conversar?";
+  "Oi, vim pelo menu do site da Utopia. Quero meu site profissional no ar e quero alinhar escopo.";
 
 export const WA_MSG_FOOTER =
-  "Quero meu projeto com a Utopia AGORA — vim pelo rodapé do site.";
+  "Oi, vim pelo rodapé da Utopia. Quero meu site profissional e quero falar com vocês no WhatsApp.";
 
 export const WA_MSG_HERO =
-  "QUERO MEU PROJETO AGORA — vim pela página inicial da Utopia. Quero alinhar prazo e escopo hoje.";
+  "Oi, vim pelo botão principal do site da Utopia. Quero site, landing ou sistema pensado pra resultado.";
 
 export const WA_MSG_CTA_SECTION =
-  "Quero meu projeto AGORA — vim da secção de destaque do site. Bora começar?";
+  "Oi, vim da chamada final antes do formulário. Quero meu site profissional (landing) ou quero alinhar outro escopo com prazo e valor.";
 
 export const WA_MSG_FLOATING =
-  "Quero falar AGORA — vim pelo atalho do site da Utopia. Me chamem no WhatsApp.";
+  "Oi, vim do botão flutuante. Quero meu site profissional e quero falar agora com a Utopia.";
 
 export const WA_MSG_BOOK_CALL =
-  "Quero minha conversa grátis de 15 min AGORA — vim da secção Como funciona.";
+  "Oi, vim da seção Como funciona. Quero 15 minutos no WhatsApp pra alinhar dor, prazo e o que preciso no ar.";
 
 /** Fallback para Cta4 ou outros blocos genéricos */
 export const WA_MSG_DEFAULT_IMPACT =
-  "Quero começar meu projeto com a Utopia AGORA — me chamem no WhatsApp.";
+  "Oi, quero começar um projeto com a Utopia. Me chamem no WhatsApp.";
 
-/** Seção Oferta — Landing page a partir de R$ 999 */
+/** Seção Oferta: landing page a partir de R$ 999 */
 export const WA_MSG_OFFER_LANDING =
-  'Quero uma Landing Page da Utopia — vim pela seção Oferta do site. Entendi "a partir de R$ 999" e queria alinhar escopo e prazo.';
+  "Oi, abri a Oferta e quero meu site profissional (landing a partir de R$ 999). Quero data de publicação e escopo fechado.";
 
-/** Seção Oferta — SaaS sob consulta */
+/** Seção Oferta: sistema online sob consulta */
 export const WA_MSG_OFFER_SAAS =
-  "Quero conversar sobre um Sistema SaaS com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.";
+  "Oi, vim da Oferta, card sistema online. Preciso de painel ou fluxo interno e quero saber o próximo passo.";
 
-/** Seção Oferta — Aplicativos sob consulta */
+/** Seção Oferta: aplicativos sob consulta */
 export const WA_MSG_OFFER_APP =
-  "Quero conversar sobre um Aplicativo com a Utopia — vim pela seção Oferta do site. Queria entender escopo e próximos passos.";
+  "Oi, vim da Oferta, card aplicativo. Quero conversar sobre app pro celular e próximos passos.";

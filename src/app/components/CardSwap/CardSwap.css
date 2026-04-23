@@ -1,0 +1,50 @@
+.card-swap-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  perspective: 900px;
+  overflow: visible;
+  transform-origin: center center;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0a0a;
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .card-swap-container {
+    transform: scale(0.88);
+  }
+}
+
+@media (max-width: 480px) {
+  .card-swap-container {
+    transform: scale(0.78);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-swap-container {
+    transform: none;
+  }
+  @media (max-width: 768px) {
+    .card-swap-container {
+      transform: scale(0.88);
+    }
+  }
+  @media (max-width: 480px) {
+    .card-swap-container {
+      transform: scale(0.78);
+    }
+  }
+}

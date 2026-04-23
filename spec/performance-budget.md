@@ -5,6 +5,7 @@ Documento vivo: o contrato abaixo reflete a arquitetura atual da LP e é **atual
 ## 1. Contrato implícito atual
 
 - Hero renderiza no chunk inicial. Plasma (OGL/WebGL) é **lazy** (`React.lazy`), só carrega após `requestIdleCallback` no desktop e nunca em mobile estreito (< 640px). Fallback visual é um gradiente radial.
+- **ShapeGrid** (canvas 2D no **corpo** da LP, abaixo do hero): animação contínua **apenas** em viewports **≥ 640px**; abaixo disso o componente fica omitido ou reduzido a fundo estático. Preferir **uma instância** partilhada + lazy/idle para não competir com LCP; `requestAnimationFrame` com cleanup; pausa em `prefers-reduced-motion` (ver `spec/features/shape-grid-background/readme.md`).
 - Seções abaixo do hero são todas **code-split** via `src/app/lazy-pages.tsx` + `LazySection` + `Suspense`, com `minHeight` explícito para não quebrar layout antes do chunk chegar.
 - Marquees e colunas em animação pausam quando fora do viewport (`section-anim-paused` em `theme.css`), reduzindo uso de CPU/GPU.
 - Imagens de portfólio e testimonials usam `loading="lazy"` + `decoding="async"` + `sizes`.
@@ -20,6 +21,7 @@ Ciclos de **refinamento visual** podem trocar ou acrescentar libs leves de layou
 | `framer-motion` / `motion` | entrada de seções; transições ao scroll no refinamento | médio; tree-shaking ok |
 | `@tsparticles/*` | disponível, **não usado** na LP | risco de import acidental — cuidado em PR |
 | `ogl` | Plasma do hero | médio; lazy + skip em mobile |
+| Canvas `ShapeGrid` | fundo geométrico pós-hero | baixo–médio; uma instância; skip < 640px; lazy/idle |
 | `recharts`, `react-dnd`, `react-day-picker`, `vaul` | disponíveis, **não usados** na LP | idem — não importar em arquivos da LP |
 
 ## 3. Alvos informativos (sem gate ainda)

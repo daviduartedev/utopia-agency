@@ -45,37 +45,37 @@ const offers: OfferRow[] = [
     },
     deadline: "Entrega em até 7 dias",
     includes: [
-      "Design em Figma + código-fonte entregue",
-      "Domínio e hospedagem configurados",
-      "SEO técnico básico",
-      "Analytics instalado",
-      "1 mês de suporte gratuito",
-      "Revisões inclusas na proposta",
+      "Página no ar com layout aprovado por você antes da publicação",
+      "Endereço do site e hospedagem configurados",
+      "Base pra Google indexar direito e te achar na busca",
+      "Contagem de visitas ligada pra você ver o movimento",
+      "1 mês de suporte gratuito depois do lançamento",
+      "Revisões dentro do que combinamos na proposta",
     ],
-    ctaText: "Quero minha landing",
+    ctaText: "Quero meu site profissional",
     ctaHref: whatsappHref(WA_MSG_OFFER_LANDING),
     ctaAriaLabel: "Falar sobre landing page no WhatsApp",
     featured: true,
   },
   {
     id: "saas",
-    label: "Sistema SaaS",
+    label: "Sistema online",
     priceDisplay: {
       main: "sob consulta",
       suffix: "parcelável em 3×",
     },
     deadline: "Sob consulta",
     includes: [
-      "Design em Figma + código-fonte entregue",
-      "Banco e backend configurados",
-      "Autenticação + painel administrativo",
-      "Deploy com CI/CD",
-      "1 mês de suporte gratuito",
-      "Revisões inclusas na proposta",
+      "Telas e fluxo fechados na proposta antes de codar",
+      "Login e área restrita pra equipe ou cliente",
+      "Dados guardados com rotina de backup",
+      "Publicação com atualização segura quando mudar algo",
+      "1 mês de suporte gratuito depois do lançamento",
+      "Revisões dentro do que combinamos na proposta",
     ],
-    ctaText: "Falar sobre meu SaaS",
+    ctaText: "Quero meu sistema online",
     ctaHref: whatsappHref(WA_MSG_OFFER_SAAS),
-    ctaAriaLabel: "Falar sobre sistema SaaS no WhatsApp",
+    ctaAriaLabel: "Falar sobre sistema online no WhatsApp",
   },
   {
     id: "app",
@@ -86,13 +86,13 @@ const offers: OfferRow[] = [
     },
     deadline: "Sob consulta",
     includes: [
-      "Design em Figma + código-fonte entregue",
-      "Build mobile (iOS/Android) ou PWA",
-      "Integrações de push/analytics",
-      "1 mês de suporte gratuito",
-      "Revisões inclusas na proposta",
+      "Telas pensadas primeiro pro uso no celular",
+      "Versão pra instalar nas lojas ou abrir pelo navegador no telefone",
+      "Aviso pro cliente e números básicos de uso",
+      "1 mês de suporte gratuito depois do lançamento",
+      "Revisões dentro do que combinamos na proposta",
     ],
-    ctaText: "Falar sobre meu app",
+    ctaText: "Quero falar sobre app",
     ctaHref: whatsappHref(WA_MSG_OFFER_APP),
     ctaAriaLabel: "Falar sobre aplicativo no WhatsApp",
   },
@@ -110,7 +110,7 @@ export function Offer() {
     <section
       id="oferta"
       aria-labelledby="oferta-heading"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
     >
       <div
         aria-hidden="true"
@@ -123,8 +123,8 @@ export function Offer() {
         <SectionHeader
           id="oferta-heading"
           eyebrow="Oferta"
-          title="O que você recebe, quando e por quanto."
-          description="Sem letras miúdas. Escopo e condições definidos na proposta."
+          title="Valor na mesa. Prazo escrito."
+          description="Landing com preço de entrada e data. Painel e app só depois de conversa séria, sem promessa vazia."
           className="mb-10 md:mb-14"
         />
       </motion.div>
@@ -186,7 +186,7 @@ export function Offer() {
                           id={titleId}
                           className="text-[clamp(1.5rem,4vw,2rem)] font-medium leading-none tracking-[-0.02em] text-white"
                           style={{
-                            fontFamily: "var(--font-display), Georgia, serif",
+                            fontFamily: "var(--font-display)",
                           }}
                         >
                           {offer.priceDisplay.main}
@@ -256,7 +256,7 @@ export function Offer() {
           className="mx-auto mt-10 max-w-2xl text-center text-[13px] leading-relaxed text-zinc-400 md:text-sm"
           style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         >
-          Para iniciar: sinal mínimo de 30% (ou 1 parcela). O restante é combinado na proposta — sem surpresa depois.
+          Para iniciar: sinal mínimo de 30% (ou 1 parcela). O restante é combinado na proposta, sem surpresa depois.
         </p>
       </div>
 

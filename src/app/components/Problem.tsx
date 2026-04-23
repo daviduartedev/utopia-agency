@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowDownRight, Ghost, Hourglass } from "lucide-react";
+import { Search, Share2, Wallet } from "lucide-react";
 import { SectionHeader } from "./ui/section-header";
 import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
@@ -12,21 +12,21 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    title: "Visita que não vira contato",
-    body: "O tráfego chega, mas ninguém te chama. A página não diz o que você vende, não aponta um próximo passo claro e o visitante sai antes de decidir.",
-    icon: <ArrowDownRight className="size-4 text-amber-400" strokeWidth={1.75} />,
+    title: "Busca no Google, você não aparece",
+    body: "Cliente digita o serviço na cidade. Aparece mapa, foto, avaliação do outro. Você nem entra na briga. O orçamento nasce ali, e não no seu WhatsApp.",
+    icon: <Search className="size-4 text-amber-400" strokeWidth={1.75} />,
     accent: "from-amber-500/30 to-amber-500/5",
   },
   {
-    title: "Orçamento caro, prazo longo, proposta burocrática",
-    body: "Você pede um site e recebe um PDF de 30 páginas, cronograma de três meses e uma fatura que só faz sentido para uma grande empresa. O projeto nunca sai do papel.",
-    icon: <Hourglass className="size-4 text-violet-400" strokeWidth={1.75} />,
+    title: "Só indicação e post não enchem agenda",
+    body: "Feed some. Grupo esfria. Indicação vem quando vem. Sem página séria, você fica refém de sorte e não sabe quanto entra no mês.",
+    icon: <Share2 className="size-4 text-violet-400" strokeWidth={1.75} />,
     accent: "from-violet-500/30 to-violet-500/5",
   },
   {
-    title: "Agência que some depois da entrega",
-    body: "O site vai ao ar, o suporte some. Um bug pequeno vira semana parada. Qualquer evolução exige um novo contrato.",
-    icon: <Ghost className="size-4 text-sky-400" strokeWidth={1.75} />,
+    title: "Sem presença clara, não fecha",
+    body: "Gente nova abre o link e desconfia. Sem prova, sem texto direto e sem chamada óbvia, ela chama quem parece mais estabelecido. Você perde na primeira impressão.",
+    icon: <Wallet className="size-4 text-sky-400" strokeWidth={1.75} />,
     accent: "from-sky-500/30 to-sky-500/5",
   },
 ];
@@ -41,7 +41,7 @@ export function Problem() {
   return (
     <section
       id="problema"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="problema-heading"
     >
       <div
@@ -54,9 +54,9 @@ export function Problem() {
       <motion.div {...headerMotion}>
         <SectionHeader
           id="problema-heading"
-          eyebrow="O problema"
-          title="Seu site hoje não está fazendo a parte dele."
-          description="Três situações que consomem oportunidade todo mês — e que a gente resolve por padrão."
+          eyebrow="O que está errado hoje"
+          title="Três jeitos de perder cliente sem perceber"
+          description="Não é preguiça sua. É falta de lugar na internet que explica, prova e pede contato."
           className="mb-12 md:mb-16"
         />
       </motion.div>

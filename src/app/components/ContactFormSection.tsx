@@ -101,7 +101,7 @@ export function ContactFormSection() {
   return (
     <section
       id="contato"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="contato-heading"
     >
       <div
@@ -115,8 +115,8 @@ export function ContactFormSection() {
         <SectionHeader
           id="contato-heading"
           eyebrow="Contato"
-          title="Fale com a gente sobre o seu projeto."
-          description="Prefere escrever? Envie pelo formulário — respondemos em até um dia útil e continuamos a conversa no WhatsApp."
+          title="Prefere escrever antes de falar?"
+          description="Manda nome, telefone e o que você vende. A gente lê, responde em até um dia útil e já abre o WhatsApp com contexto."
           className="mb-12 md:mb-14"
         />
       </motion.div>
@@ -201,14 +201,14 @@ export function ContactFormSection() {
               <option value="" disabled className="bg-zinc-900 text-zinc-400">
                 Selecione uma opção
               </option>
-              <option value="Landing page ou site" className="bg-zinc-900">
-                Landing page ou site
+              <option value="Site ou landing page" className="bg-zinc-900">
+                Site ou landing page
               </option>
-              <option value="SaaS ou painel administrativo" className="bg-zinc-900">
-                SaaS ou painel administrativo
+              <option value="Painel ou sistema interno" className="bg-zinc-900">
+                Painel ou sistema interno
               </option>
-              <option value="App mobile ou PWA" className="bg-zinc-900">
-                App mobile ou PWA
+              <option value="App no celular" className="bg-zinc-900">
+                App no celular
               </option>
               <option value="Outro ou ainda não sei" className="bg-zinc-900">
                 Outro ou ainda não sei

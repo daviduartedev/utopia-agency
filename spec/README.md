@@ -22,6 +22,10 @@ spec/
     conversion-landing/     LP principal da Utopia.
       readme.md
       sections/             Um doc por seção da LP (estado atual).
+    card-swap/              Componente reutilizável (pilha 3D) usado no portfólio.
+      readme.md
+    shape-grid-background/  Canvas de grelha animada no corpo da LP (não no hero).
+      readme.md
 ```
 
 ## Convenções
@@ -36,3 +40,5 @@ spec/
 ## Features ativas
 
 - [`features/conversion-landing/`](features/conversion-landing/readme.md) — Landing page pública da Utopia, focada em conversão para WhatsApp.
+- [`features/card-swap/`](features/card-swap/readme.md) — `CardSwap` (GSAP), canónico na secção de portfólio.
+- [`features/shape-grid-background/`](features/shape-grid-background/readme.md) — `ShapeGrid` (canvas 2D), fundo do corpo da LP; hero continua só com Plasma + gradiente.

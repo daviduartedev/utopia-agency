@@ -21,3 +21,8 @@ export function useMediaQuery(query: string): boolean {
 export function useIsNarrowMobile(): boolean {
   return useMediaQuery("(max-width: 767px)");
 }
+
+/** Alinhado ao budget do Plasma / ShapeGrid: animação só a partir de 640px. */
+export function useIsMinWidth640(): boolean {
+  return useMediaQuery("(min-width: 640px)");
+}

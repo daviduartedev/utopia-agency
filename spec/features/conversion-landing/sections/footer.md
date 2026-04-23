@@ -11,12 +11,12 @@ Fechar a página com navegação secundária, selos de stack (reforço qualitati
 
 - **Coluna esquerda**: `BrandLogo` + slogan + faixa de ícones de stack.
 - **Coluna direita / navegação**: links para âncoras `#inicio`, `#ofertas`, `#como-funciona`, `#portfolio`, `#depoimentos`, `#faq` + CTA WhatsApp "Quero meu projeto" apontando para `whatsappHref(WA_MSG_FOOTER)`.
-- **Linha inferior**: copyright (`© <ano atual> Utopia Studio. Todos os direitos reservados.`) + links `Termos` e `Privacidade`.
+- **Linha inferior**: copyright (`© <ano atual> Utopia Studio. Todos os direitos reservados.`) + link **Instagram** (`SiInstagram`, `https://www.instagram.com/utopia_digital.lab/`, nova aba) + links `Termos` e `Privacidade`.
 
 ## 3. Copy canônica
 
-- Slogan sob o logo: `Landing pages, SaaS e apps — entrega rápida com padrão premium.`
-- Link persistente: `Quero meu projeto` → WhatsApp (mesma mensagem `WA_MSG_FOOTER`).
+- Slogan sob o logo: `Landing, SaaS e app — da dor mal explicada ao produto no ar, com prazo combinado.`
+- Link persistente: `Quero conversar` → WhatsApp (mesma mensagem `WA_MSG_FOOTER`).
 
 ## 4. Stack icons
 
@@ -33,7 +33,7 @@ Hoje `Termos` e `Privacidade` são `href="#"` (sem destino). É **débito conhec
 
 - `<footer>` semântico, border superior `white/10`.
 - `<nav aria-label="Rodapé">` para o bloco de navegação.
-- Link externo (WhatsApp) tem `target="_blank" rel="noopener noreferrer"`.
+- Links externos (WhatsApp, Instagram) têm `target="_blank" rel="noopener noreferrer"`; Instagram com `aria-label` descritivo no ícone.
 
 ## 7. Não fazer
 

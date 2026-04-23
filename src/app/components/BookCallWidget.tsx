@@ -39,13 +39,13 @@ export function BookCallWidget({
             className="text-base font-semibold tracking-tight text-zinc-900"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
-            Marcar uma conversa
+            15 minutos no WhatsApp
           </p>
           <p
             className="mt-0.5 text-sm leading-snug text-zinc-500"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
-            15 minutos gratuitos com nossa equipe para falarmos sobre o seu projeto.
+            A gente ouve o que você vende, o que não está funcionando hoje e se faz sentido colocar página no ar rápido. Sem compromisso.
           </p>
         </div>
       </div>
@@ -58,7 +58,7 @@ export function BookCallWidget({
         style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
       >
         <CalendarPlus className="size-5 shrink-0 text-white" strokeWidth={2} aria-hidden />
-        Quero agendar agora
+        Quero minha vaga
       </a>
     </div>
   );

@@ -1,43 +1,41 @@
 # Solução — Serviços
 
 **Componente:** `src/app/components/OfferingsScrollStack.tsx` (nome do arquivo pode permanecer; o **layout interno** deve seguir este spec e não é mais prescrito como `ScrollStack` empilhando três cartões no scroll).
-**Posição:** 4ª seção (depois de ClientLogos).
+**Posição:** 4ª secção (depois de ClientLogos).
 **Âncora:** `#ofertas` (mantida por retrocompatibilidade de navegação).
 
-> Apesar do id `#ofertas`, esta seção apresenta os **serviços** como solução. A seção comercial com preço se chama `Offer` e tem id próprio — ver `offer.md`.
+> Apesar do id `#ofertas`, esta secção apresenta os **serviços** como solução. A secção comercial com preço chama-se `Offer` e tem id próprio — ver `offer.md`.
 
 ## 1. Objetivo de funil
 
-Depois de a dor ser nomeada (seção Problema), esta seção mostra **em que formatos** a Utopia responde: Landing Page, Sistema SaaS, Aplicativo.
+Depois de a dor ser nomeada (secção Problema), esta secção mostra **em que formatos** a Utopia responde: cada formato liga-se ao problema de **clareza, prazo e contato**.
 
 ## 2. Copy canônica
 
-- **Title**: `Nossos serviços`
-- **Description**: `Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega.`
+- **Title**: `O que a gente constrói pra você`
+- **Description**: `Landing page, SaaS ou app — três formatos com o mesmo jeito de entregar: direto, com prazo escrito e conversa no WhatsApp.`
 
 ### Três cards (ordem fixa)
 
-1. **Landing pages** — kicker `Conversão e clareza`
-   Body: `Landing pages e sites de produto para converter visita em contato. Mensagem clara, layout objetivo e performance real.`
+1. **Landing pages** — kicker `Contato, não vitrine`
+   Body: `Página de produto que diz o que você vende em segundos, leva o visitante pro WhatsApp ou pro formulário, e carrega rápido no celular.`
 
-2. **Sistemas SaaS** — kicker `Operação e escala`
-   Body: `Sistemas SaaS e painéis customizados para sua equipe operar e medir. Integrações sólidas e escala sem gargalo técnico.`
+2. **Sistemas SaaS** — kicker `Operação no painel`
+   Body: `Painéis e SaaS sob medida: login, dados e fluxos que sua equipe usa no dia a dia, sem virar projeto eterno de agência.`
 
-3. **Aplicativos** — kicker `Mobile & PWA`
-   Body: `Aplicativos mobile e PWA com fluxos simples e onboarding inteligente. Experiência pensada para o uso no dia a dia.`
-
-> Copy ajustada do original: "converter visita em lead" → "converter visita em contato" (alinhamento com o vocabulário do request).
+3. **Aplicativos** — kicker `Uso no bolso`
+   Body: `App mobile ou PWA com telas enxutas: o cliente agenda, paga ou acompanha pedido sem fricção.`
 
 ## 3. Visual
 
 - Cabeçalho: `SectionHeader` com `compactDescription` — margem entre o `h2` e o parágrafo um pouco menor que o padrão global.
-- **Formato livre (ciclo atual):** a apresentação dos três serviços **não** usa mais o padrão canônico de três cartões com **`ScrollStack`** empilhando no scroll. O implementador escolhe um arranjo **claramente diferenciado** (ex.: faixas horizontais alternadas, painel em destaque + secundários, bento assimétrico, sequência editorial), mantendo a ordem e a copy dos três itens.
+- **Formato livre (ciclo actual):** a apresentação dos três serviços **não** usa mais o padrão canónico de três cartões com **`ScrollStack`** empilhando no scroll. O implementador escolhe um arranjo **claramente diferenciado** (ex.: faixas horizontais alternadas, painel em destaque + secundários, bento assimétrico, sequência editorial), mantendo a ordem e a copy dos três itens.
 - Imagens de apoio (se houver) continuam otimizadas (`loading`/`sizes` adequados) e não devem competir com o texto.
 - Mobile estreito (`<640px`): priorizar leitura e rolagem fluida; evitar gestos ou efeitos que dependam de scroll “preso”.
 
 ## 4. CTA
 
-Nenhum CTA explícito por card. O card serve de apresentação; a conversão acontece no bloco `Offer` (seção 9) e nos CTAs persistentes.
+Nenhum CTA explícito por card. O card serve de apresentação; a conversão acontece no bloco `Offer` (secção 9) e nos CTAs persistentes.
 
 ## 5. Acessibilidade
 
@@ -46,6 +44,6 @@ Nenhum CTA explícito por card. O card serve de apresentação; a conversão aco
 
 ## 6. Não fazer
 
-- Não mudar `#ofertas` para outra âncora sem atualizar `Navbar` e `Footer` juntos.
+- Não mudar `#ofertas` para outra âncora sem actualizar `Navbar` e `Footer` juntos.
 - Não reordenar os três cards — Landing é a porta de entrada comercial (preço-âncora), vem primeiro.
-- Não voltar ao layout canônico antigo de **três cartões + `ScrollStack`** como padrão principal desta seção neste ciclo.
+- Não voltar ao layout canónico antigo de **três cartões + `ScrollStack`** como padrão principal desta secção neste ciclo.

@@ -9,7 +9,7 @@ Informal: **WCAG 2.2 AA** em contraste e navegação por teclado. Sem auditoria 
 ## 2. Convenções em vigor
 
 - Todas as seções usam `<section aria-labelledby="...-heading">` com o `<h2>` do `SectionHeader` referenciado.
-- `aria-hidden="true"` nas hairlines decorativas (`h-px bg-white/10`) e nos fundos (Plasma, gradientes).
+- `aria-hidden="true"` nas hairlines decorativas (`h-px bg-white/10`) e nos fundos (Plasma, gradientes, canvas `ShapeGrid` no corpo da LP).
 - `alt=""` em imagens decorativas (ex.: avatar do `BookCallWidget`); `alt` descritivo nas imagens de conteúdo (portfólio).
 - Foco visível via `focus-visible:ring-white/50` + `ring-offset-page-surface`.
 - Menu mobile com `aria-expanded`, `aria-controls`, `aria-label` dinâmico.
@@ -27,16 +27,17 @@ Texto principal sobre `--page-surface #0a0a0a`:
 ## 4. Motion
 
 - `prefers-reduced-motion: reduce` já cancela marquees e coluna infinita de testimonials (ver `theme.css`).
+- **ShapeGrid:** com `reduce`, a animação da grelha fica **parada** (frame estático ou componente sem loop).
 - Entradas `motion` de seção continuam ativas — impacto leve, aceitável.
 
-## 5. Carrossel de portfólio (após ciclo)
+## 5. Pilha 3D de portfólio (CardSwap)
 
-Quando o Portfolio migrar para Embla neste ciclo:
+A secção de portfólio usa a pilha animada `CardSwap` (GSAP) em cima de uma **região** de trabalhos selecionados, não o padrão de carrossel horizontal com setas (Embla foi usado noutro contexto, não no stack actual).
 
-- Container com `role="region"` + `aria-roledescription="carousel"` + `aria-label`.
-- Botões prev/next com `aria-label` explícito ("Ver case anterior", "Ver próximo case").
-- Navegação por teclado: setas esquerda/direita movem um slot.
-- Slides com `aria-roledescription="slide"` e `aria-label` com posição (ex.: "Case 2 de 5").
+- Região com rótulo coerente (ex. “Trabalhos selecionados”); não impor `aria-roledescription="carousel"` se a UX for só rotação em pilha.
+- A legenda visível (título + escopo) acompanha o case **em frente**; anúncio para tecnologias assistivas conforme o contrato em [`features/conversion-landing/sections/portfolio.md`](features/conversion-landing/sections/portfolio.md) §6 (incl. `aria-live` opcional e cuidado com *spam*). Os cards **não** têm link de demo; o rótulo e `alt` das imagens alinham com o título do case.
+- `prefers-reduced-motion: reduce` → rotação automática desligada, pilha estática.
+- Navegação por setas **não** é o contrato principal; Tab/foco evitam armadilhas.
 
 ## TODO (futuros ciclos)
 

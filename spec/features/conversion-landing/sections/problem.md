@@ -6,24 +6,24 @@
 
 ## 1. Objetivo de funil
 
-Fazer o visitante **se reconhecer** em pelo menos uma das dores. Sem reconhecimento, a próxima seção (Serviços) soa genérica.
+Fazer o visitante **se reconhecer** em pelo menos uma das dores — com **consequência** explícita para o negócio, em tom de conversa (não relatório). Sem reconhecimento, a secção de Serviços soa genérica.
 
 ## 2. Copy canônica
 
 - **Eyebrow**: `O problema`
-- **Title**: `Seu site hoje não está fazendo a parte dele.`
-- **Description**: `Três situações que consomem oportunidade todo mês — e que a gente resolve por padrão.`
+- **Title**: `Seu produto existe. Sua página não fecha.`
+- **Description**: `Três padrões que a gente vê toda semana quando um fundador abre o site no celular.`
 
 ### Três pontos de dor (ordem fixa; apresentação livre)
 
-1. **`Visita que não vira contato`**
-   O tráfego chega, mas ninguém te chama. A página não diz o que você vende, não aponta um próximo passo claro e o visitante sai antes de decidir.
+1. **`Tráfego que morre na página`**
+   O link ou o anúncio até trazem gente. Só que ninguém entende em dez segundos o que você vende, não tem botão óbvio e o visitante sai antes de te chamar.
 
-2. **`Orçamento caro, prazo longo, proposta burocrática`**
-   Você pede um site e recebe um PDF de 30 páginas, cronograma de três meses e uma fatura que só faz sentido para uma grande empresa. O projeto nunca sai do papel.
+2. **`Orçamento que não cabe no bolso`**
+   Você pede um site e volta um PDF enorme, prazo de trimestre e valor de empresa grande. Na prática o projeto nunca começa.
 
-3. **`Agência que some depois da entrega`**
-   O site vai ao ar, o suporte some. Um bug pequeno vira semana parada. Qualquer evolução exige um novo contrato.
+3. **`Suporte que some depois do ar`**
+   O deploy passa, o WhatsApp esfria. Ajuste pequeno vira fila. Qualquer evolução vira novo contrato do zero.
 
 Cada card tem um ícone discreto (`lucide-react`): `ArrowDownRight`, `Hourglass`, `Ghost` (ou equivalente decidido no PR).
 
@@ -36,7 +36,7 @@ Cada card tem um ícone discreto (`lucide-react`): `ArrowDownRight`, `Hourglass`
 
 ## 4. CTA
 
-Nenhum CTA explícito nesta seção. O próximo passo é a **rolagem** natural para Serviços.
+Nenhum CTA explícito nesta secção. O próximo passo é a **rolagem** natural para logos e Serviços.
 
 ## 5. Acessibilidade
 

@@ -6,25 +6,23 @@
 
 ## 1. Objetivo de funil
 
-Em até 5 segundos, o visitante entende:
-- **O que** a Utopia entrega (produto digital);
-- **Para quem** (negócio que quer vender);
-- **Como começar** (um clique, WhatsApp).
+Em poucos segundos, o visitante **reconhece a dor** (site que não gera contato), entende **quem resolve** (Utopia) e **como destravar** (WhatsApp). A promessa comercial concreta (7 dias, `R$ 999`) só entra na subheadline quando já houver contexto — ver `offer.md` / `product.md`.
 
 ## 2. Copy canônica
 
 - **Eyebrow**: `Utopia Studio`
 - **Headline (2 linhas)**:
-  - linha 1 (tagline1): `Produto digital`
-  - linha 2 (tagline2): `pronto para vender`
-- **Subheadline**: `Agência focada em landing pages, sistemas SaaS e aplicativos: briefing objetivo, prazos curtos e entrega eficiente — sem abrir mão do acabamento premium.`
-- **CTA primário**: `Quero meu projeto agora` → `whatsappHref(WA_MSG_HERO)`.
+  - linha 1 (tagline1): `Visitas chegam.`
+  - linha 2 (tagline2): `Contato não entra.`
+- **Subheadline** (`ctaDescription` no componente — uma frase, 14–28 palavras): `Seu site não explica o produto nem pede contato — a gente entrega uma landing page clara em até 7 dias, com valor e escopo na proposta.`
+- **CTA primário** (`primaryCtaLabel`): `Quero falar agora` → `whatsappHref(WA_MSG_HERO)`.
+- **Linha de confiança** (opcional, abaixo do CTA, `footnote`): `Proposta curta · resposta rápida · sem vitrine vazia`
 
-Sem CTA secundário nessa etapa (ciclo atual).
+Sem CTA secundário nesta etapa.
 
 ## 3. Visual
 
-- Fundo: gradiente radial dark + `Plasma` (OGL/WebGL) lazy no desktop.
+- Fundo: gradiente radial dark + `Plasma` (OGL/WebGL) lazy no desktop — **exclusivo desta secção**; o fundo animado em canvas **`ShapeGrid` não entra no hero** (ver `spec/features/shape-grid-background/readme.md` para o corpo da LP).
 - Mobile estreito (< 640px): só gradiente (Plasma desabilitado — ver `spec/performance-budget.md`).
 - Overlay: duas camadas de `bg-gradient` pretas para garantir contraste do texto.
 - Tipografia do headline: `Fraunces` (display), `clamp(2.6rem, 6.5vw, 5rem)`, tracking `-0.03em`.
@@ -41,6 +39,6 @@ Sem CTA secundário nessa etapa (ciclo atual).
 
 ## 6. Não fazer
 
-- Não adicionar um terceiro elemento de fundo (ex.: partículas adicionais).
+- Não adicionar um terceiro elemento de fundo **dentro do hero** (ex.: partículas adicionais nem `ShapeGrid` aqui).
 - Não mover a âncora `#inicio` para outro componente.
-- Não trocar a headline por algo com a palavra "transforme" (blacklist).
+- Não usar interrogação no headline nem verbos da blacklist (`content-guidelines.md` §4).

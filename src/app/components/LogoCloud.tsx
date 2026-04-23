@@ -59,7 +59,7 @@ export function LogoCloud() {
   return (
     <section
       id="stack"
-      className="relative z-10 w-full overflow-hidden bg-page-surface py-20"
+      className="relative z-10 w-full overflow-hidden bg-black py-20"
     >
       <div
         aria-hidden="true"
@@ -94,7 +94,7 @@ export function LogoCloud() {
         <div className="absolute inset-x-8 top-0 h-px bg-white/10 md:inset-x-12" />
         <div className="absolute inset-x-8 bottom-0 h-px bg-white/10 md:inset-x-12" />
 
-        <div className="relative flex min-h-[200px] w-full items-center overflow-hidden rounded-2xl border border-white/10 bg-page-surface md:min-h-[220px]">
+        <div className="relative flex min-h-[200px] w-full items-center overflow-hidden rounded-2xl border border-white/10 bg-black md:min-h-[220px]">
           <LogoLoop
             logos={stackLogos}
             speed={100}

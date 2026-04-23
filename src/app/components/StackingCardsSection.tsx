@@ -8,7 +8,7 @@ const projects: ProjectData[] = [
     icon: <Code size={20} className="text-zinc-600" />,
     title: 'Alinhamento rápido no que importa',
     description:
-      'Escopo claro para landing, SaaS ou app: priorizamos o que vende e o que precisa estar no ar primeiro — sem semanas em reunião infinita.',
+      'Escopo claro para landing, SaaS ou app: priorizamos o que vende e o que precisa estar no ar primeiro, sem semanas em reunião infinita.',
     url: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
@@ -26,7 +26,7 @@ const projects: ProjectData[] = [
     icon: <Pencil size={20} className="text-zinc-600" />,
     title: 'Acabamento premium, performance real',
     description:
-      'UI polida, código enxuto e stack atual — para seu site ou sistema carregar rápido, converter melhor e aguentar escala.',
+      'UI polida, código enxuto e stack atual, para seu site ou sistema carregar rápido, converter melhor e aguentar escala.',
     url: 'https://images.unsplash.com/photo-1675271591211-126ad94e495d?q=80&w=1200&auto=format&fit=crop',
     color: '#E5E5E5',
   },
@@ -43,7 +43,7 @@ const projects: ProjectData[] = [
 
 export function StackingCardsSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-page-surface py-20">
+    <section className="relative w-full overflow-hidden bg-black py-20">
       {/* Creme Digital Inspired Radial Gradient Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,120,244,0.4)_0%,rgba(240,113,165,0.3)_50%,rgba(125,194,251,0.2)_100%)] blur-[100px]" />

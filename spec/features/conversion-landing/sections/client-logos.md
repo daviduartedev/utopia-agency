@@ -15,7 +15,7 @@ Prova social leve imediatamente após reconhecer a dor em "Problema". Mostra que
 
 ## 3. Copy canônica
 
-- **Rótulo único acima dos logos** (`<p>`, caixa alta, tracking amplo): `Quem já trabalhou com a Utopia`
+- **Rótulo único acima dos logos** (`<p>`, caixa alta, tracking amplo): `Marcas que já passaram por aqui`
 - Sem título maior; sem description. É um banner silencioso.
 
 ## 4. Dataset (placeholders)

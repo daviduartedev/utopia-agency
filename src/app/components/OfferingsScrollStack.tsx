@@ -9,28 +9,28 @@ import { cn } from "./ui/utils";
 const STACK_ITEMS = [
   {
     id: "landing",
-    kicker: "Conversão e clareza",
-    title: "Landing pages",
+    kicker: "Onde a conversão nasce",
+    title: "Site e landing que pedem contato",
     body:
-      "Landing pages e sites de produto para converter visita em contato. Mensagem clara, layout objetivo e performance real.",
+      "Frase certa em cima. Prova no meio. Botão de WhatsApp ou formulário na cara. Quem busca no celular entende na hora e chama.",
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=85&w=1600&auto=format&fit=crop",
   },
   {
     id: "saas",
-    kicker: "Operação e escala",
-    title: "Sistemas SaaS",
+    kicker: "Quando o fluxo aperta",
+    title: "Painel e sistema interno",
     body:
-      "Sistemas SaaS e painéis customizados para sua equipe operar e medir. Integrações sólidas e escala sem gargalo técnico.",
+      "Agenda, pedido, cadastro, área do cliente: o que sua operação precisa num lugar só. Menos planilha solta, menos retrabalho.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
   },
   {
     id: "apps",
-    kicker: "Mobile & PWA",
-    title: "Aplicativos",
+    kicker: "No bolso",
+    title: "Aplicativo",
     body:
-      "Aplicativos mobile e PWA com fluxos simples e onboarding inteligente. Experiência pensada para o uso no dia a dia.",
+      "Cliente marca, paga ou acompanha pelo celular. Telas enxutas, linguagem simples, sem complicar o dia a dia de quem usa.",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1600&auto=format&fit=crop",
   },
@@ -56,14 +56,14 @@ export function OfferingsScrollStack() {
   return (
     <section
       id="ofertas"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface text-white"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient text-white"
       aria-labelledby="ofertas-heading"
     >
       <SectionHeader
         id="ofertas-heading"
         className="pb-8 pt-12 md:pb-10 md:pt-16"
-        title="Nossos serviços"
-        description="Landing pages, sistemas SaaS e aplicativos — três formatos, um mesmo padrão de entrega."
+        title="O que a gente coloca no ar pra você"
+        description="Primeiro a página que traz contato. Se o negócio pedir, a gente sobe pra painel ou app, sempre com escopo e prazo escritos."
         compactDescription
       />
 
@@ -114,7 +114,7 @@ export function OfferingsScrollStack() {
                   <h3
                     id={`oferta-${item.id}-title`}
                     className="text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl md:text-[2.1rem] md:leading-tight"
-                    style={{ fontFamily: "var(--font-display), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-display)" }}
                   >
                     {item.title}
                   </h3>

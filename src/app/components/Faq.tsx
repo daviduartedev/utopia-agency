@@ -12,28 +12,28 @@ import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref"
 
 const faqs = [
   {
-    q: "Qual é o prazo médio de entrega?",
-    a: "Landing page em até 7 dias. Sistemas SaaS e aplicativos ficam sob consulta — o prazo é combinado na proposta, antes de você confirmar qualquer coisa.",
+    q: "Quanto tempo demora?",
+    a: "Landing no ar em até 7 dias depois do combinado. Painel maior ou app: prazo e valor só na proposta, antes de você pagar qualquer sinal.",
   },
   {
-    q: "Preciso ter todo o conteúdo pronto para começar?",
-    a: "Não. Trabalhamos com o que você tem e ajudamos a estruturar o resto. Textos, imagens e materiais podem ser desenvolvidos ao longo do projeto — inclusive com apoio de copy quando necessário.",
+    q: "Preciso ter tudo escrito antes de começar?",
+    a: "Não. A gente parte do que você tem e monta o resto junto. Texto e imagem podem ir amadurecendo, o importante é começar com meta clara.",
   },
   {
-    q: "Como funciona o pagamento?",
-    a: "Sinal mínimo de 30% (ou 1 parcela) para iniciar. O restante é parcelado em até 3×, alinhado às entregas na proposta.",
+    q: "Como é o pagamento?",
+    a: "Sinal de 30% (ou uma parcela) pra iniciar. O resto em até 3×, amarrado às entregas que estão na proposta.",
   },
   {
-    q: "Posso solicitar alterações durante o projeto?",
-    a: "Sim. Existem rodadas de revisão previstas em cada etapa — design e desenvolvimento. Alterações fora do escopo acordado são tratadas como adicional, sempre com cotação transparente.",
+    q: "Posso mudar coisa no meio?",
+    a: "Sim, dentro das rodadas combinadas. Fora disso a gente cota à parte, sempre com número na mesa.",
   },
   {
-    q: "Vocês fazem manutenção pós-entrega?",
-    a: "Todo projeto já inclui 1 mês de suporte gratuito após o lançamento. Para manutenção contínua, atualizações e novas funcionalidades, fechamos um plano mensal ao final do projeto.",
+    q: "Depois que publica, vocês somem?",
+    a: "Não. Vai 1 mês de suporte no pacote. Depois, se quiser manutenção contínua, a gente fecha valor mensal separado.",
   },
   {
-    q: "Vocês atendem fora do Brasil?",
-    a: "Sim. Trabalhamos 100% remoto. Atendimento em português ou inglês; pagamento em BRL ou USD.",
+    q: "Atendem fora do Brasil?",
+    a: "Sim, 100% remoto. Português ou inglês. Pagamento em real ou dólar, como combinar.",
   },
 ];
 
@@ -43,7 +43,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="relative z-10 w-full scroll-mt-24 bg-page-surface py-12 md:py-16"
+      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="faq-heading"
     >
       <div
@@ -57,8 +57,8 @@ export function Faq() {
         <SectionHeader
           id="faq-heading"
           eyebrow="Dúvidas frequentes"
-          title="Perguntas que todo cliente faz."
-          description="Se a sua dúvida não estiver aqui, é só mandar uma mensagem — respondemos rápido."
+          title="O que segura a decisão"
+          description="Não achou? Chama no WhatsApp. A gente responde."
           className="mb-8 md:mb-10"
         />
       </motion.div>
