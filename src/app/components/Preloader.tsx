@@ -5,7 +5,7 @@
  *
  * Fases:
  *  1) "booting": fundo branco + HUD técnico (LOADING 0→100%, URL scroller,
- *     crosshair, CLICK TO ENABLE SOUND, SCROLL indicador).
+ *     crosshair, SCROLL indicador).
  *  2) "reveal":  logotipo UTOPIA entra por filtro goo (metaball leve em SVG)
  *     + stroke draw; letras se condensam até ficarem sólidas.
  *  3) "portal":  uma faixa vertical central se abre, revelando o hero atrás.
@@ -56,7 +56,6 @@ export function Preloader({ force = false, wordmark = "UTOPIA", onDone }: Preloa
 
   const [progress, setProgress] = useState(0);
   const [urlIndex, setUrlIndex] = useState(0);
-  const [soundEnabled, setSoundEnabled] = useState(false);
   const startRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
 
@@ -138,8 +137,6 @@ export function Preloader({ force = false, wordmark = "UTOPIA", onDone }: Preloa
       progress={progress}
       urlLabel={URL_SEGMENTS[urlIndex]}
       wordmark={wordmark}
-      soundEnabled={soundEnabled}
-      onToggleSound={() => setSoundEnabled((s) => !s)}
     />
   );
 }
@@ -149,10 +146,8 @@ function PreloaderView(props: {
   progress: number;
   urlLabel: string;
   wordmark: string;
-  soundEnabled: boolean;
-  onToggleSound: () => void;
 }) {
-  const { phase, progress, urlLabel, wordmark, soundEnabled, onToggleSound } = props;
+  const { phase, progress, urlLabel, wordmark } = props;
   const progressLabel = String(progress).padStart(3, "0");
   const showWordmark = phase === "reveal" || phase === "portal";
   const portalOpen = phase === "portal";
@@ -202,13 +197,7 @@ function PreloaderView(props: {
       {/* Conteúdo técnico da fase booting fica "escondido atrás" do portal
           mas como bg do portal é branco puro, só precisamos escondê-lo no reveal/portal. */}
       {phase === "booting" && (
-        <BootingHUD
-          progress={progress}
-          progressLabel={progressLabel}
-          urlLabel={urlLabel}
-          soundEnabled={soundEnabled}
-          onToggleSound={onToggleSound}
-        />
+        <BootingHUD progress={progress} progressLabel={progressLabel} urlLabel={urlLabel} />
       )}
 
       {/* REVEAL do wordmark — aparece a partir do fim do booting */}
@@ -239,10 +228,8 @@ function BootingHUD(props: {
   progress: number;
   progressLabel: string;
   urlLabel: string;
-  soundEnabled: boolean;
-  onToggleSound: () => void;
 }) {
-  const { progress, progressLabel, urlLabel, soundEnabled, onToggleSound } = props;
+  const { progress, progressLabel, urlLabel } = props;
 
   return (
     <>
@@ -256,26 +243,6 @@ function BootingHUD(props: {
           <path d="M14 0v8M14 20v8M0 14h8M20 14h28" />
         </svg>
       </div>
-
-      {/* Botão CLICK TO ENABLE SOUND (canto superior direito) */}
-      <button
-        onClick={onToggleSound}
-        className="absolute right-6 top-6 flex flex-col items-center gap-1 text-[10px] tracking-[0.22em] text-black/70 hover:text-black"
-        type="button"
-      >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/50">
-          {soundEnabled ? (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4l5-4v24l-5-4H6z" /></svg>
-          ) : (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-          )}
-        </span>
-        <span>{soundEnabled ? "SOUND ON" : "CLICK TO ENABLE SOUND"}</span>
-      </button>
 
       {/* Barra de loading centralizada */}
       <div className="absolute left-1/2 top-1/2 w-[min(720px,78vw)] -translate-x-1/2 -translate-y-1/2">
