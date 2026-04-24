@@ -186,7 +186,7 @@ export function CinematicHero({
             {subcopy}
           </p>
         ) : null}
-        <div className="flex w-full min-w-0 max-w-md flex-col items-center gap-4 sm:max-w-none">
+        <div className="flex w-full min-w-0 max-w-2xl flex-col items-center gap-4 sm:max-w-none">
           <div className="flex w-full flex-col gap-4 sm:flex-row sm:justify-center">
             <a
               href={whatsappHref(WA_MSG_HERO)}
@@ -214,7 +214,7 @@ export function CinematicHero({
           </div>
           {footnote ? (
             <p
-              className="pointer-events-auto max-w-md text-center text-[13px] font-medium uppercase tracking-[0.14em] text-zinc-500 sm:text-xs"
+              className="pointer-events-auto w-full text-center text-[clamp(10px,3.1vw,12px)] font-medium uppercase tracking-[0.08em] text-zinc-500 whitespace-nowrap sm:text-xs sm:tracking-[0.14em]"
               style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
             >
               {footnote}
