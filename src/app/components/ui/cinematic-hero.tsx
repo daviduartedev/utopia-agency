@@ -10,9 +10,39 @@ import { usePrefersReducedMotion } from "../../lib/motion-pref";
 import { cn } from "./utils";
 
 const PlasmaLazy = lazy(() => import("./plasma"));
+const Hero3DLazy = lazy(() =>
+  import("./Hero3DScene").then((m) => ({ default: m.Hero3DScene })),
+);
 
 const DESKTOP_HERO_FALLBACK =
   "absolute inset-0 bg-[radial-gradient(ellipse_120%_85%_at_50%_38%,#3f3f46_0%,#18181b_45%,#09090b_78%,#000_100%)]";
+
+function HeroHUD() {
+  return (
+    <>
+      {/* Crosshair esquerdo */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-5 top-1/2 z-[3] -translate-y-1/2 text-white/60"
+      >
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1">
+          <circle cx="14" cy="14" r="3" />
+          <path d="M14 0v8M14 20v8M0 14h8M20 14h28" />
+        </svg>
+      </div>
+      {/* Labels técnicos */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-6 top-6 z-[3] hidden gap-4 text-[10px] tracking-[0.22em] text-white/40 md:flex"
+        style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+      >
+        <span>UTOPIA/</span>
+        <span>NODE-01</span>
+        <span>R30</span>
+      </div>
+    </>
+  );
+}
 
 export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   tagline1?: string;
@@ -68,15 +98,22 @@ export function CinematicHero({
             <div aria-hidden className={cn("absolute inset-0", DESKTOP_HERO_FALLBACK)} />
             {desktopPlasmaReady && (
               <Suspense fallback={null}>
-                <div className="absolute inset-0 z-0 overflow-hidden">
+                {/* Plasma como atmosfera distante */}
+                <div className="absolute inset-0 z-0 overflow-hidden opacity-80">
                   <PlasmaLazy
-                    color="#52525b"
-                    speed={0.55}
+                    color="#3f3f46"
+                    speed={0.45}
                     direction="forward"
-                    scale={1.05}
-                    opacity={0.72}
-                    mouseInteractive
+                    scale={1.3}
+                    opacity={0.55}
+                    mouseInteractive={false}
                   />
+                </div>
+                {/* Objeto 3D (núcleo) no centro */}
+                <div className="absolute inset-0 z-[1] flex items-center justify-center">
+                  <div className="h-[70vh] w-[70vh] max-h-[720px] max-w-[720px]">
+                    <Hero3DLazy />
+                  </div>
                 </div>
               </Suspense>
             )}
@@ -85,12 +122,29 @@ export function CinematicHero({
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/30 to-black/85"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/70 via-black/30 to-black/85"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-transparent to-black/50"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-black/50 via-transparent to-black/50"
       />
+      {/* HUD técnico inspirado em KPR */}
+      <HeroHUD />
+      {/* Scroll indicator */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-6 right-6 z-[3] flex items-center gap-2 text-[10px] tracking-[0.22em] text-white/60"
+        style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+      >
+        <span>SCROLL</span>
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" stroke="currentColor" strokeWidth="1.2">
+          <rect x="1" y="1" width="8" height="12" rx="4" />
+          <line x1="5" y1="3" x2="5" y2="6">
+            <animate attributeName="y1" values="3;6;3" dur="1.4s" repeatCount="indefinite" />
+            <animate attributeName="y2" values="6;9;6" dur="1.4s" repeatCount="indefinite" />
+          </line>
+        </svg>
+      </div>
       <motion.div
         className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24"
         initial={

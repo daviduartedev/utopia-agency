@@ -4,6 +4,7 @@ import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
 import { LazySection } from "./components/LazySection";
 import { DeferredDemoOne } from "./components/DeferredDemoOne";
+import { Preloader } from "./components/Preloader";
 import {
   ImpactSection,
   Problem,
@@ -37,7 +38,10 @@ export default function App() {
       className="min-h-screen overflow-x-hidden bg-black pb-28 text-white antialiased selection:bg-white/15 sm:pb-10 md:pb-12"
       style={{ fontFamily: "var(--font-sans)" }}
     >
-      {/* 1. Hero — Plasma + gradiente (só aqui) */}
+      {/* Preloader cinematográfico (1x por aba, via sessionStorage) */}
+      <Preloader />
+
+      {/* 1. Hero — núcleo 3D + plasma atmosférico + HUD */}
       <div className="relative z-20 w-full">
         <main className="relative w-full">
           <Hero />

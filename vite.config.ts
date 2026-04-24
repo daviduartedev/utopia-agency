@@ -30,6 +30,7 @@ export default defineConfig({
             }
             if (id.includes("lenis")) return "lenis";
             if (id.includes("ogl")) return "ogl";
+            if (id.includes(`${path.sep}three${path.sep}`)) return "three";
             if (id.includes("@supabase")) return "supabase";
           },
         },
