@@ -43,16 +43,18 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 4,
-    title: "Painel administrativo para clínica",
-    scope: "Pacientes, prontuários e financeiro num fluxo único.",
-    image: null,
+    title: "Portfólio de arquitetura residencial (ATELIER)",
+    scope:
+      "Hero com headline “Onde arquitetura encontra emoção”, narrativa de residências atemporais, CTA para explorar projetos e visual noturno com tipografia serifada e alto contraste.",
+    image: "/portfolio-atelier-arquitetura.png",
     layout: "web",
   },
   {
     id: 5,
-    title: "Site institucional com blog",
-    scope: "Home, sobre, serviços e blog editável via CMS.",
-    image: null,
+    title: "Landing de eco design e permacultura (ATELIER)",
+    scope:
+      "Proposta “viva em equilíbrio com a natureza”: copy sobre projetos sustentáveis e design consciente, CTA para soluções sustentáveis e identidade minimalista sobre fotografia da casa de madeira.",
+    image: "/portfolio-atelier-eco-design.png",
     layout: "web",
   },
   {
@@ -68,19 +70,21 @@ function CasePreview({ project }: { project: PortfolioProject }) {
   return (
     <div
       className={cn(
-        "relative flex h-full min-h-0 w-full items-stretch overflow-hidden border border-white/10 bg-zinc-950",
+        "relative h-full min-h-0 w-full min-w-0 overflow-hidden border border-white/10 bg-zinc-950",
         "rounded-2xl",
       )}
     >
       {project.image ? (
-        <ImageWithFallback
-          src={project.image}
-          alt={project.title}
-          loading="lazy"
-          decoding="async"
-          sizes="(max-width: 767px) 92vw, 640px"
-          className="h-full w-full min-h-0 min-w-0 object-contain object-center"
-        />
+        <div className="absolute inset-0 min-h-0 min-w-0">
+          <ImageWithFallback
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 767px) 92vw, 768px"
+            className="h-full w-full object-contain object-center"
+          />
+        </div>
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-4 text-center">
           <div>
@@ -104,8 +108,9 @@ export function Portfolio() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const narrow = useIsNarrowMobile();
   const [frontIndex, setFrontIndex] = useState(0);
-  const w = narrow ? 340 : 640;
-  const h = Math.max(212, Math.round((w * 550) / 880));
+  // 16:9 combina melhor com screenshots de página inteira (menos corte lateral que o antigo ~880×550).
+  const w = narrow ? 380 : 768;
+  const h = Math.round((w * 9) / 16);
 
   const current = projects[frontIndex] ?? projects[0];
 
