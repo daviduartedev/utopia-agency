@@ -81,8 +81,8 @@ function CasePreview({ project }: { project: PortfolioProject }) {
             alt={project.title}
             loading="lazy"
             decoding="async"
-            sizes="(max-width: 767px) 92vw, 640px"
-            className="h-full w-full object-cover object-center"
+            sizes="(max-width: 767px) 92vw, 768px"
+            className="h-full w-full object-contain object-center"
           />
         </div>
       ) : (
@@ -108,8 +108,9 @@ export function Portfolio() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const narrow = useIsNarrowMobile();
   const [frontIndex, setFrontIndex] = useState(0);
-  const w = narrow ? 340 : 640;
-  const h = Math.max(212, Math.round((w * 550) / 880));
+  // 16:9 combina melhor com screenshots de página inteira (menos corte lateral que o antigo ~880×550).
+  const w = narrow ? 380 : 768;
+  const h = Math.round((w * 9) / 16);
 
   const current = projects[frontIndex] ?? projects[0];
 
