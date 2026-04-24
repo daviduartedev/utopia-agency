@@ -99,18 +99,18 @@ export function CinematicHero({
             {desktopPlasmaReady && (
               <Suspense fallback={null}>
                 {/* Plasma como atmosfera distante */}
-                <div className="absolute inset-0 z-0 overflow-hidden opacity-80">
+                <div className="absolute inset-0 z-0 overflow-hidden opacity-45">
                   <PlasmaLazy
                     color="#3f3f46"
                     speed={0.45}
                     direction="forward"
                     scale={1.3}
-                    opacity={0.55}
+                    opacity={0.45}
                     mouseInteractive={false}
                   />
                 </div>
-                {/* Objeto 3D (núcleo) no centro */}
-                <div className="absolute inset-0 z-[1] flex items-center justify-center">
+                {/* Objeto 3D (núcleo) no centro — leve para não competir com o texto */}
+                <div className="absolute inset-0 z-[1] flex items-center justify-center opacity-[0.55]">
                   <div className="h-[70vh] w-[70vh] max-h-[720px] max-w-[720px]">
                     <Hero3DLazy />
                   </div>
@@ -122,11 +122,16 @@ export function CinematicHero({
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/70 via-black/30 to-black/85"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/88 via-black/60 to-black/92"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-black/50 via-transparent to-black/50"
+        className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-black/75 via-black/35 to-black/75"
+      />
+      {/* Vignette extra no miolo: leitura do título e parágrafo */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_90%_72%_at_50%_46%,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.18)_55%,transparent_72%)]"
       />
       {/* HUD técnico inspirado em KPR */}
       <HeroHUD />
@@ -146,7 +151,7 @@ export function CinematicHero({
         </svg>
       </div>
       <motion.div
-        className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24"
+        className="relative z-20 flex w-full max-w-5xl flex-col items-center justify-center px-4 py-20 text-center pointer-events-none md:py-24"
         initial={
           prefersReducedMotion
             ? { opacity: 1, y: 0, x: 0 }
@@ -158,24 +163,24 @@ export function CinematicHero({
           ease: [0.22, 0.65, 0.36, 1],
         }}
       >
-        <p className="mb-5 text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+        <p className="mb-5 text-[13px] font-semibold uppercase tracking-[0.2em] text-zinc-300">
           Utopia Studio
         </p>
         <h1
           className={cn(
-            "text-[clamp(2.6rem,6.5vw,5rem)] font-medium leading-[1.1] tracking-[-0.03em] text-white",
+            "text-[clamp(2.6rem,6.5vw,5rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-white [text-shadow:0_2px_32px_rgba(0,0,0,0.92),0_1px_3px_rgba(0,0,0,0.9)]",
             hasBelowH1 ? "mb-8" : "mb-10 md:mb-12",
           )}
           style={{ fontFamily: "var(--font-display)" }}
         >
           <span className="block">{tagline1}</span>
           {tagline2Trim ? (
-            <span className="mt-2 block text-zinc-200 sm:mt-3">{tagline2Trim}</span>
+            <span className="mt-2 block text-zinc-100 sm:mt-3 [text-shadow:inherit]">{tagline2Trim}</span>
           ) : null}
         </h1>
         {subcopy ? (
           <p
-            className="mb-12 max-w-2xl text-[1.1rem] font-normal leading-relaxed text-zinc-300 sm:text-[1.2rem] md:text-xl"
+            className="mb-12 max-w-2xl text-[1.1rem] font-normal leading-relaxed text-zinc-100/95 sm:text-[1.2rem] md:text-xl [text-shadow:0_1px_18px_rgba(0,0,0,0.88)]"
             style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
           >
             {subcopy}
