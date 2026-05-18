@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Quote } from "lucide-react";
+import { useCallback, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { SectionHeader } from "./ui/section-header";
 import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
@@ -58,7 +59,7 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-function Initials({ name }: { name: string }) {
+function getInitials(name: string): string {
   return name
     .split(" ")
     .map((part) => part[0])
@@ -68,101 +69,133 @@ function Initials({ name }: { name: string }) {
     .toUpperCase();
 }
 
+/**
+ * Testimonials estilo Jax Orion — cluster de fotos no topo + card único navegável.
+ */
 export function Testimonials() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
-    delayIndex: 0,
-    lateral: true,
-  });
-  const [featured, ...rest] = testimonials;
+  const [index, setIndex] = useState(0);
+  const total = testimonials.length;
+
+  const goPrev = useCallback(
+    () => setIndex((i) => (i - 1 + total) % total),
+    [total],
+  );
+  const goNext = useCallback(() => setIndex((i) => (i + 1) % total), [total]);
+
+  const current = testimonials[index];
 
   return (
     <section
       id="depoimentos"
       aria-labelledby="depoimentos-heading"
-      className="relative z-10 w-full scroll-mt-28 bg-section-over-gradient py-12 text-zinc-100 md:py-16"
+      className="relative w-full bg-section-over-gradient py-24 md:py-32"
     >
-      <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-8 md:px-12">
-        <motion.div {...headerMotion}>
-          <SectionHeader
-            id="depoimentos-heading"
-            className="mb-8 md:mb-10"
-            eyebrow="Prova"
-            title="Quem já saiu da invisibilidade"
-            description="Negócios que precisavam de página clara, prazo cumprido e alguém que respondesse depois do ar."
-          />
-        </motion.div>
+      <SectionHeader
+        eyebrow="Depoimentos"
+        title="Vozes de confiança e resultado"
+        description="Negócios que precisavam de página clara, prazo cumprido e alguém que respondesse depois do ar."
+        id="depoimentos-heading"
+      />
 
-        <motion.div
-          {...scrollRevealMotion(prefersReducedMotion, {
-            delayIndex: 0,
-            lateral: true,
-          })}
-          className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 via-page-surface to-page-surface p-8 md:p-12"
-        >
+      {/* Cluster decorativo de avatares */}
+      <motion.div
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0 })}
+        className="mt-10 flex items-center justify-center"
+      >
+        <div className="flex -space-x-3">
+          {testimonials.slice(0, 5).map((t) => (
+            <div
+              key={t.id}
+              className={`relative inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 border-black bg-gradient-to-br ${t.gradient} text-[12px] font-semibold text-white shadow-lg`}
+            >
+              {getInitials(t.name)}
+            </div>
+          ))}
+          <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-black bg-zinc-800 text-[11px] font-medium text-zinc-300 shadow-lg">
+            +20
+          </div>
+        </div>
+      </motion.div>
+
+      <p className="mt-5 text-center text-[12px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+        Aprovado por quem confia · feito pra inspirar
+      </p>
+
+      {/* Card único com setas */}
+      <motion.div
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1 })}
+        className="mx-auto mt-12 w-full max-w-3xl px-4 sm:px-8 md:px-12"
+      >
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/70 p-8 backdrop-blur-sm md:p-12">
           <Quote
-            className="absolute right-6 top-6 size-16 text-emerald-400/10 md:size-24"
-            strokeWidth={1.25}
+            className="absolute right-6 top-6 h-12 w-12 text-white/[0.04]"
+            strokeWidth={1.5}
             aria-hidden
           />
-          <figure className="relative max-w-3xl">
-            <blockquote
-              className="m-0 border-none p-0 text-[clamp(1.125rem,2.4vw,1.5rem)] font-medium leading-snug tracking-[-0.02em] text-white"
-              style={{
-                fontFamily: "var(--font-display)",
-              }}
-            >
-              <p className="m-0">{featured.text}</p>
-            </blockquote>
-            <figcaption className="mt-8 flex items-center gap-4">
-              <span
-                aria-hidden
-                className={`inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-sm font-semibold text-white/95 ${featured.gradient}`}
-              >
-                <Initials name={featured.name} />
-              </span>
-              <cite className="not-italic">
-                <p className="text-base font-semibold text-white">{featured.name}</p>
-                <p className="text-sm text-zinc-500">{featured.role}</p>
-              </cite>
-            </figcaption>
-          </figure>
-        </motion.div>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:gap-7">
-          {rest.map((t, i) => (
-            <motion.figure
-              key={t.id}
-              {...scrollRevealMotion(prefersReducedMotion, {
-                delayIndex: i + 1,
-                lateral: true,
-              })}
-              className="group relative m-0 border-l-2 border-white/15 pl-6 transition-colors hover:border-emerald-400/40"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={
+                prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }
+              }
+              animate={{ opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.35 }}
             >
-              <blockquote
-                className="m-0 border-none p-0 text-[15px] leading-relaxed text-zinc-300"
-                style={{
-                  fontFamily: "var(--font-sans), system-ui, sans-serif",
-                }}
-              >
-                <p className="m-0">{t.text}</p>
-              </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3">
-                <span
-                  aria-hidden
-                  className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xs font-semibold text-white/90 ${t.gradient}`}
+              <div className="mb-6 flex items-center gap-4">
+                <div
+                  className={`inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br ${current.gradient} text-[14px] font-semibold text-white shadow`}
                 >
-                  <Initials name={t.name} />
-                </span>
-                <cite className="not-italic">
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-[12px] text-zinc-500">{t.role}</p>
-                </cite>
-              </figcaption>
-            </motion.figure>
-          ))}
+                  {getInitials(current.name)}
+                </div>
+                <div className="flex flex-col leading-tight">
+                  <span
+                    className="text-[15px] font-semibold text-white"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {current.name}
+                  </span>
+                  <span className="text-[13px] text-zinc-400">
+                    {current.role}
+                  </span>
+                </div>
+              </div>
+
+              <blockquote
+                className="text-[1.05rem] italic leading-relaxed text-zinc-200 md:text-[1.18rem]"
+                style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+              >
+                “{current.text}”
+              </blockquote>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </div>
+
+        {/* Controles */}
+        <div className="mt-7 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={goPrev}
+            aria-label="Depoimento anterior"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-zinc-950/80 text-zinc-300 transition-colors hover:border-white/25 hover:bg-zinc-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <span className="min-w-[3rem] text-center text-[12px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label="Próximo depoimento"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-zinc-950/80 text-zinc-300 transition-colors hover:border-white/25 hover:bg-zinc-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </motion.div>
     </section>
   );
 }
