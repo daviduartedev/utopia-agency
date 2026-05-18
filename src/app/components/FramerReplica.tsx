@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { type ReactNode, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -56,9 +56,18 @@ const ANA_AVATAR =
     </svg>
   `);
 
+/** Links do header — rótulos alinhados ao conteúdo de cada seção */
+const headerNavLinks = [
+  { label: "O problema", href: "#servicos" },
+  { label: "Impacto", href: "#impacto" },
+  { label: "Como funciona", href: "#processo" },
+  { label: "Planos", href: "#planos" },
+  { label: "FAQ", href: "#faq" },
+] as const;
+
 const dockItems = [
   { Icon: Home, label: "In\u00edcio", href: "#inicio" },
-  { Icon: Layers, label: "Como funciona", href: "#processo" },
+  { Icon: Layers, label: "O problema", href: "#servicos" },
   { Icon: LayoutDashboard, label: "Planos", href: "#planos" },
   { Icon: HelpCircle, label: "FAQ", href: "#faq" },
 ];
@@ -252,17 +261,41 @@ function SectionTitle({
   );
 }
 
+const HEADER_SCROLL_OFFSET = 96;
+
 function smoothScrollTo(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
   if (!href.startsWith("#")) return;
   const id = href.slice(1);
   const target = document.getElementById(id);
   if (!target) return;
   event.preventDefault();
-  const top = target.getBoundingClientRect().top + window.scrollY - 80;
-  window.scrollTo({ top, behavior: "smooth" });
-  if (history.replaceState) {
-    history.replaceState(null, "", href);
-  }
+  const header = document.querySelector<HTMLElement>(".fr-topbar");
+  const offset = header?.offsetHeight ? header.offsetHeight + 20 : HEADER_SCROLL_OFFSET;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  history.replaceState?.(null, "", href);
+}
+
+function HeaderNavLink({
+  href,
+  children,
+  onNavigate,
+}: {
+  href: string;
+  children: ReactNode;
+  onNavigate?: () => void;
+}) {
+  return (
+    <a
+      href={href}
+      onClick={(event) => {
+        onNavigate?.();
+        smoothScrollTo(event, href);
+      }}
+    >
+      {children}
+    </a>
+  );
 }
 
 function BottomDock() {
@@ -338,42 +371,11 @@ export function FramerReplica() {
           {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
         <nav className={`fr-nav-copy ${menuOpen ? "is-open" : ""}`} aria-label={"Navega\u00e7\u00e3o principal"}>
-          <a
-            href="#impacto"
-            onClick={(event) => {
-              setMenuOpen(false);
-              smoothScrollTo(event, "#impacto");
-            }}
-          >
-            Impacto
-          </a>
-          <a
-            href="#processo"
-            onClick={(event) => {
-              setMenuOpen(false);
-              smoothScrollTo(event, "#processo");
-            }}
-          >
-            Como funciona
-          </a>
-          <a
-            href="#planos"
-            onClick={(event) => {
-              setMenuOpen(false);
-              smoothScrollTo(event, "#planos");
-            }}
-          >
-            Planos
-          </a>
-          <a
-            href="#faq"
-            onClick={(event) => {
-              setMenuOpen(false);
-              smoothScrollTo(event, "#faq");
-            }}
-          >
-            FAQ
-          </a>
+          {headerNavLinks.map(({ label, href }) => (
+            <HeaderNavLink key={href} href={href} onNavigate={() => setMenuOpen(false)}>
+              {label}
+            </HeaderNavLink>
+          ))}
           <a
             href={whatsappHref(WA_MSG_NAV)}
             target="_blank"
