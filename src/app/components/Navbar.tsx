@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { ArrowRight, Instagram, Menu, MessageCircle, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { BrandLogo } from "./BrandLogo";
 import { whatsappHref } from "../lib/whatsapp";
@@ -9,155 +10,122 @@ import { useIsNarrowMobile } from "../lib/use-media-query";
 import { usePrefersReducedMotion } from "../lib/motion-pref";
 import { cn } from "./ui/utils";
 
-const links = [
-  { href: "#ofertas", label: "Serviços" },
-  { href: "#como-funciona", label: "Como funciona" },
+const navLinks = [
+  { href: "#ofertas", label: "Servi\u00e7os" },
   { href: "#portfolio", label: "Trabalhos" },
   { href: "#oferta", label: "Oferta" },
-  { href: whatsappHref(WA_MSG_NAV), label: "Quero meu site" },
+  { href: "#faq", label: "FAQ" },
 ] as const;
 
-function MenuToggleIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden
-    >
-      {open ? (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      ) : (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      )}
-    </svg>
-  );
-}
+const CTA_HREF = whatsappHref(WA_MSG_NAV);
 
 export function Navbar() {
   const narrowMobile = useIsNarrowMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navEntrance = {
-    initial: prefersReducedMotion
-      ? { opacity: 1, y: 0, x: 0 }
-      : { opacity: 0, y: -12, x: 14 },
-    animate: { opacity: 1, y: 0, x: 0 },
+  useEffect(() => {
+    if (!narrowMobile) setMenuOpen(false);
+  }, [narrowMobile]);
+
+  const motionProps = {
+    initial: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -12 },
+    animate: { opacity: 1, y: 0 },
     transition: {
       duration: prefersReducedMotion ? 0 : 0.5,
       ease: [0.22, 0.65, 0.36, 1] as const,
     },
   };
 
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
-
-  useEffect(() => {
-    if (!narrowMobile) setMenuOpen(false);
-  }, [narrowMobile]);
-
-  useEffect(() => {
-    if (!narrowMobile || !menuOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeMenu();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [narrowMobile, menuOpen, closeMenu]);
-
-  useEffect(() => {
-    const onHash = () => closeMenu();
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, [closeMenu]);
-
-  if (!narrowMobile) {
-    return (
-      <motion.header
-        {...navEntrance}
-        className="flex w-full flex-col gap-3 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3 md:px-6 md:py-3.5"
-      >
-        <BrandLogo className="shrink-0 self-start sm:self-center" />
-
-        <nav
-          className="-mx-1 flex w-full max-w-full items-center gap-1 overflow-x-auto overscroll-x-contain px-1 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:mx-0 sm:w-auto sm:max-w-none sm:flex-wrap sm:justify-end sm:gap-5 sm:overflow-visible sm:px-0 md:gap-8 [&::-webkit-scrollbar]:hidden"
-          style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-          aria-label="Navegação principal"
-        >
-          {links.map(({ href, label }) => {
-            const external = /^https?:\/\//i.test(href);
-            return (
-              <a
-                key={label}
-                href={href}
-                {...(external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="shrink-0 whitespace-nowrap rounded-md px-2 py-2 text-[13px] font-medium tracking-normal text-zinc-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface sm:px-0 sm:py-0 sm:text-sm md:text-[15px]"
-              >
-                {label}
-              </a>
-            );
-          })}
-        </nav>
-      </motion.header>
-    );
-  }
-
   return (
     <motion.header
-      {...navEntrance}
-      className="flex w-full flex-col gap-0 rounded-2xl border border-white/10 bg-page-surface px-3 py-2.5"
+      {...motionProps}
+      className="mx-auto flex w-full max-w-[920px] flex-col rounded-[22px] border border-black/8 bg-white/55 px-2.5 py-2 shadow-[0_18px_60px_rgba(24,24,24,0.1)] backdrop-blur-2xl"
     >
-      <div className="flex w-full min-w-0 items-center justify-between gap-3">
-        <BrandLogo className="min-w-0" onClick={closeMenu} />
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          <MenuToggleIcon open={menuOpen} />
-        </button>
-      </div>
+      <div className="flex w-full items-center justify-between gap-3">
+        <BrandLogo
+          className="min-w-0 gap-2 rounded-full px-1"
+          imgClassName="size-7 md:size-8"
+          wordmarkClassName="text-black text-[15px] md:text-[16px]"
+          onClick={() => setMenuOpen(false)}
+        />
 
-      <nav
-        id="primary-navigation"
-        className={cn(
-          "w-full flex-col gap-0.5 border-t border-white/10 pt-3",
-          menuOpen ? "flex" : "hidden",
-        )}
-        style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-        aria-label="Navegação principal"
-      >
-        {links.map(({ href, label }) => {
-          const external = /^https?:\/\//i.test(href);
-          return (
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Navega\u00e7\u00e3o principal">
+          {navLinks.map(({ href, label }) => (
             <a
               key={label}
               href={href}
-              {...(external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              onClick={closeMenu}
-              className="rounded-lg px-3 py-3 text-[15px] font-medium tracking-normal text-zinc-200 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-page-surface"
+              className="rounded-full px-3 py-2 text-[12px] font-bold text-black/54 transition hover:bg-black/5 hover:text-black"
             >
               {label}
             </a>
-          );
-        })}
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-2 sm:flex">
+          <span className="inline-flex items-center gap-2 rounded-full bg-black/[0.04] px-3 py-2 text-[11px] font-bold text-black/60">
+            <span className="size-1.5 rounded-full bg-[var(--utopia-green)] shadow-[0_0_14px_var(--utopia-green)]" />
+            3 slots abertos
+          </span>
+          <a
+            href="https://www.instagram.com/utopia_digital.lab/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="inline-flex size-9 items-center justify-center rounded-full bg-white/65 text-black/65 transition hover:bg-black hover:text-white"
+          >
+            <Instagram className="size-4" />
+          </a>
+          <a
+            href={CTA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Falar no WhatsApp"
+            className="inline-flex size-9 items-center justify-center rounded-full bg-black text-white transition hover:-translate-y-0.5"
+          >
+            <MessageCircle className="size-4" />
+          </a>
+        </div>
+
+        <div className="flex items-center gap-2 sm:hidden">
+          <a
+            href={CTA_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-black px-3 py-2 text-[12px] font-bold text-white"
+          >
+            Quero
+            <ArrowRight className="size-3.5" />
+          </a>
+          <button
+            type="button"
+            className="inline-flex size-9 items-center justify-center rounded-full bg-white/70 text-black"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+          </button>
+        </div>
+      </div>
+
+      <nav
+        className={cn(
+          "mt-2 grid gap-1 border-t border-black/8 pt-2 sm:hidden",
+          menuOpen ? "grid" : "hidden",
+        )}
+        aria-label="Navega\u00e7\u00e3o mobile"
+      >
+        {navLinks.map(({ href, label }) => (
+          <a
+            key={label}
+            href={href}
+            onClick={() => setMenuOpen(false)}
+            className="rounded-2xl px-3 py-3 text-[14px] font-bold text-black/65 hover:bg-black/5 hover:text-black"
+          >
+            {label}
+          </a>
+        ))}
       </nav>
     </motion.header>
   );
