@@ -156,6 +156,8 @@
   html {
     font-size: var(--font-size);
     position: relative;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 
   @media (max-width: 767px) {
@@ -1891,10 +1893,6 @@
     padding-bottom: 112px;
   }
 
-  .fr-pain-grid,
-  .fr-testimonial-card,
-  .fr-timeline,
-  .fr-price-card,
   .fr-accordion {
     margin-top: 48px;
   }
