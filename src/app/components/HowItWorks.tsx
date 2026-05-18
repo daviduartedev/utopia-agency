@@ -1,135 +1,117 @@
+"use client";
+
 import { motion } from "motion/react";
 import { BookCallWidget } from "./BookCallWidget";
 import { SectionHeader } from "./ui/section-header";
+import { cn } from "./ui/utils";
 import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
 
-const steps = [
+const steps: ReadonlyArray<{ num: string; title: string; body: string }> = [
   {
-    number: "01",
+    num: "01",
     title: "Briefing",
     body: "Uma conversa curta ou formulário. A gente entende o que você vende, pra quem e o que você quer que o visitante faça no fim.",
   },
   {
-    number: "02",
+    num: "02",
     title: "Proposta",
     body: "Escopo fechado, prazo e valor na mesma folha. Você olha, aprova ou não. Só paga sinal quando estiver claro.",
   },
   {
-    number: "03",
+    num: "03",
     title: "Layout",
     body: "Você vê a página antes do código. Ajustamos texto e ordem até ficar óbvio: o que é, por que importa, como chamar você.",
   },
   {
-    number: "04",
+    num: "04",
     title: "Publicação",
     body: "Montamos tudo, testamos no celular e colocamos no ar. Você acompanha o link até abrir bonito do seu lado.",
   },
   {
-    number: "05",
+    num: "05",
     title: "Suporte no começo",
     body: "Um mês de ajuste fino depois do lançamento. Dúvida pequena não vira desculpa. A gente responde.",
   },
 ];
 
+/**
+ * HowItWorks estilo Jax Orion — timeline vertical zig-zag com linha pontilhada
+ * central conectando os cards alternados.
+ */
 export function HowItWorks() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const headerMotion = scrollRevealMotion(prefersReducedMotion, {
-    delayIndex: 0,
-    lateral: true,
-  });
 
   return (
     <section
       id="como-funciona"
-      className="relative z-10 w-full scroll-mt-24 bg-section-over-gradient py-12 md:py-16"
       aria-labelledby="howitworks-heading"
+      className="relative w-full bg-section-over-gradient py-24 md:py-32"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 flex justify-center"
-      >
-        <div className="h-px w-full bg-white/10" />
-      </div>
+      <SectionHeader
+        eyebrow="Processo"
+        title="Cinco passos. Você sempre sabe o que vem."
+        description="Do primeiro 'oi' à página no ar, sem passo escondido."
+        id="howitworks-heading"
+      />
 
-      <motion.div {...headerMotion}>
-        <SectionHeader
-          id="howitworks-heading"
-          eyebrow="Como funciona"
-          title="Cinco passos. Você sempre sabe o que vem."
-          description="Do primeiro ‘oi’ à página no ar, sem passo escondido."
-          className="mb-12 md:mb-16"
-        />
-      </motion.div>
-
-      <div className="mx-auto max-w-[900px] px-4 sm:px-8 md:px-12">
-        <ol className="relative">
-          {steps.map((step, i) => (
-            <motion.li
-              key={step.number}
-              {...scrollRevealMotion(prefersReducedMotion, {
-                delayIndex: i,
-                lateral: true,
-              })}
-              className="relative list-none pb-12 last:pb-0"
-            >
-              <div className="relative flex gap-5 md:gap-8">
-                <div className="flex w-12 shrink-0 flex-col items-stretch md:w-14">
-                  <div className="flex flex-1 flex-col items-center">
-                    <span className="relative z-10 flex size-11 items-center justify-center rounded-full border border-white/15 bg-page-surface text-[11px] font-semibold tabular-nums text-zinc-300 md:size-12 md:text-xs">
-                      {step.number}
-                    </span>
-                    {i < steps.length - 1 ? (
-                      <span
-                        aria-hidden
-                        className="mt-2 w-px flex-1 bg-gradient-to-b from-white/30 via-white/12 to-white/5 md:min-h-[3.5rem]"
-                      />
-                    ) : null}
-                  </div>
-                </div>
-
-                <div className="min-w-0 flex-1 pb-1 pt-0.5">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 md:p-7">
-                    <h3
-                      className="mb-3 text-base font-semibold tracking-[-0.01em] text-white"
-                      style={{
-                        fontFamily: "var(--font-sans), system-ui, sans-serif",
-                      }}
-                    >
-                      <span className="text-zinc-500">{step.number} ·</span>{" "}
-                      {step.title}
-                    </h3>
-                    <p
-                      className="text-sm leading-relaxed text-zinc-400"
-                      style={{
-                        fontFamily: "var(--font-sans), system-ui, sans-serif",
-                      }}
-                    >
-                      {step.body}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.li>
-          ))}
-        </ol>
-
-        <motion.div
-          {...scrollRevealMotion(prefersReducedMotion, {
-            delayIndex: 5,
-            lateral: true,
-          })}
-          className="mx-auto mt-6 max-w-xl md:mt-10"
+      <div className="relative mx-auto mt-16 w-full max-w-4xl px-4 sm:px-8 md:mt-20 md:px-0">
+        {/* Linha central pontilhada (desktop) */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 md:block"
         >
-          <BookCallWidget />
-        </motion.div>
+          <div className="h-full w-px border-l border-dashed border-white/15" />
+        </div>
+
+        <ol className="flex flex-col gap-12 md:gap-16">
+          {steps.map((step, i) => {
+            const isRight = i % 2 === 1;
+            return (
+              <motion.li
+                key={step.num}
+                {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+                className={cn(
+                  "relative flex flex-col gap-4 md:flex-row md:items-center md:gap-0",
+                  isRight ? "md:justify-end" : "md:justify-start",
+                )}
+              >
+                {/* Bolinha central */}
+                <span
+                  aria-hidden
+                  className="absolute left-1/2 top-7 hidden h-3 w-3 -translate-x-1/2 rounded-full border-2 border-black bg-white md:block"
+                />
+
+                <article
+                  className={cn(
+                    "relative w-full rounded-3xl border border-white/10 bg-zinc-950/70 p-6 backdrop-blur-sm md:w-[calc(50%-2rem)] md:p-8",
+                    isRight ? "md:ml-auto" : "md:mr-auto",
+                  )}
+                >
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                    Etapa #{step.num}
+                  </p>
+                  <h3
+                    className="mt-3 text-[1.25rem] font-semibold leading-snug tracking-tight text-white md:text-[1.4rem]"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-[14.5px] leading-relaxed text-zinc-400">
+                    {step.body}
+                  </p>
+                </article>
+              </motion.li>
+            );
+          })}
+        </ol>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
+      <motion.div
+        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 5 })}
+        className="mx-auto mt-16 w-full max-w-3xl px-4 sm:px-8 md:px-12"
       >
-        <div className="h-px w-full bg-white/10" />
-      </div>
+        <BookCallWidget />
+      </motion.div>
     </section>
   );
 }

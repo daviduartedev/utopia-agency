@@ -40,15 +40,15 @@ export function BodyShapeGridLayer() {
           speed={0.22}
           squareSize={40}
           direction="diagonal"
-          borderColor="#2f2a38"
-          hoverFillColor="#1a1820"
+          borderColor="rgba(0,0,0,0.045)"
+          hoverFillColor="rgba(92,255,0,0.16)"
           shape="square"
           hoverTrailAmount={0}
           staticMotion={prefersReducedMotion}
         />
       </Suspense>
       <div
-        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/8 via-transparent to-black/14"
+        className="absolute inset-0 z-[1] bg-gradient-to-b from-[var(--utopia-paper)]/80 via-transparent to-[var(--utopia-paper)]/90"
         aria-hidden
       />
     </div>
