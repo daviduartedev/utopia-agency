@@ -1,18 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { SectionHeader } from "./ui/section-header";
-import { Card, CardSwap } from "./CardSwap";
 import { cn } from "./ui/utils";
 import { scrollRevealMotion, usePrefersReducedMotion } from "../lib/motion-pref";
-import { useIsNarrowMobile } from "../lib/use-media-query";
-import { motion } from "motion/react";
 
 type PortfolioLayout = "web" | "phone";
 
 type PortfolioProject = {
   id: number;
+  slug: string;
   title: string;
   scope: string;
   image: string | null;
@@ -22,6 +21,7 @@ type PortfolioProject = {
 const projects: PortfolioProject[] = [
   {
     id: 1,
+    slug: "erp",
     title: "ERP para lojistas",
     scope: "Catálogo, estoque e pedidos num painel único.",
     image: "/portfolio-movix-erp.png",
@@ -29,6 +29,7 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 2,
+    slug: "emera",
     title: "LP para loja de painéis solares",
     scope: "Site de produto com simulador e captação de contato.",
     image: "/portfolio-emera-solar.png",
@@ -36,6 +37,7 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 3,
+    slug: "barbearia",
     title: "App de agendamento para barbearia",
     scope: "Agenda, clientes e lembretes em uma interface enxuta.",
     image: "/mobile.png",
@@ -43,6 +45,7 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 4,
+    slug: "atelier-arq",
     title: "Portfólio de arquitetura residencial (ATELIER)",
     scope:
       "Hero com headline “Onde arquitetura encontra emoção”, narrativa de residências atemporais, CTA para explorar projetos e visual noturno com tipografia serifada e alto contraste.",
@@ -51,6 +54,7 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 5,
+    slug: "atelier-eco",
     title: "Landing de eco design e permacultura (ATELIER)",
     scope:
       "Proposta “viva em equilíbrio com a natureza”: copy sobre projetos sustentáveis e design consciente, CTA para soluções sustentáveis e identidade minimalista sobre fotografia da casa de madeira.",
@@ -59,131 +63,103 @@ const projects: PortfolioProject[] = [
   },
   {
     id: 6,
+    slug: "cs2",
     title: "Site para jogos eletrônicos (CS2)",
-    scope: "Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.",
+    scope:
+      "Loja premium de skins CS2 com vitrine, rifas e fluxos claros para conversão.",
     image: "/portfolio-dr-black-skins.png",
     layout: "web",
   },
 ];
 
-function CasePreview({ project }: { project: PortfolioProject }) {
-  return (
-    <div
-      className={cn(
-        "relative h-full min-h-0 w-full min-w-0 overflow-hidden border border-white/10 bg-zinc-950",
-        "rounded-2xl",
-      )}
-    >
-      {project.image ? (
-        <div className="absolute inset-0 min-h-0 min-w-0">
-          <ImageWithFallback
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            sizes="(max-width: 767px) 92vw, 768px"
-            className="h-full w-full object-contain object-center"
-          />
-        </div>
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] px-4 text-center">
-          <div>
-            <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-500">
-              Case em breve
-            </p>
-            <p
-              className="text-xl font-medium tracking-tight text-zinc-200 sm:text-2xl"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {project.title}
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
+/**
+ * Portfolio em lista vertical estilo Jax Orion — cada projeto é um card grande
+ * com mockup à esquerda + título/scope/CTA à direita, alternando layout.
+ */
 export function Portfolio() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const narrow = useIsNarrowMobile();
-  const [frontIndex, setFrontIndex] = useState(0);
-  // 16:9 combina melhor com screenshots de página inteira (menos corte lateral que o antigo ~880×550).
-  const w = narrow ? 380 : 768;
-  const h = Math.round((w * 9) / 16);
-
-  const current = projects[frontIndex] ?? projects[0];
 
   return (
     <section
       id="portfolio"
       aria-labelledby="portfolio-heading"
-      className="relative z-10 flex w-full flex-col items-center bg-section-over-gradient pb-16 pt-6"
+      className="relative w-full bg-section-over-gradient py-24 md:py-32"
     >
-      <motion.div
-        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 0, lateral: true })}
-        className="w-full"
-      >
-        <SectionHeader
-          id="portfolio-heading"
-          className="pb-10 pt-10 md:pb-14 md:pt-14"
-          eyebrow="Portfólio"
-          title="Páginas e painéis que já estão no ar"
-          description="Seleção de trabalhos reais, de landing que pede contato a painel que a equipe usa todo dia."
-        />
-      </motion.div>
+      <SectionHeader
+        eyebrow="Trabalhos"
+        title="Páginas e painéis que já estão no ar"
+        description="Seleção de trabalhos reais, de landing que pede contato a painel que a equipe usa todo dia."
+        id="portfolio-heading"
+      />
 
-      <motion.div
-        {...scrollRevealMotion(prefersReducedMotion, { delayIndex: 1, lateral: true })}
-        className="relative mt-20 flex w-full max-w-full flex-col items-center px-4 md:mt-28 lg:mt-36"
-      >
-        <div className="relative flex w-full max-w-[min(100%,1300px)] flex-col items-center">
-          <div className="flex min-h-[min(560px,72vw)] w-full flex-col items-center justify-start sm:min-h-[600px]">
-            <CardSwap
-              width={w}
-              height={h}
-              cardDistance={60}
-              verticalDistance={70}
-              delay={3500}
-              pauseOnHover={false}
-              skewAmount={6}
-              easing="linear"
-              onFrontIndexChange={setFrontIndex}
-              className="outline-none"
-            >
-              {projects.map((p) => (
-                <Card key={p.id}>
-                  <div className="h-full w-full p-0.5">
-                    <CasePreview project={p} />
-                  </div>
-                </Card>
-              ))}
-            </CardSwap>
-          </div>
-
-          <div
-            key={frontIndex}
-            className="mx-auto mt-8 max-w-xl px-2 text-center sm:mt-10 sm:px-0"
-            role="status"
-            aria-live="polite"
-            aria-atomic
+      <div className="mx-auto mt-14 flex w-full max-w-6xl flex-col gap-6 px-4 sm:px-8 md:mt-20 md:gap-8 md:px-12">
+        {projects.map((project, i) => (
+          <motion.article
+            key={project.id}
+            {...scrollRevealMotion(prefersReducedMotion, { delayIndex: i })}
+            className={cn(
+              "group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/70 transition-all duration-300 hover:border-white/20 hover:bg-zinc-900/80 md:flex-row md:items-stretch",
+              i % 2 === 1 && "md:flex-row-reverse",
+            )}
           >
-            <p
-              id={`portfolio-active-case-title-${current.id}`}
-              className="text-sm font-medium text-zinc-300 sm:text-base"
-              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+            {/* Mockup */}
+            <div
+              className={cn(
+                "relative aspect-[16/10] w-full overflow-hidden bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,#1f1f22_0%,#0f0f11_70%,#09090b_100%)] md:aspect-auto md:w-3/5",
+              )}
             >
-              {current.title}
-            </p>
-            <p
-              className="mt-1.5 text-xs leading-relaxed text-zinc-500 sm:text-sm"
-              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
-            >
-              {current.scope}
-            </p>
-          </div>
-        </div>
-      </motion.div>
+              {project.image ? (
+                <ImageWithFallback
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 767px) 92vw, 720px"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center px-4 text-center">
+                  <p className="text-[12px] uppercase tracking-[0.16em] text-zinc-500">
+                    Case em breve
+                  </p>
+                </div>
+              )}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-transparent"
+              />
+            </div>
+
+            {/* Descrição */}
+            <div className="flex flex-1 flex-col justify-between gap-6 p-7 md:p-10">
+              <div>
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                  Case {String(project.id).padStart(2, "0")}
+                </p>
+                <h3
+                  className="mb-4 text-[1.45rem] font-semibold leading-snug tracking-tight text-white md:text-[1.7rem]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {project.title}
+                </h3>
+                <p className="text-[15px] leading-relaxed text-zinc-400">
+                  {project.scope}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-white/10 pt-5">
+                <span className="text-[12px] uppercase tracking-[0.16em] text-zinc-500">
+                  {project.layout === "phone" ? "Mobile" : "Web"}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-zinc-200 transition-colors group-hover:text-white">
+                  Ver detalhes
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </span>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
     </section>
   );
 }
