@@ -5,19 +5,18 @@ import { motion, useScroll, useTransform } from "motion/react";
 import {
   ArrowRight,
   BadgeCheck,
-  BriefcaseBusiness,
   Check,
   ChevronDown,
   ChevronUp,
   Globe,
+  HelpCircle,
   Home,
   Instagram,
   LayoutDashboard,
+  Layers,
   Menu,
   MessageCircle,
-  PenTool,
   Plus,
-  ShieldCheck,
   Smartphone,
   Twitter,
   X,
@@ -58,10 +57,10 @@ const ANA_AVATAR =
   `);
 
 const dockItems = [
-  { Icon: PenTool, label: "Servi\u00e7os", href: "#servicos" },
-  { Icon: ShieldCheck, label: "Como funciona", href: "#processo" },
-  { Icon: BriefcaseBusiness, label: "Oferta", href: "#planos" },
-  { Icon: Home, label: "Quero meu site", href: "#contato" },
+  { Icon: Home, label: "In\u00edcio", href: "#inicio" },
+  { Icon: Layers, label: "Como funciona", href: "#processo" },
+  { Icon: LayoutDashboard, label: "Planos", href: "#planos" },
+  { Icon: HelpCircle, label: "FAQ", href: "#faq" },
 ];
 
 const painPoints = [
@@ -253,6 +252,19 @@ function SectionTitle({
   );
 }
 
+function smoothScrollTo(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith("#")) return;
+  const id = href.slice(1);
+  const target = document.getElementById(id);
+  if (!target) return;
+  event.preventDefault();
+  const top = target.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top, behavior: "smooth" });
+  if (history.replaceState) {
+    history.replaceState(null, "", href);
+  }
+}
+
 function BottomDock() {
   return (
     <motion.nav
@@ -264,7 +276,13 @@ function BottomDock() {
     >
       <div className="fr-dock-icons">
         {dockItems.map(({ Icon, label, href }) => (
-          <a key={label} href={href} aria-label={label}>
+          <a
+            key={label}
+            href={href}
+            aria-label={label}
+            title={label}
+            onClick={(event) => smoothScrollTo(event, href)}
+          >
             <Icon size={17} strokeWidth={2.4} />
           </a>
         ))}
@@ -296,7 +314,14 @@ export function FramerReplica() {
       <motion.div className="fr-slash" style={{ rotate: slashRotate, y: slashY }} aria-hidden />
 
       <header className="fr-topbar" aria-label={"Cabe\u00e7alho"}>
-        <a href="#inicio" className="fr-brand">
+        <a
+          href="#inicio"
+          className="fr-brand"
+          onClick={(event) => {
+            setMenuOpen(false);
+            smoothScrollTo(event, "#inicio");
+          }}
+        >
           <img src="/logo.png" alt="" />
           <span>
             utopia
@@ -313,10 +338,48 @@ export function FramerReplica() {
           {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
         <nav className={`fr-nav-copy ${menuOpen ? "is-open" : ""}`} aria-label={"Navega\u00e7\u00e3o principal"}>
-          <a href="#servicos" onClick={() => setMenuOpen(false)}>{"Servi\u00e7os"}</a>
-          <a href="#processo" onClick={() => setMenuOpen(false)}>Como funciona</a>
-          <a href="#planos" onClick={() => setMenuOpen(false)}>Oferta</a>
-          <a href={whatsappHref(WA_MSG_NAV)} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>
+          <a
+            href="#impacto"
+            onClick={(event) => {
+              setMenuOpen(false);
+              smoothScrollTo(event, "#impacto");
+            }}
+          >
+            Impacto
+          </a>
+          <a
+            href="#processo"
+            onClick={(event) => {
+              setMenuOpen(false);
+              smoothScrollTo(event, "#processo");
+            }}
+          >
+            Como funciona
+          </a>
+          <a
+            href="#planos"
+            onClick={(event) => {
+              setMenuOpen(false);
+              smoothScrollTo(event, "#planos");
+            }}
+          >
+            Planos
+          </a>
+          <a
+            href="#faq"
+            onClick={(event) => {
+              setMenuOpen(false);
+              smoothScrollTo(event, "#faq");
+            }}
+          >
+            FAQ
+          </a>
+          <a
+            href={whatsappHref(WA_MSG_NAV)}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setMenuOpen(false)}
+          >
             Quero meu site
           </a>
         </nav>
